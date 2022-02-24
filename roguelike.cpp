@@ -104,7 +104,7 @@ int main()
 		}
 	}
 
-	delete MenuOption;
+	delete[] MenuOption;
 	return 0;
 }
 //-----------------------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ void MenuFun1()
 	system("cls"); //clear the screen.
 	gotoxy(25, 10);
 	cout << "You have selected menu option (#1)" << endl;
-	_getch(); // we can use _getch like pause (whitout assigning the return value to a variable).
+	cin.ignore(); // we can use _getch like pause (whitout assigning the return value to a variable).
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ void MenuFun2()
 	system("cls");
 	gotoxy(25, 10);
 	cout << "You have selected menu option (#2)" << endl;
-	_getch();
+	cin.ignore();
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ void MenuFun3()
 	system("cls");
 	gotoxy(25, 10);
 	cout << "You have selected menu option (#3)" << endl;
-	_getch();
+	cin.ignore();
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ void ExitOption()
 {
 	gotoxy(30, 15);
 	cout << "Exitting..." << endl;
-	_getch();
+	cin.ignore();
 	exit(0);
 }
 //-----------------------------------------------------------------------------------------------
