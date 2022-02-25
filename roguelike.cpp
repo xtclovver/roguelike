@@ -2,6 +2,7 @@
 #include <string>
 #include <windows.h> // we need this header for the 'gotoxy' function.
 #include <conio.h> // we need this header for the '_getch' function.
+#include <stdio.h>
 //-----------------------------------------------------------------------------------------------
 using namespace std;
 //-----------------------------------------------------------------------------------------------
@@ -15,15 +16,38 @@ void MenuFun1(); // every menu item needs a seperate function, so this is for th
 
 void MenuFun2(); //    and the second item etc...
 
-void MenuFun3(); //if you want another way to implement the functionallity of a menu item plz
-				 //    contact me at my email.
+void MenuFun3(); 
 
 void ExitOption(); // this is also an item function but i named it like this coz every menu must
 				   //    have an exit item.
 //-----------------------------------------------------------------------------------------------
+class Player
+{
+public:
+	string name;
+	int coins = 0, hp = 3, damage = 3;
+};
+//-----------------------------------------------------------------------------------------------
 int main()
 {
+	setlocale(LC_ALL, "Russian");
 	ChangeCursorStatus(false);
+	////////////////////меняем размер консоли 
+	system("mode con cols=80 lines=40"); //размер окна, вывод нужного количества строк в консоль
+	HANDLE  hout = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD  size{ 100,100 };//символов строки, строк
+	SetConsoleScreenBufferSize(hout, size);//размер буфера
+	///////////////////////////////////Меняем шрифт для отображения символов Unicode, можно пропустить - если у вас установлен такой
+	CONSOLE_FONT_INFOEX cfi;
+	cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+	cfi.nFont = 0;
+	cfi.dwFontSize.X = 16;
+	cfi.dwFontSize.Y = 24;
+	cfi.FontFamily = FF_DONTCARE;
+	cfi.FontWeight = FW_NORMAL;
+	wcscpy_s(cfi.FaceName, L"Lucida Console");
+	SetCurrentConsoleFontEx(hout, false, &cfi);
+	///////////////////////////////////Меняем шрифт
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
 
 	int ItemCount = 4; // This variable holds the number of menu items.
@@ -48,12 +72,10 @@ int main()
 		} // finish the drawing.
 
 		key = _getch(); //get the key.
-
 		/*
 		   _getch() is like cin>>bla;
 		   but the differance is that by 'cin' you can enter char,double,int,etc...
 		   with more than one digit and the value you entered is printed on the screen
-
 		   but with _getch you can only enter ONE CHARACTER and will not be printed on
 		   the sceen and return the entered key to the variable 'key' in this case.
 		*/
@@ -111,9 +133,9 @@ int main()
 string* MenuItems() // this function returns a pointer to a string.
 {
 	string* item = new string[4];
-	item[0] = "Menu Option #1.";
-	item[1] = "Menu Option #2.";
-	item[2] = "Menu Option #3.";
+	item[0] = "Start new game.";
+	item[1] = "Settings.";
+	item[2] = "Achivments.";
 	item[3] = "Exit.";
 
 	return item;
@@ -131,8 +153,8 @@ void MenuFun1()
 {
 	system("cls"); //clear the screen.
 	gotoxy(25, 10);
-	cout << "You have selected menu option (#1)" << endl;
-	cin.ignore(); // we can use _getch like pause (whitout assigning the return value to a variable).
+	cout << "There is no game (Will be)" << endl;
+	cin.ignore(); 
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
@@ -140,7 +162,7 @@ void MenuFun2()
 {
 	system("cls");
 	gotoxy(25, 10);
-	cout << "You have selected menu option (#2)" << endl;
+	cout << "No settings there, maybe later" << endl;
 	cin.ignore();
 	system("cls");
 }
@@ -149,7 +171,7 @@ void MenuFun3()
 {
 	system("cls");
 	gotoxy(25, 10);
-	cout << "You have selected menu option (#3)" << endl;
+	cout << "There is nothing" << endl;
 	cin.ignore();
 	system("cls");
 }
@@ -158,7 +180,6 @@ void ExitOption()
 {
 	gotoxy(30, 15);
 	cout << "Exitting..." << endl;
-	cin.ignore();
 	exit(0);
 }
 //-----------------------------------------------------------------------------------------------
