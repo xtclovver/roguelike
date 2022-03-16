@@ -2,7 +2,11 @@
 #include <string>
 #include <windows.h> // we need this header for the 'gotoxy' function.
 #include <conio.h> // we need this header for the '_getch' function.
+#include <cstdlib> // "system" is ambiguous.
 #include <stdio.h>
+#include <fstream>
+#include <vector>
+#include <fstream>
 //-----------------------------------------------------------------------------------------------
 using namespace std;
 //-----------------------------------------------------------------------------------------------
@@ -12,28 +16,40 @@ void gotoxy(int, int); // by this function you can goto any position on the cmd 
 
 void ChangeCursorStatus(bool);
 
-void MenuFun1(); // every menu item needs a seperate function, so this is for the first item.
+void MenuStart(); // every menu item needs a seperate function, so this is for the first item.
 
-void MenuFun2(); //    and the second item etc...
+void MenuSettings(); //    and the second item etc...
 
-void MenuFun3(); 
+void MenuAchievements(); 
+
+void Gameplay(int map[35][93]);
+
+void GenerateMap();
+
+void MenuStartTutorial(); // TODO
 
 void ExitOption(); // this is also an item function but i named it like this coz every menu must
 				   //    have an exit item.
+/* Красим текст в консоли // POTOM
+	HANDLE hOUTPUT = GetStdHandle(STD_OUTPUT_HANDLE); 
+    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    cout<<"GREEN TEXT\n";
+    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_RED   | FOREGROUND_INTENSITY);
+    cout<<"RED TEXT\n";
+    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE );*/
 //-----------------------------------------------------------------------------------------------
-class Player
-{
-public:
-	string name;
-	int coins = 0, hp = 3, damage = 3;
-};
+int map[35][93]; // map \\ level
+int leftMenu[35][30]; // lest menu with stats, hp and etc.
+int xPlayer, yPlayer, playerCoins = 15, playerHP = 100, playerXP = 0, playerLVL = 1;
+int ItemSlotID[6] = {1,0,0,0,0,0}, DefaultSword[3] = {15,1,0}; // DefaultSword {15 is dmg, 1 is lvl to need to equip, 0 sell cost
 //-----------------------------------------------------------------------------------------------
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+	srand(time(NULL));
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
-	system("mode con cols=80 lines=40"); //размер окна, вывод нужного количества строк в консоль
+	system("mode con cols=125 lines=35"); //размер окна, вывод нужного количества строк в консоль
 	HANDLE  hout = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD  size{ 100,100 };//символов строки, строк
 	SetConsoleScreenBufferSize(hout, size);//размер буфера
@@ -41,8 +57,8 @@ int main()
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
 	cfi.nFont = 0;
-	cfi.dwFontSize.X = 16;
-	cfi.dwFontSize.Y = 24;
+	cfi.dwFontSize.X = 12;
+	cfi.dwFontSize.Y = 18;
 	cfi.FontFamily = FF_DONTCARE;
 	cfi.FontWeight = FW_NORMAL;
 	wcscpy_s(cfi.FaceName, L"Lucida Console");
@@ -50,21 +66,22 @@ int main()
 	///////////////////////////////////Меняем шрифт
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
 
-	int ItemCount = 4; // This variable holds the number of menu items.
+	int ItemCount = 5; // This variable holds the number of menu items.
 	int MenuChoice = 1; // This variable holds the position of the cursor. 
 	char key; //for entering the key (up arrow,down arrow,etc...);
 
 	TMenuOption* MenuOption = new TMenuOption[ItemCount];//array of pointers to functions (dynamic).
-	MenuOption[0] = MenuFun1; //filling the array with the functions.
-	MenuOption[1] = MenuFun2;
-	MenuOption[2] = MenuFun3;
-	MenuOption[3] = ExitOption;
+	MenuOption[0] = MenuStart; //filling the array with the functions.
+	MenuOption[1] = MenuStartTutorial;
+	MenuOption[2] = MenuSettings;
+	MenuOption[3] = MenuAchievements;
+	MenuOption[4] = ExitOption;
 
 	while (1) //infinite loop. (this loop will not break that's why we need an exit function).
 	{
 		for (int i = 0; i < ItemCount; i++) // Draw the menu.
 		{
-			gotoxy(25, 7 + i);
+			gotoxy(50, 14 + i);
 			MenuChoice == i + 1 ? cout << " -> " : cout << "    "; // if (i+1) == the cursor then
 														   //    print ' -> ' else print '    '.
 														   //    by the way i call '->' the cursor
@@ -79,7 +96,6 @@ int main()
 		   but with _getch you can only enter ONE CHARACTER and will not be printed on
 		   the sceen and return the entered key to the variable 'key' in this case.
 		*/
-
 		switch (key) //check the entered key.
 		{
 		case '\r': // if the entered key is 'Enter'.
@@ -132,13 +148,183 @@ int main()
 //-----------------------------------------------------------------------------------------------
 string* MenuItems() // this function returns a pointer to a string.
 {
-	string* item = new string[4];
+	string* item = new string[5];
 	item[0] = "Start new game.";
-	item[1] = "Settings.";
-	item[2] = "Achivments.";
-	item[3] = "Exit.";
+	item[1] = "Tutorial.";
+	item[2] = "Settings.";
+	item[3] = "Achivments.";
+	item[4] = "Exit.";
 
 	return item;
+}
+//-----------------------------------------------------------------------------------------------
+void CheckItem()
+{
+	int attemptsToCatch = 0;
+	for (int i = 0; i < 6; i++)
+	{
+		if (ItemSlotID[i] == 0)
+		{
+			gotoxy(1, 7 + attemptsToCatch);
+			cout << "Empty.";
+			gotoxy(1, 9 + attemptsToCatch);
+			cout << "-----------------------------";
+			attemptsToCatch += 3;
+		}
+		else if (ItemSlotID[i] == 1)
+		{
+			gotoxy(1, 7 + attemptsToCatch);
+			cout << "Default Sword.";
+			gotoxy(1, 8 + attemptsToCatch);
+			cout << "dmg: " << DefaultSword[0];
+			gotoxy(10, 8 + attemptsToCatch);
+			cout << "lv: " << DefaultSword[1];
+			gotoxy(17, 8 + attemptsToCatch);
+			cout << "cost: " << DefaultSword[2];
+			gotoxy(1, 9 + attemptsToCatch);
+			cout << "-----------------------------";
+			attemptsToCatch += 3;
+		}
+	}
+	attemptsToCatch = 0;
+}
+//-----------------------------------------------------------------------------------------------
+void InitializationLeftMenu()
+{
+	system("cls");
+	for (int j = 1; j < 34; j++)
+	{
+		gotoxy(0, 0 + j);
+		cout << "|" << "\n";
+		gotoxy(30, 0 + j);
+		cout << "|" << "\n";
+	}
+	for (int i = 0; i < 31; i++)
+	{
+		gotoxy(0 + i, 0);
+		cout << "-";
+	}
+	for (int i = 0; i < 31; i++)
+	{
+		gotoxy(0 + i, 34);
+		cout << "-";
+	}
+	gotoxy(1, 1);
+	cout << "hp: " << playerHP;
+	gotoxy(15, 1);
+	cout << "xp: " << playerXP;
+	gotoxy(15, 2);
+	cout << "lv: " << playerLVL;
+	gotoxy(1, 2);
+	cout << "Coins: " << playerCoins;
+	gotoxy(1, 3);
+	cout << "-----------------------------";
+	gotoxy(1, 5);
+	cout << "Items:";
+	gotoxy(1, 6);
+	cout << "-----------------------------";
+	CheckItem();
+	cin.ignore();
+}
+//
+void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
+{
+	xPlayer = rand() % 93;
+	yPlayer = rand() % 35;
+	for (int j = 0; j < 35; j++)
+	{
+		for (int i = 0; i < 93; i++)
+		{
+			if (j == yPlayer && i == xPlayer)
+			{
+				map[j][i] = 4;
+				continue;
+			}
+			map[j][i] = rand() % 3;
+		}
+	}
+}
+//-----------------------------------------------------------------------------------------------
+void Gameplay(int map[35][93])
+{
+	char key;
+	system("cls"); //clear the screen.
+	InitializationLeftMenu();
+	while (1)
+	{
+		for (int j = 0; j < 35; j++)
+		{
+			gotoxy(31, 0 + j);
+			for (int i = 0; i < 93; i++)
+			{
+				gotoxy(31 + i, 0);
+				if (map[j][i] == 0)
+				{
+					cout << " ";
+				}
+				else if (map[j][i] == 1)
+				{
+					cout << " ";
+				}
+				else if (map[j][i] == 2)
+				{
+					cout << " ";
+				}
+				else if (map[j][i] == 3)
+				{
+					cout << " ";
+				}
+				else if (map[j][i] == 4)
+				{
+					cout << " ";
+				}
+			}
+		}
+		key = _getch();
+		switch (key) //check the entered key.
+		{
+		case '\r': // if the entered key is 'Enter'.
+			try
+			{
+				//
+			}
+			catch (...)
+			{
+			}  // we have to use try and catch coz if we did'nt fill that index with a function.
+			   //                     a runtime error will appear.
+			break;
+
+		case 'P': // if the entered key is the 'up arrow' notice that its equal to 'P' (capital)
+			 //then we will increment the cursor by one.
+			 // if the cursor value is more than the items count.
+				       //    then it will return back to the first item.
+			break;
+
+		case 'H': // same but with 'down arrow' and decrement the cursor.
+
+			break;
+
+		case 27: // 27 is the asscii to the escape key (Esc)
+			try { } // useually when the 'Esc' key is pressed the last
+												//     item will be called (executed). but you can
+												//     change it to whatever you want.
+			catch (...) {}
+			break;
+		default:// any another key.
+			//check if the pressed key is in the range
+			//    of (1,2,3,...,#of items) [all char(s)]
+			{
+				try { } //call the function of the pressed number.
+					 //  you can make the cursor move to that item instead of calling (executing)
+					 //  it by replacing all the code between 'if (bla){' and '}' with this
+					 //  statement MenuChooice=int(key)-'0'
+				catch (...) {}
+			}
+		}
+	}
+	cin.ignore();
+	system("cls");
+
 }
 //-----------------------------------------------------------------------------------------------
 void gotoxy(int xpos, int ypos)  // just take this function as it is.
@@ -149,28 +335,35 @@ void gotoxy(int xpos, int ypos)  // just take this function as it is.
 	SetConsoleCursorPosition(hOuput, scrn);
 }
 //-----------------------------------------------------------------------------------------------
-void MenuFun1()
+void MenuStart()
 {
 	system("cls"); //clear the screen.
-	gotoxy(25, 10);
+	gotoxy(50, 14);
 	cout << "There is no game (Will be)" << endl;
 	cin.ignore(); 
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
-void MenuFun2()
+void MenuStartTutorial()
+{
+	InitializationLeftMenu();
+//	GenerateMap();
+//	Gameplay(map);
+}
+//-----------------------------------------------------------------------------------------------
+void MenuSettings()
 {
 	system("cls");
-	gotoxy(25, 10);
+	gotoxy(50, 14);
 	cout << "No settings there, maybe later" << endl;
 	cin.ignore();
 	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
-void MenuFun3()
+void MenuAchievements()
 {
 	system("cls");
-	gotoxy(25, 10);
+	gotoxy(50, 14);
 	cout << "There is nothing" << endl;
 	cin.ignore();
 	system("cls");
@@ -178,7 +371,8 @@ void MenuFun3()
 //-----------------------------------------------------------------------------------------------
 void ExitOption()
 {
-	gotoxy(30, 15);
+	system("cls");
+	gotoxy(50, 14);
 	cout << "Exitting..." << endl;
 	exit(0);
 }
