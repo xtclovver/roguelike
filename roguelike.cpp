@@ -62,7 +62,7 @@ int map[35][93]; // map \\ level
 int xPlayer, yPlayer, playerCoins = 15, playerHP = 100, playerXP = 0, playerLVL = 1;
 int difficulty = 1;
 int ItemSlotID[6] = {1,0,0,0,0,0}, DefaultSword[3] = {15,1,0}; // DefaultSword {15 is dmg, 1 is lvl to need to equip, 0 sell cost
-int EnemyStats[4] = {15,10,10,5}; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor?
+int EnemyStats[4] = {15,10,10,5}; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
 char WallSymbol = '#';
 char FloorSymbol = ' ';
 char ChestSymbol = '*';
