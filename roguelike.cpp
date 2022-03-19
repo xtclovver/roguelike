@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <windows.h> // we need this header for the 'gotoxy' function.
 #include <conio.h> // we need this header for the '_getch' function.
@@ -7,8 +7,27 @@
 #include <fstream>
 #include <vector>
 #include <fstream>
+#include "colorfull.h" // full of huinya
+#pragma warning(push, 0)
+#include "colorfull.h"
+#pragma warning(pop)
 //-----------------------------------------------------------------------------------------------
 using namespace std;
+//-----------------------------------------------------------------------------------------------
+Color::Modifier magenta(Color::FG_MAGENTA);// " << mag << "
+Color::Modifier red(Color::FG_RED);// " << rou << "
+Color::Modifier def(Color::FG_DEFAULT);// " << def << "
+Color::Modifier yellow(Color::FG_YELLOW);// " << yel << "
+Color::Modifier green(Color::FG_GREEN);// " << gre << "
+Color::Modifier orange(Color::FG_ORANGE);// " << ora << "
+Color::Modifier pink(Color::FG_PINK);// " << pin << "
+Color::Modifier black(Color::FG_BLACK);// " << bla << "
+Color::Modifier gray(Color::FG_GREY);// " << gry << "
+Color::Modifier white(Color::FG_WHITE);// " << whi << "
+Color::Modifier brwhite(Color::BG_BRWHITE);// " << big << "
+Color::Modifier brcyan(Color::FG_BRCYAN);// " << bcc << "
+Color::Modifier cyan(Color::FG_CYAN);// " << cya << "
+Color::Modifier blue(Color::FG_BLUE);// " << blu << "
 //-----------------------------------------------------------------------------------------------
 string* MenuItems(); // a function that returns the name of a menu item.
 
@@ -26,34 +45,44 @@ void Gameplay(int map[35][93]);
 
 void GenerateMap();
 
+void InitializationLeftMenu();
+
+void ShowMap();
+
 void MenuStartTutorial(); // TODO
+
+bool IsNothingDisturbingThePlayer(int x, int y, char Where);
 
 void ExitOption(); // this is also an item function but i named it like this coz every menu must
 				   //    have an exit item.
-/* Êðàñèì òåêñò â êîíñîëè // POTOM
-	HANDLE hOUTPUT = GetStdHandle(STD_OUTPUT_HANDLE); 
-    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    cout<<"GREEN TEXT\n";
-    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_RED   | FOREGROUND_INTENSITY);
-    cout<<"RED TEXT\n";
-    SetConsoleTextAttribute(hOUTPUT,FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE );*/
 //-----------------------------------------------------------------------------------------------
+const string title = "Roguelike v0.1.0 by rizze//hakerhd93";
+//
 int map[35][93]; // map \\ level
-int leftMenu[35][30]; // lest menu with stats, hp and etc.
 int xPlayer, yPlayer, playerCoins = 15, playerHP = 100, playerXP = 0, playerLVL = 1;
+int difficulty = 1;
 int ItemSlotID[6] = {1,0,0,0,0,0}, DefaultSword[3] = {15,1,0}; // DefaultSword {15 is dmg, 1 is lvl to need to equip, 0 sell cost
+int EnemyStats[4] = {15,10,10,5}; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor?
+char WallSymbol = '#';
+char FloorSymbol = ' ';
+char ChestSymbol = '*';
+char EnemySymbol = 'E';
+char PlayerSymbol = 'P';
+char MagazineSymbol = '$';
+char BossTeleporterSymbol = '@';
 //-----------------------------------------------------------------------------------------------
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	srand(time(NULL));
+//	setlocale(LC_ALL, "Russian");
+	system("title Roguelike v0.1.0 by rizze//hakerhd93");
+	srand((unsigned int)time(NULL));
 	ChangeCursorStatus(false);
-	////////////////////ìåíÿåì ðàçìåð êîíñîëè 
-	system("mode con cols=125 lines=35"); //ðàçìåð îêíà, âûâîä íóæíîãî êîëè÷åñòâà ñòðîê â êîíñîëü
+	////////////////////Ð¼ÐµÐ½ÑÐµÐ¼ Ñ€Ð°Ð·Ð¼ÐµÑ€ ÐºÐ¾Ð½ÑÐ¾Ð»Ð¸ 
+	system("mode con cols=125 lines=35"); //Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¾ÐºÐ½Ð°, Ð²Ñ‹Ð²Ð¾Ð´ Ð½ÑƒÐ¶Ð½Ð¾Ð³Ð¾ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° ÑÑ‚Ñ€Ð¾Ðº Ð² ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ
 	HANDLE  hout = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD  size{ 100,100 };//ñèìâîëîâ ñòðîêè, ñòðîê
-	SetConsoleScreenBufferSize(hout, size);//ðàçìåð áóôåðà
-	///////////////////////////////////Ìåíÿåì øðèôò äëÿ îòîáðàæåíèÿ ñèìâîëîâ Unicode, ìîæíî ïðîïóñòèòü - åñëè ó âàñ óñòàíîâëåí òàêîé
+	COORD  size{ 100,100 };//ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² ÑÑ‚Ñ€Ð¾ÐºÐ¸, ÑÑ‚Ñ€Ð¾Ðº
+	SetConsoleScreenBufferSize(hout, size);//Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð±ÑƒÑ„ÐµÑ€Ð°
+	///////////////////////////////////ÐœÐµÐ½ÑÐµÐ¼ ÑˆÑ€Ð¸Ñ„Ñ‚ Ð´Ð»Ñ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Unicode, Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ñ€Ð¾Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ - ÐµÑÐ»Ð¸ Ñƒ Ð²Ð°Ñ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ Ñ‚Ð°ÐºÐ¾Ð¹
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
 	cfi.nFont = 0;
@@ -63,7 +92,7 @@ int main()
 	cfi.FontWeight = FW_NORMAL;
 	wcscpy_s(cfi.FaceName, L"Lucida Console");
 	SetCurrentConsoleFontEx(hout, false, &cfi);
-	///////////////////////////////////Ìåíÿåì øðèôò
+	///////////////////////////////////ÐœÐµÐ½ÑÐµÐ¼ ÑˆÑ€Ð¸Ñ„Ñ‚
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
 
 	int ItemCount = 5; // This variable holds the number of menu items.
@@ -174,13 +203,13 @@ void CheckItem()
 		else if (ItemSlotID[i] == 1)
 		{
 			gotoxy(1, 7 + attemptsToCatch);
-			cout << "Default Sword.";
+			cout << gray << "Default Sword." << def;
 			gotoxy(1, 8 + attemptsToCatch);
-			cout << "dmg: " << DefaultSword[0];
+			cout << red << "dmg: " << DefaultSword[0] << def;
 			gotoxy(10, 8 + attemptsToCatch);
-			cout << "lv: " << DefaultSword[1];
+			cout << brcyan << "lv: " << DefaultSword[1] << def;
 			gotoxy(17, 8 + attemptsToCatch);
-			cout << "cost: " << DefaultSword[2];
+			cout << green << "cost: " << DefaultSword[2] << def;
 			gotoxy(1, 9 + attemptsToCatch);
 			cout << "-----------------------------";
 			attemptsToCatch += 3;
@@ -210,13 +239,13 @@ void InitializationLeftMenu()
 		cout << "-";
 	}
 	gotoxy(1, 1);
-	cout << "hp: " << playerHP;
+	cout << red << "hp: " << playerHP << def;
 	gotoxy(15, 1);
-	cout << "xp: " << playerXP;
+	cout << magenta << "xp: " << playerXP << def;
 	gotoxy(15, 2);
-	cout << "lv: " << playerLVL;
+	cout << brcyan << "lv: " << playerLVL << def;
 	gotoxy(1, 2);
-	cout << "Coins: " << playerCoins;
+	cout << green << "Coins: " << playerCoins << def;
 	gotoxy(1, 3);
 	cout << "-----------------------------";
 	gotoxy(1, 5);
@@ -224,62 +253,208 @@ void InitializationLeftMenu()
 	gotoxy(1, 6);
 	cout << "-----------------------------";
 	CheckItem();
-	cin.ignore();
 }
-//
-void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
+//-----------------------------------------------------------------------------------------------
+bool IsNothingDisturbingThePlayer(int x, int y, char Where) // ÐµÑÐ»Ð¸ Ð²Ñ…ÐµÑ€Ðµ U - UP; D - DOWN; L - LEFT; R - RIGHT
+{
+	if (Where == 'U')
+	{
+		// up
+		if (y < 1)
+		{
+			return false;
+		}
+		if (map[y - 1][x] == 0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if (Where == 'D')
+	{
+		// down
+		if (y > 33)
+		{
+			return false;
+		}
+		if (map[y + 1][x] == 0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if (Where == 'L')
+	{
+		// left
+		if (map[y][x - 1] == 0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if (Where == 'R')
+	{
+		// right
+		if (map[y][x + 1] == 0)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else
+	{
+		exit(-1);
+	}
+}
+//-----------------------------------------------------------------------------------------------
+void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 = Magazine, 6 = bossTP
 {
 	xPlayer = rand() % 93;
 	yPlayer = rand() % 35;
+	int WallCount = 0,ChestCount = 140, EnemyCount = 250, MagazineCount = 0, BossTPCount = 0;
 	for (int j = 0; j < 35; j++)
 	{
 		for (int i = 0; i < 93; i++)
 		{
+			map[j][i] = 0;
+		}
+	}
+	for (int j = 0; j < 35; j++)
+	{
+		for (int i = 0; i < 93; i++)
+		{
+			int rNum = 0;
 			if (j == yPlayer && i == xPlayer)
 			{
 				map[j][i] = 4;
 				continue;
 			}
-			map[j][i] = rand() % 3;
+			if (ChestCount <= 0)
+			{
+				ChestCount = 140;
+				map[j][i] = 2;
+				continue;
+			}
+			ChestCount--;
+			if (EnemyCount <= 0)
+			{
+				map[j][i] = 3;
+				EnemyCount = 250;
+			}
+			EnemyCount--;
+			do {
+				rNum = rand() % 6;
+			} while (rNum == 4);
+			if (rNum == 0)
+			{
+				map[j][i] = 0;
+			}
+			else if (rNum == 1)
+			{
+				map[j][i] = 1;
+				WallCount++;
+				if (WallCount >= 2)
+				{
+					WallCount = 0;
+					map[j][i] = 0;
+					continue;
+				}
+			}
+			else if (rNum == 2)
+			{
+				if (ChestCount <= 0)
+				{
+					map[j][i] = 2;
+					ChestCount = 140;
+				}
+				else
+				{
+					ChestCount--;
+				}
+			}
+			else if (rNum == 3)
+			{
+				if (EnemyCount <= 0)
+				{
+					map[j][i] = 3;
+					EnemyCount = 250;
+				}
+				else
+				{
+					map[j][i] = 0;
+					EnemyCount--;
+				}
+			}
+			else if (rNum == 5)
+			{
+				if (MagazineCount == 0)
+				{
+					cout << orange << MagazineSymbol << def;
+					MagazineCount++;
+				}
+				else if (MagazineCount == 1) {
+					map[j][i] = 0;
+					continue;
+				}
+			}
+
 		}
+	}
+}
+//-----------------------------------------------------------------------------------------------
+void ShowMap()
+{
+	int Symbol = 0;
+	for (int j = 0; j < 35; j++)
+	{
+		gotoxy(31, 0 + j);
+		for (int i = 0; i < 93; i++) // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
+		{
+			Symbol++;
+			gotoxy(31 + Symbol, 0);
+			if (map[j][i] == 0)
+			{
+				cout << FloorSymbol;
+			}
+			else if (map[j][i] == 1)
+			{
+				cout << WallSymbol;
+			}
+			else if (map[j][i] == 2)
+			{
+				cout << yellow << ChestSymbol << def;
+			}
+			else if (map[j][i] == 3)
+			{
+				cout << red << EnemySymbol << def;
+			}
+			else if (map[j][i] == 4)
+			{
+				cout << green << PlayerSymbol << def;
+			}
+		}
+
 	}
 }
 //-----------------------------------------------------------------------------------------------
 void Gameplay(int map[35][93])
 {
 	char key;
+	bool IsNothingDisturbing;
 	system("cls"); //clear the screen.
+	GenerateMap();
 	InitializationLeftMenu();
 	while (1)
 	{
-		for (int j = 0; j < 35; j++)
-		{
-			gotoxy(31, 0 + j);
-			for (int i = 0; i < 93; i++)
-			{
-				gotoxy(31 + i, 0);
-				if (map[j][i] == 0)
-				{
-					cout << " ";
-				}
-				else if (map[j][i] == 1)
-				{
-					cout << " ";
-				}
-				else if (map[j][i] == 2)
-				{
-					cout << " ";
-				}
-				else if (map[j][i] == 3)
-				{
-					cout << " ";
-				}
-				else if (map[j][i] == 4)
-				{
-					cout << " ";
-				}
-			}
-		}
+		ShowMap();
 		key = _getch();
 		switch (key) //check the entered key.
 		{
@@ -294,30 +469,86 @@ void Gameplay(int map[35][93])
 			   //                     a runtime error will appear.
 			break;
 
-		case 'P': // if the entered key is the 'up arrow' notice that its equal to 'P' (capital)
-			 //then we will increment the cursor by one.
-			 // if the cursor value is more than the items count.
-				       //    then it will return back to the first item.
+		case 'P': // down arrow key
+
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'D');
+			if (IsNothingDisturbing == true)
+			{
+				if (yPlayer == 0)
+				{
+					continue;
+				}
+				else {
+					map[yPlayer + 1][xPlayer] = 4;
+					gotoxy(31 + xPlayer, 0 + (yPlayer + 1));
+					cout << green << PlayerSymbol << def;
+					gotoxy(31 + xPlayer, 0 + yPlayer);
+					map[yPlayer][xPlayer] = 0;
+					cout << FloorSymbol;
+					yPlayer++;
+				}
+
+			}
+			else if (IsNothingDisturbing == false) {}
 			break;
 
-		case 'H': // same but with 'down arrow' and decrement the cursor.
+		case 'H': // up arrow key
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'U');
+			if (IsNothingDisturbing == true)
+			{
+				if (yPlayer == 1)
+				{
+					continue;
+				}
+				else {
+					map[yPlayer - 1][xPlayer] = 4;
+					gotoxy(31 + xPlayer, 0 + (yPlayer - 1));
+					cout << green << PlayerSymbol << def;
+					gotoxy(31 + xPlayer, 0 + yPlayer);
+					map[yPlayer][xPlayer] = 0;
+					cout << FloorSymbol;
+					yPlayer--;
+				}
 
+			}
+			else if (IsNothingDisturbing == false) {}
 			break;
-
-		case 27: // 27 is the asscii to the escape key (Esc)
-			try { } // useually when the 'Esc' key is pressed the last
-												//     item will be called (executed). but you can
-												//     change it to whatever you want.
+		case 'K': // left arrow key
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'L');
+			if (IsNothingDisturbing == true)
+			{
+				map[yPlayer][xPlayer - 1] = 4;
+				gotoxy(31 + (xPlayer - 1), 0 + yPlayer);
+				cout << green << PlayerSymbol << def;
+				gotoxy(31 + xPlayer, 0 + yPlayer);
+				map[yPlayer][xPlayer] = 0;
+				cout << FloorSymbol;
+				xPlayer--;
+			}
+			else if (IsNothingDisturbing == false) {}
+			break;
+		case 'M': // right arrow key
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'R');
+			if (IsNothingDisturbing == true)
+			{
+				map[yPlayer][xPlayer + 1] = 4;
+				gotoxy(31 + (xPlayer + 1), 0 + yPlayer);
+				cout << green << PlayerSymbol << def;
+				gotoxy(31 + xPlayer, 0 + yPlayer);
+				map[yPlayer][xPlayer] = 0;
+				cout << FloorSymbol;
+				xPlayer++;
+			}
+			else if (IsNothingDisturbing == false) {}
+			break;
+		case 27: // Esc
+			try {
+			}
 			catch (...) {}
 			break;
-		default:// any another key.
-			//check if the pressed key is in the range
-			//    of (1,2,3,...,#of items) [all char(s)]
+		default:
 			{
-				try { } //call the function of the pressed number.
-					 //  you can make the cursor move to that item instead of calling (executing)
-					 //  it by replacing all the code between 'if (bla){' and '}' with this
-					 //  statement MenuChooice=int(key)-'0'
+				try { }
 				catch (...) {}
 			}
 		}
@@ -347,8 +578,8 @@ void MenuStart()
 void MenuStartTutorial()
 {
 	InitializationLeftMenu();
-//	GenerateMap();
-//	Gameplay(map);
+	GenerateMap();
+	Gameplay(map);
 }
 //-----------------------------------------------------------------------------------------------
 void MenuSettings()

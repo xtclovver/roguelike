@@ -1,3 +1,2 @@
 ﻿  roguelike.cpp
-C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(49,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   roguelike.vcxproj -> C:\Users\hakerhd93\source\repos\roguelike\x64\Debug\roguelike.exe
