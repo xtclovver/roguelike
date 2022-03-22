@@ -1,2 +1,3 @@
 ﻿  roguelike.cpp
+C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1392,24): warning C4305: 'initializing': truncation from 'double' to 'float'
   roguelike.vcxproj -> C:\Users\hakerhd93\source\repos\roguelike\x64\Debug\roguelike.exe

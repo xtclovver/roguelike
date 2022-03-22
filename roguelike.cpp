@@ -45,6 +45,8 @@ void Gameplay(int map[35][93]);
 
 void GenerateMap();
 
+void difficultyIncrease();
+
 void InitializationLeftMenu();
 
 void ShowMap();
@@ -53,20 +55,41 @@ void MenuStartTutorial(); // TODO
 
 bool IsNothingDisturbingThePlayer(int x, int y, char Where);
 
+bool CanYouHitAEnemy(int x, int y);
+
+void InitializationEnemyStats(int count);
+
+void CheckItem();
+
+void actionOnTheEnemy(int x, int y, int count, bool attack);
+
+int WhereIsChestX(int x, int y);
+
+int WhereIsChestX(int x, int y);
+
+void OpenChest(int x, int y);
+
+int xEnemy(int x, int y);
+
+int yEnemy(int x, int y);
+
 void ExitOption(); // this is also an item function but i named it like this coz every menu must
 				   //    have an exit item.
 //-----------------------------------------------------------------------------------------------
-const string title = "Roguelike v0.1.0 by rizze//hakerhd93";
 //
 int map[35][93]; // map \\ level
 int xPlayer, yPlayer, playerCoins = 15, playerHP = 100, playerXP = 0, playerLVL = 1;
-int difficulty = 1;
-int ItemSlotID[6] = {1,0,0,0,0,0}, DefaultSword[3] = {15,1,0}; // DefaultSword {15 is dmg, 1 is lvl to need to equip, 0 sell cost
-int EnemyStats[4] = {15,10,10,5}; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
+int difficulty = 1, Stage = 1;
+int ItemSlotID[6] = {1,0,0,0,0,0}, DefaultSword[3] = {15,1,5}, FireSword[3] = {25,3,75}, IchorSword[3] = {35,4,150}, Katana[3] = {50,6,300}; // DefaultSword {15 is dmg, 1 is lvl to need to equip, 0 sell n buy cost
+int EnemyStats[4] = {15,10,20,5}; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
+int EnemyOne[4] = {15,10,20,5}, EnemyTwo[4] = { 15,10,20,5 }, EnemyThree[4] = { 15,10,20,5 }, EnemyFour[4], EnemyFive[4], EnemySix[4], EnemySeven[4], EnemyEight[4], EnemyNine[4], EnemyTen[4], EnemyEleven[4], EnemyTwelve[4], EnemyThirty[4], EnemyFourty[4], EnemyFifty[4], EnemySixteen[4], EnemySeventeen[4], EnemyEighteen[4], EnemyNineteen[4], EnemyTwenty[4];
+int EnemyAssociationToMap[20]; // example 7 is first enemy = 7
+string CurrentState = "";
 char WallSymbol = '#'; 
 char FloorSymbol = ' ';
 char ChestSymbol = '*';
 char EnemySymbol = 'E';
+int NumberOfEnemy = 0;
 char PlayerSymbol = 'P';
 char MagazineSymbol = '$'; // TODO
 char BossTeleporterSymbol = '@'; // TODO
@@ -74,7 +97,7 @@ char BossTeleporterSymbol = '@'; // TODO
 int main()
 {
 //	setlocale(LC_ALL, "Russian");
-	system("title Roguelike v0.1.0 by rizze//hakerhd93");
+	system("title Roguelike v0.2.9 by rizze//hakerhd93 // Beta");
 	srand((unsigned int)time(NULL));
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
@@ -187,8 +210,7 @@ string* MenuItems() // this function returns a pointer to a string.
 	return item;
 }
 //-----------------------------------------------------------------------------------------------
-void CheckItem()
-{
+void CheckItem() {
 	int attemptsToCatch = 0;
 	for (int i = 0; i < 6; i++)
 	{
@@ -200,7 +222,7 @@ void CheckItem()
 			cout << "-----------------------------";
 			attemptsToCatch += 3;
 		}
-		else if (ItemSlotID[i] == 1)
+		else if (ItemSlotID[0] == 1) // DefaultSword[3] = {15,1,5}
 		{
 			gotoxy(1, 7 + attemptsToCatch);
 			cout << gray << "Default Sword." << def;
@@ -214,8 +236,60 @@ void CheckItem()
 			cout << "-----------------------------";
 			attemptsToCatch += 3;
 		}
+		else if (ItemSlotID[0] == 2) // FireSword[3] = {25,3,75}
+		{
+			gotoxy(1, 7 + attemptsToCatch);
+			cout << gray << "Default Sword." << def;
+			gotoxy(1, 8 + attemptsToCatch);
+			cout << red << "dmg: " << FireSword[0] << def;
+			gotoxy(10, 8 + attemptsToCatch);
+			cout << brcyan << "lv: " << FireSword[1] << def;
+			gotoxy(17, 8 + attemptsToCatch);
+			cout << green << "cost: " << FireSword[2] << def;
+			gotoxy(1, 9 + attemptsToCatch);
+			cout << "-----------------------------";
+			attemptsToCatch += 3;
+		}
+		else if (ItemSlotID[0] == 3) // IchorSword[3] = {35,4,150}
+		{
+			gotoxy(1, 7 + attemptsToCatch);
+			cout << gray << "Default Sword." << def;
+			gotoxy(1, 8 + attemptsToCatch);
+			cout << red << "dmg: " << IchorSword[0] << def;
+			gotoxy(10, 8 + attemptsToCatch);
+			cout << brcyan << "lv: " << IchorSword[1] << def;
+			gotoxy(17, 8 + attemptsToCatch);
+			cout << green << "cost: " << IchorSword[2] << def;
+			gotoxy(1, 9 + attemptsToCatch);
+			cout << "-----------------------------";
+			attemptsToCatch += 3;
+		}
+		else if (ItemSlotID[0] == 4) // Katana[3] = {50,6,300}
+		{
+			gotoxy(1, 7 + attemptsToCatch);
+			cout << gray << "Katana." << def;
+			gotoxy(1, 8 + attemptsToCatch);
+			cout << red << "dmg: " << Katana[0] << def;
+			gotoxy(10, 8 + attemptsToCatch);
+			cout << brcyan << "lv: " << Katana[1] << def;
+			gotoxy(17, 8 + attemptsToCatch);
+			cout << green << "cost: " << Katana[2] << def;
+			gotoxy(1, 9 + attemptsToCatch);
+			cout << "-----------------------------";
+			attemptsToCatch += 3;
+		}
 	}
 	attemptsToCatch = 0;
+}
+//-----------------------------------------------------------------------------------------------
+void difficultyIncrease() // TODO
+{
+
+}
+//
+void GoToTheNextStage() // TODO
+{
+
 }
 //-----------------------------------------------------------------------------------------------
 void InitializationLeftMenu()
@@ -247,12 +321,23 @@ void InitializationLeftMenu()
 	gotoxy(1, 2);
 	cout << green << "Coins: " << playerCoins << def;
 	gotoxy(1, 3);
+	cout << orange << "Difficulty: " << difficulty << def;
+	gotoxy(15, 3);
+	cout << blue << "Stage: " << Stage << def;
+	gotoxy(1, 4);
 	cout << "-----------------------------";
 	gotoxy(1, 5);
 	cout << "Items:";
 	gotoxy(1, 6);
 	cout << "-----------------------------";
 	CheckItem();
+	gotoxy(1, 25);
+	cout << brwhite << "Curret state: " << CurrentState << def;
+}
+//-----------------------------------------------------------------------------------------------
+int enemyCount(int xEnemy, int yEnemy)
+{
+	return map[yEnemy][xEnemy] - 6;
 }
 //-----------------------------------------------------------------------------------------------
 bool IsNothingDisturbingThePlayer(int x, int y, char Where) // если вхере U - UP; D - DOWN; L - LEFT; R - RIGHT
@@ -315,11 +400,707 @@ bool IsNothingDisturbingThePlayer(int x, int y, char Where) // если вхер
 	}
 }
 //-----------------------------------------------------------------------------------------------
+bool CanYouHitAEnemy(int x, int y)
+{
+	for (int i = 0; i < 20; i++)
+	{
+	if (map[y - 1][x] == 7 + i)	//up
+	{
+		return true;
+	} else if (map[y + 1][x] == 7 + i) // down
+	{
+		return true;
+	} else if (map[y][x - 1] == 7 + i) // left
+	{
+		return true;
+	} else if (map[y][x + 1] == 7 + i) // right
+	{
+		return true;
+	} else if (map[y - 1][x - 1] == 7 + i) // left up
+	{
+		return true;
+	} else if (map[y - 1][x + 1] == 7 + i) // right up
+	{
+		return true;
+	} else if (map[y + 1][x - 1] == 7 + i) // left down
+	{
+		return true;
+	} else if (map[y + 1][x + 1] == 7 + i) // right down
+	{
+		return true;
+	}
+	}
+	return false;
+}
+//-----------------------------------------------------------------------------------------------
+void InitializationEnemyStats(int count) // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
+{
+	switch (count)
+	{
+	case 1:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyOne[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[0] = 6 + count;
+		break;
+	case 2:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyTwo[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[1] = 6 + count;
+		break;
+	case 3:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyThree[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[2] = 6 + count;
+		break;
+	case 4:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyFour[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[3] = 6 + count;
+		break;
+	case 5:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyFive[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[4] = 6 + count;
+		break;
+	case 6:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemySix[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[5] = 6 + count;
+		break;
+	case 7:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemySeven[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[6] = 6 + count;
+		break;
+	case 8:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyEight[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[7] = 6 + count;
+		break;
+	case 9:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyNine[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[8] = 6 + count;
+		break;
+	case 10:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyTen[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[9] = 6 + count;
+		break;
+	case 11:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyEleven[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[10] = 6 + count;
+		break;
+	case 12:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyTwelve[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[11] = 6 + count;
+		break;
+	case 13:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyThirty[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[12] = 6 + count;
+		break;
+	case 14:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyFourty[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[13] = 6 + count;
+		break;
+	case 15:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyFifty[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[14] = 6 + count;
+		break;
+	case 16:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemySixteen[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[15] = 6 + count;
+		break;
+	case 17:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemySeventeen[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[16] = 6 + count;
+		break;
+	case 18:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyEighteen[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[17] = 6 + count;
+		break;
+	case 19:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyNineteen[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[18] = 6 + count;
+		break;
+	case 20:
+		for (int i = 0; i < 4; i++)
+		{
+			EnemyTwenty[i] = EnemyStats[i];
+		}
+		EnemyAssociationToMap[19] = 6 + count;
+		break;
+	default:
+		break;
+	}
+}
+//-----------------------------------------------------------------------------------------------
+int WhereIsChestX(int x, int y)
+{
+	if (map[y + 1][x] == 2)
+	{
+		return x;
+	}
+	else if (map[y - 1][x] == 2)
+	{
+		return x;
+	}
+	else if (map[y][x + 1] == 2)
+	{
+		return x + 1;
+	} 
+	else if (map[y][x - 1] == 2)
+	{
+		return x - 1;
+	}
+	else if(map[y + 1][x + 1] == 2)
+	{
+		return x + 1;
+	}
+	else if(map[y + 1][x - 1] == 2)
+	{
+		return x - 1;
+	}
+	else if (map[y - 1][x + 1] == 2)
+	{
+		return x + 1;
+	}
+	else if (map[y - 1][x - 1] == 2)
+	{
+		return x - 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
+//
+int WhereIsChestY(int x, int y)
+{
+	if (map[y + 1][x] == 2)
+	{
+		return y + 1;
+	}
+	else if (map[y - 1][x] == 2)
+	{
+		return y - 1;
+	}
+	else if (map[y][x + 1] == 2)
+	{
+		return y;
+	}
+	else if (map[y][x - 1] == 2)
+	{
+		return y;
+	}
+	else if (map[y + 1][x + 1] == 2)
+	{
+		return y + 1;
+	}
+	else if (map[y + 1][x - 1] == 2)
+	{
+		return y + 1;
+	}
+	else if (map[y - 1][x + 1] == 2)
+	{
+		return y - 1;
+	}
+	else if (map[y - 1][x - 1] == 2)
+	{
+		return y - 1;
+	}
+	else
+	{
+		return -1;
+	}
+}
+//
+void OpenChest(int x, int y)
+{
+	if (map[y][x] == 2)
+	{
+		playerCoins += 15;
+		CurrentState = "You got 15 coins";
+		map[y][x] = 0;
+		gotoxy(31 + x, 0 + y);
+		cout << " ";
+		InitializationLeftMenu();
+		ShowMap();
+	}
+}
+//-----------------------------------------------------------------------------------------------
+int yEnemy(int x, int y)
+{
+	for (int i = 0; i < 20; i++)
+	{
+		if (map[y - 1][x] == 7 + i)	//up
+		{
+			return y - 1;
+		}
+		else if (map[y + 1][x] == 7 + i) // down
+		{
+			return y + 1;
+		}
+		else if (map[y - 1][x - 1] == 7 + i) // left up
+		{
+			return y - 1;
+		}
+		else if (map[y - 1][x + 1] == 7 + i) // right up
+		{
+			return y - 1;
+		}
+		else if (map[y + 1][x - 1] == 7 + i) // left down
+		{
+			return y + 1;
+		}
+		else if (map[y + 1][x + 1] == 7 + i) // right down
+		{
+			return y + 1;
+		}
+	}
+	return -1;
+}
+//
+int xEnemy(int x, int y)
+{
+	for (int i = 0; i < 20; i++)
+	{
+		if (map[y][x - 1] == 7 + i) // left
+		{
+			return x - 1;
+		}
+		else if (map[y][x + 1] == 7 + i) // right
+		{
+			return x + 1;
+		}
+		else if (map[y - 1][x - 1] == 7 + i) // left up
+		{
+			return x - 1;
+		}
+		else if (map[y - 1][x + 1] == 7 + i) // right up
+		{
+			return x + 1;
+		}
+		else if (map[y + 1][x - 1] == 7 + i) // left down
+		{
+			return x - 1;
+		}
+		else if (map[y + 1][x + 1] == 7 + i) // right down
+		{
+			return x + 1;
+		}
+	}
+	return -1;
+}
+//
+void actionOnTheEnemy(int x, int y, int count, bool attack) //attack = false - check enemy, attack = true - attack enemy
+{
+	if (attack == false)
+	{
+		switch (count)
+		{
+		case 1:
+			if (EnemyOne[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyOne[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 2: 
+			if (EnemyTwo[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyTwo[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 3:
+			if (EnemyThree[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyThree[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 4:
+			if (EnemyFour[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyFour[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 5:
+			if (EnemyFive[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyFive[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 6:
+			if (EnemySix[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemySix[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 7:
+			if (EnemySeven[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemySeven[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 8:
+			if (EnemyEight[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyEight[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 9:
+			if (EnemyNine[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyNine[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 10:
+			if (EnemyTen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyTen[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 11:
+			if (EnemyEleven[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyEleven[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 12:
+			if (EnemyTwelve[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyTwelve[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 13:
+			if (EnemyThirty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyThirty[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 14:
+			if (EnemyFourty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyFourty[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 15:
+			if (EnemyFifty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyFifty[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 16:
+			if (EnemySixteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemySixteen[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 17:
+			if (EnemySeventeen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemySeventeen[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 18:
+			if (EnemyEighteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyEighteen[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 19:
+			if (EnemyNineteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyNineteen[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		case 20:
+			if (EnemyTwenty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			else if (EnemyTwenty[1] > 0)
+			{
+				map[y][x] = 6 + count;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (attack == true)
+	{
+		switch (count)
+		{
+		case 1:
+			if (ItemSlotID[0] == 1)
+			{
+				EnemyOne[1] -= DefaultSword[0];
+			}
+			else if (ItemSlotID[0] == 2)
+			{
+				EnemyOne[1] -= FireSword[0];
+			}
+			else if (ItemSlotID[0] == 3)
+			{
+				EnemyOne[1] -= IchorSword[0];
+			}
+			else if (ItemSlotID[0] == 4)
+			{
+				EnemyOne[1] -= Katana[0];
+			}
+			if (EnemyOne[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 2:
+			if (EnemyTwo[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 3:
+			if (EnemyThree[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 4:
+			if (EnemyFour[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 5:
+			if (EnemyFive[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 6:
+			if (EnemySix[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 7:
+			if (EnemySeven[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 8:
+			if (EnemyEight[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 9:
+			if (EnemyNine[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 10:
+			if (EnemyTen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 11:
+			if (EnemyEleven[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 12:
+			if (EnemyTwelve[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 13:
+			if (EnemyThirty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 14:
+			if (EnemyFourty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 15:
+			if (EnemyFifty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 16:
+			if (EnemySixteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 17:
+			if (EnemySeventeen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 18:
+			if (EnemyEighteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 19:
+			if (EnemyNineteen[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		case 20:
+			if (EnemyTwenty[1] <= 0)
+			{
+				map[y][x] = 0;
+			}
+			break;
+		default:
+			break; 
+		}
+	}
+}
+//-----------------------------------------------------------------------------------------------
 void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 = Magazine, 6 = bossTP
 {
-	xPlayer = rand() % 93;
-	yPlayer = rand() % 35;
-	int WallCount = 0,ChestCount = 140, EnemyCount = 250, MagazineCount = 0, BossTPCount = 0;
+	xPlayer = rand() % 92;
+	yPlayer = rand() % 34;
+	int WallCount = 0, ChestCount = 120 + (20 * difficulty), EnemyCount = 270 - (20 * difficulty);//, MagazineCount = 0, BossTPCount = 0;
 	for (int j = 0; j < 35; j++)
 	{
 		for (int i = 0; i < 93; i++)
@@ -331,7 +1112,7 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 	{
 		for (int i = 0; i < 93; i++)
 		{
-			int rNum = 0;
+			int rNum;
 			if (j == yPlayer && i == xPlayer)
 			{
 				map[j][i] = 4;
@@ -339,20 +1120,38 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 			}
 			if (ChestCount <= 0)
 			{
-				ChestCount = 140;
+				ChestCount = 120 + (20 * difficulty);
 				map[j][i] = 2;
 				continue;
 			}
 			ChestCount--;
 			if (EnemyCount <= 0)
 			{
-				map[j][i] = 3;
-				EnemyCount = 250;
+				if (EnemyCount <= 2 * difficulty)
+				{
+					NumberOfEnemy++;
+					map[j][i] = 6 + NumberOfEnemy;
+					InitializationEnemyStats(NumberOfEnemy);
+					EnemyCount = 270 - (20 * difficulty);
+					continue;
+				}
+				else
+				{
+					EnemyCount--;
+				}
 			}
-			EnemyCount--;
 			do {
 				rNum = rand() % 6;
 			} while (rNum == 4);
+			/*if (rNum == 5)
+			{
+				if (MagazineCount == 0)
+				{
+					cout << orange << MagazineSymbol << def;
+					MagazineCount++;
+				}
+				else if (MagazineCount == 1) { }
+			}*/
 			if (rNum == 0)
 			{
 				map[j][i] = 0;
@@ -373,7 +1172,7 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 				if (ChestCount <= 0)
 				{
 					map[j][i] = 2;
-					ChestCount = 140;
+					ChestCount = 120 + (20 * difficulty);
 				}
 				else
 				{
@@ -382,10 +1181,12 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 			}
 			else if (rNum == 3)
 			{
-				if (EnemyCount <= 0)
+				if (EnemyCount <= 2 * difficulty)
 				{
-					map[j][i] = 3;
-					EnemyCount = 250;
+					NumberOfEnemy++;
+					map[j][i] = 6 + NumberOfEnemy;
+					InitializationEnemyStats(NumberOfEnemy);
+					EnemyCount = 270 - (20 * difficulty);
 				}
 				else
 				{
@@ -393,19 +1194,6 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 					EnemyCount--;
 				}
 			}
-			else if (rNum == 5)
-			{
-				if (MagazineCount == 0)
-				{
-					cout << orange << MagazineSymbol << def;
-					MagazineCount++;
-				}
-				else if (MagazineCount == 1) {
-					map[j][i] = 0;
-					continue;
-				}
-			}
-
 		}
 	}
 }
@@ -420,25 +1208,108 @@ void ShowMap()
 		{
 			Symbol++;
 			gotoxy(31 + Symbol, 0);
-			if (map[j][i] == 0)
+			switch (map[j][i])
 			{
+			case 0:
 				cout << FloorSymbol;
-			}
-			else if (map[j][i] == 1)
-			{
+				break;
+			case 1:
 				cout << WallSymbol;
-			}
-			else if (map[j][i] == 2)
-			{
+				break;
+			case 2:
 				cout << yellow << ChestSymbol << def;
-			}
-			else if (map[j][i] == 3)
-			{
-				cout << red << EnemySymbol << def;
-			}
-			else if (map[j][i] == 4)
-			{
+				break;
+			case 4:
 				cout << green << PlayerSymbol << def;
+				break;
+			case 5:
+				cout << FloorSymbol;
+				break;
+			case 6:
+				cout << FloorSymbol;
+				break;
+			case 7:
+				actionOnTheEnemy(i, j, 1, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 8:
+				actionOnTheEnemy(i, j, 2, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 9:
+				actionOnTheEnemy(i, j, 3, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 10:
+				actionOnTheEnemy(i, j, 4, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 11:
+				actionOnTheEnemy(i, j, 5, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 12:
+				actionOnTheEnemy(i, j, 6, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 13:
+				actionOnTheEnemy(i, j, 7, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 14:
+				actionOnTheEnemy(i, j, 8, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 15:
+				actionOnTheEnemy(i, j, 9, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 16:
+				actionOnTheEnemy(i, j, 10, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 17:
+				actionOnTheEnemy(i, j, 11, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 18:
+				actionOnTheEnemy(i, j, 12, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 19:
+				actionOnTheEnemy(i, j, 13, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 20:
+				actionOnTheEnemy(i, j, 14, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 21:
+				actionOnTheEnemy(i, j, 15, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 22:
+				actionOnTheEnemy(i, j, 16, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 23:
+				actionOnTheEnemy(i, j, 17, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 24:
+				actionOnTheEnemy(i, j, 18, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 25:
+				actionOnTheEnemy(i, j, 19, false);
+				cout << red << EnemySymbol << def;
+				break;
+			case 26:
+				actionOnTheEnemy(i, j, 20, false);
+				cout << red << EnemySymbol << def;
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -451,17 +1322,49 @@ void Gameplay(int map[35][93])
 	bool IsNothingDisturbing;
 	system("cls"); //clear the screen.
 	GenerateMap();
+	NumberOfEnemy = 0;
 	InitializationLeftMenu();
+	gotoxy(1, 26);
+	cout << brwhite << "x: " << xPlayer << def;
+	gotoxy(10, 26);
+	cout << brwhite << "y: " << yPlayer << def;
+	if (yPlayer < 10)
+	{
+		gotoxy(1, 26);
+		cout << brwhite << "x: " << xPlayer << def;
+		gotoxy(14, 26);
+		cout << " ";
+	}
+	ShowMap();
 	while (1)
 	{
-		ShowMap();
+
+		gotoxy(1, 26);
+		cout << brwhite << "x: " << xPlayer << def;
+		gotoxy(10, 26);
+		cout << brwhite << "y: " << yPlayer << def;
+		if (yPlayer < 10)
+		{
+			gotoxy(14, 26);
+			cout << " ";
+		}
 		key = _getch();
 		switch (key) //check the entered key.
 		{
 		case '\r': // if the entered key is 'Enter'.
 			try
 			{
-				//
+				if (CanYouHitAEnemy(xPlayer, yPlayer) == false)
+				{
+					if (WhereIsChestX(xPlayer, yPlayer) != -1 && WhereIsChestY(xPlayer, yPlayer) != -1)
+					{
+						OpenChest(WhereIsChestX(xPlayer, yPlayer), WhereIsChestY(xPlayer, yPlayer));
+					}
+				}
+				else if (CanYouHitAEnemy(xPlayer, yPlayer) == true)
+				{
+					actionOnTheEnemy(xEnemy(xPlayer, yPlayer), yEnemy(xPlayer, yPlayer), enemyCount(xEnemy(xPlayer, yPlayer), yEnemy(xPlayer, yPlayer)), true);
+				}
 			}
 			catch (...)
 			{
@@ -470,15 +1373,15 @@ void Gameplay(int map[35][93])
 			break;
 
 		case 'P': // down arrow key
-
 			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'D');
 			if (IsNothingDisturbing == true)
 			{
-				if (yPlayer == 0)
+				if (yPlayer < 1)
 				{
 					continue;
 				}
 				else {
+
 					map[yPlayer + 1][xPlayer] = 4;
 					gotoxy(31 + xPlayer, 0 + (yPlayer + 1));
 					cout << green << PlayerSymbol << def;
@@ -486,6 +1389,10 @@ void Gameplay(int map[35][93])
 					map[yPlayer][xPlayer] = 0;
 					cout << FloorSymbol;
 					yPlayer++;
+					float delay = 0.35;
+					delay *= CLOCKS_PER_SEC;
+					clock_t now = clock();
+					while (clock() - now < delay);
 				}
 
 			}
@@ -496,7 +1403,7 @@ void Gameplay(int map[35][93])
 			IsNothingDisturbing = IsNothingDisturbingThePlayer(xPlayer, yPlayer, 'U');
 			if (IsNothingDisturbing == true)
 			{
-				if (yPlayer == 1)
+				if (yPlayer <= 1)
 				{
 					continue;
 				}
@@ -554,8 +1461,7 @@ void Gameplay(int map[35][93])
 		}
 	}
 	cin.ignore();
-	system("cls");
-
+//	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
 void gotoxy(int xpos, int ypos)  // just take this function as it is.
@@ -568,18 +1474,21 @@ void gotoxy(int xpos, int ypos)  // just take this function as it is.
 //-----------------------------------------------------------------------------------------------
 void MenuStart()
 {
-	system("cls"); //clear the screen.
-	gotoxy(50, 14);
-	cout << "There is no game (Will be)" << endl;
-	cin.ignore(); 
 	system("cls");
+	int delay = 1;
+	delay *= CLOCKS_PER_SEC;
+	clock_t now = clock();
+	while (clock() - now < delay);
+	Gameplay(map);
 }
 //-----------------------------------------------------------------------------------------------
 void MenuStartTutorial()
 {
-	InitializationLeftMenu();
-	GenerateMap();
-	Gameplay(map);
+	system("cls"); //clear the screen.
+	gotoxy(50, 14);
+	cout << "There is no game (Will be)" << endl;
+	cin.ignore();
+	system("cls");
 }
 //-----------------------------------------------------------------------------------------------
 void MenuSettings()
