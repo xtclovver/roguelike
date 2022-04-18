@@ -1,6 +1,7 @@
 #pragma once
 #include <ostream>
-
+#pragma warning(push)
+#pragma warning(disable: 26812)
 namespace Color {
     enum Code {
         FG_BLACK = 30,
@@ -35,7 +36,7 @@ namespace Color {
         }
     };
 }
-
+#pragma warning(pop)
 /*
 Name            FG  BG
 Black           30  40
