@@ -35,6 +35,20 @@ namespace Color {
             return os << "\033[" << mod.code << "m";
         }
     };
+    Color::Modifier magenta(Color::FG_MAGENTA);// " << mag << "
+    Color::Modifier red(Color::FG_RED);// " << rou << "
+    Color::Modifier def(Color::FG_DEFAULT);// " << def << "
+    Color::Modifier yellow(Color::FG_YELLOW);// " << yel << "
+    Color::Modifier green(Color::FG_GREEN);// " << gre << "
+    Color::Modifier orange(Color::FG_ORANGE);// " << ora << "
+    Color::Modifier pink(Color::FG_PINK);// " << pin << "
+    Color::Modifier black(Color::FG_BLACK);// " << bla << "
+    Color::Modifier gray(Color::FG_GREY);// " << gry << "
+    Color::Modifier white(Color::FG_WHITE);// " << whi << "
+    Color::Modifier brwhite(Color::BG_BRWHITE);// " << big << "
+    Color::Modifier brcyan(Color::FG_BRCYAN);// " << bcc << "
+    Color::Modifier cyan(Color::FG_CYAN);// " << cya << "
+    Color::Modifier blue(Color::FG_BLUE);// " << blu << "
 }
 #pragma warning(pop)
 /*

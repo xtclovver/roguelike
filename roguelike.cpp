@@ -1,48 +1,32 @@
 ﻿#include <iostream>
 #include <string>
-#include <windows.h> // we need this header for the 'gotoxy' function.
+#include <windows.h> // we need this header for the 'systems::gotoxy' function.
 #include <conio.h> // we need this header for the '_getch' function.
 #include <cstdlib> // "system" is ambiguous.
 #include <stdio.h>
 #include <chrono>
 #include <thread>
-#include "colorfull.h" // full of huinya
+#include "colorfull.h" // ты вчера мне приподнёс
+#include "systems.h"
+#include "shopNitems.h"
+#include "player.h"
 //-----------------------------------------------------------------------------------------------
 using namespace std;
+using namespace systems;
+using namespace Color;
+using namespace shopNitems;
+using namespace player;
 #pragma comment(lib, "winmm")
 //-----------------------------------------------------------------------------------------------
-Color::Modifier magenta(Color::FG_MAGENTA);// " << mag << "
-Color::Modifier red(Color::FG_RED);// " << rou << "
-Color::Modifier def(Color::FG_DEFAULT);// " << def << "
-Color::Modifier yellow(Color::FG_YELLOW);// " << yel << "
-Color::Modifier green(Color::FG_GREEN);// " << gre << "
-Color::Modifier orange(Color::FG_ORANGE);// " << ora << "
-Color::Modifier pink(Color::FG_PINK);// " << pin << "
-Color::Modifier black(Color::FG_BLACK);// " << bla << "
-Color::Modifier gray(Color::FG_GREY);// " << gry << "
-Color::Modifier white(Color::FG_WHITE);// " << whi << "
-Color::Modifier brwhite(Color::BG_BRWHITE);// " << big << "
-Color::Modifier brcyan(Color::FG_BRCYAN);// " << bcc << "
-Color::Modifier cyan(Color::FG_CYAN);// " << cya << "
-Color::Modifier blue(Color::FG_BLUE);// " << blu << "
+
 //-----------------------------------------------------------------------------------------------
 string* MenuItems(); // a function that returns the name of a menu item.
-
-string* ShopMenuItems();
-
-string* ShopMenuItemsSpecs(bool cost, bool dmg, bool desc);
-
-void gotoxy(int, int); // by this function you can goto any position on the cmd line screen.
-
-void ChangeCursorStatus(bool);
 
 void MenuStart(); // every menu item needs a seperate function, so this is for the first item.
 
 void MenuSettings(); //    and the second item etc...
 
 void MenuAchievements();
-
-void UpgradeLvl();
 
 void Gameplay(int map[35][93]);
 
@@ -54,21 +38,9 @@ void InitializationLeftMenu();
 
 void ShowMap();
 
-void ShopBuy0();
-
-void ShopBuy1();
-
-void ShopBuy2();
-
 void MenuStartTutorial(); // TODO
 
-bool IsNothingDisturbingThePlayer(int x, int y, char Where);
-
-bool CanYouHitAEnemy(int x, int y);
-
 void InitializationEnemyStats(int count);
-
-void CheckItem();
 
 int getRandomNumber(int min, int max);
 
@@ -87,22 +59,9 @@ void ExitOption(); // this is also an item function but i named it like this coz
 //-----------------------------------------------------------------------------------------------
 //
 int map[35][93]; // map \\ level
-struct PlayerStats {
-	int x;
-	int y;
-	int coins;
-	int hp;
-	int exp;
-	int forNextlvl;
-	int lvl;
-	int armor;
-	int MaxHP;
-};
-PlayerStats Player;
+
 float difficulty = 1;
 int Stage = 1;
-int ShopItemsIDs[3];
-int ItemSlotID[6] = { 0,-1,-1,-1,-1,-1 }; // [0] is sword, another is items
 int EnemyDefaultStats[4] = { 15,10,20,5 }; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
 //int enemyTurn = 0;
 struct EnemyStats
@@ -126,67 +85,9 @@ int NumberOfEnemy = 0;
 char PlayerSymbol = 'P';
 char ShopSymbol = '$'; // TODO
 char BossTeleporterSymbol = '@'; // TODO
-
-struct ItemsSpecifications {
-	string Name;
-	int damage = 0;
-	int ID = 0;
-	int StageReq = 0;
-	int LvlToEqp = 0;
-	int cost = 0;
-	string Desc; // Description
-};
-
-struct weapon
-{
-	int damage;
-	int lvltoEq;
-	int sellCost;
-};
-// WEAPONS // WEAPONS // WEAPONS // WEAPONS // WEAPONS // WEAPONS
-//weapon Dao; // Default Sword
-//weapon Quelling_Blade;
-//weapon Ogre_Axe;
-//weapon Katana;
-//weapon Desolator; // дезоль
-//weapon Skull_Basher; // башер
-//weapon Heavens_Halberd;
-//weapon Sacred_Relic; // сакред
-//weapon Ethereal_blade; // езериал
-//weapon Divine_Rapier; // рапира
-// WEAPONS // WEAPONS // WEAPONS // WEAPONS // WEAPONS // WEAPONS
-
-// ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS 
-ItemsSpecifications ShopItems[20];
-//  Consumables
-//Item healing_salve; // 11
-//Item Tome_of_Knowledge; // 12
-//  Consumables
-//
-// Equipment
-//Item Iron_Branch; // 13
-//Item Ring_of_Protection; // 14
-//Item Chainmail; // 15
-//Item Vitality_Booster; // 16
-//Item Morbid_Mask; // 17
-//Item Ultimate_Orb; // 18
-//Item Vanguard; // 19
-//Item Heart_of_Tarrasque; // 20
-// Equipment
-// ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS 
-
 //-----------------------------------------------------------------------------------------------
 int main()
 {
-	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
-	Player.coins = 15;
-	Player.hp = 100;
-	Player.exp = 0;
-	Player.forNextlvl = 10;
-	Player.lvl = 1;
-	Player.armor = 0;
-	Player.MaxHP = 100;
-	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
 	// Swords // Swords // Swords // Swords // Swords // Swords
 	ShopItems[0].Name = "Dao";
 	ShopItems[0].damage = 15;
@@ -198,7 +99,7 @@ int main()
 	//
 	ShopItems[1].Name = "Quelling Blade";
 	ShopItems[1].cost = 25;
-	ShopItems[0].damage = 20;
+	ShopItems[1].damage = 20;
 	ShopItems[1].LvlToEqp = 2;
 	ShopItems[1].ID = 2;
 	ShopItems[1].StageReq = 1;
@@ -206,7 +107,7 @@ int main()
 	//
 	ShopItems[2].Name = "Ogre Axe";
 	ShopItems[2].cost = 50;
-	ShopItems[0].damage = 25;
+	ShopItems[2].damage = 25;
 	ShopItems[2].LvlToEqp = 4;
 	ShopItems[2].ID = 3;
 	ShopItems[2].StageReq = 2;
@@ -214,7 +115,7 @@ int main()
 	//
 	ShopItems[3].Name = "Katana";
 	ShopItems[3].cost = 75;
-	ShopItems[0].damage = 30;
+	ShopItems[3].damage = 30;
 	ShopItems[3].LvlToEqp = 6;
 	ShopItems[3].ID = 4;
 	ShopItems[3].StageReq = 2;
@@ -222,7 +123,7 @@ int main()
 	//
 	ShopItems[4].Name = "Desolator";
 	ShopItems[4].cost = 100;
-	ShopItems[0].damage = 35;
+	ShopItems[4].damage = 35;
 	ShopItems[4].LvlToEqp = 8;
 	ShopItems[4].ID = 5;
 	ShopItems[4].StageReq = 3;
@@ -230,7 +131,7 @@ int main()
 	//
 	ShopItems[5].Name = "Skull Basher";
 	ShopItems[5].cost = 125;
-	ShopItems[0].damage = 40;
+	ShopItems[5].damage = 40;
 	ShopItems[5].LvlToEqp = 10;
 	ShopItems[5].ID = 6;
 	ShopItems[5].StageReq = 3;
@@ -238,7 +139,7 @@ int main()
 	//
 	ShopItems[6].Name = "Heavens Halberd";
 	ShopItems[6].cost = 125;
-	ShopItems[0].damage = 45;
+	ShopItems[6].damage = 45;
 	ShopItems[6].LvlToEqp = 12;
 	ShopItems[6].ID = 7;
 	ShopItems[6].StageReq = 4;
@@ -246,7 +147,7 @@ int main()
 	//
 	ShopItems[7].Name = "Sacred Relic";
 	ShopItems[7].cost = 150;
-	ShopItems[0].damage = 50;
+	ShopItems[7].damage = 50;
 	ShopItems[7].LvlToEqp = 14;
 	ShopItems[7].ID = 8;
 	ShopItems[7].StageReq = 4;
@@ -254,7 +155,7 @@ int main()
 	//
 	ShopItems[8].Name = "Ethereal blade";
 	ShopItems[8].cost = 175;
-	ShopItems[0].damage = 55;
+	ShopItems[8].damage = 55;
 	ShopItems[8].LvlToEqp = 16;
 	ShopItems[8].ID = 9;
 	ShopItems[8].StageReq = 5;
@@ -262,7 +163,7 @@ int main()
 	//
 	ShopItems[9].Name = "Divine Rapier";
 	ShopItems[9].cost = 293;
-	ShopItems[0].damage = 70;
+	ShopItems[9].damage = 70;
 	ShopItems[9].LvlToEqp = 20;
 	ShopItems[9].ID = 10;
 	ShopItems[9].StageReq = 5;
@@ -284,8 +185,17 @@ int main()
 	ShopItems[12].Desc = "Gives you exp";
 	//  Consumables
 	// ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS 
-	//	setlocale(LC_ALL, "Russian");
-	system("title Roguelike v0.3.5 by rizze // hakerhd93 // Beta");
+	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
+	Player.coins = 15;
+	Player.hp = 100;
+	Player.exp = 0;
+	Player.forNextlvl = 10;
+	Player.lvl = 1;
+	Player.armor = 0;
+	Player.MaxHP = 100;
+	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
+
+	system("title Roguelike v0.3.6 by rizze // hakerhd93 // Beta");
 	srand((unsigned int)time(NULL));
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
@@ -321,7 +231,7 @@ int main()
 	{
 		for (int i = 0; i < ItemCount; i++) // Draw the menu.
 		{
-			gotoxy(50, 14 + i);
+			systems::gotoxy(50, 14 + i);
 			MenuChoice == i + 1 ? cout << " -> " : cout << "    "; // if (i+1) == the cursor then
 														   //    print ' -> ' else print '    '.
 														   //    by the way i call '->' the cursor
@@ -398,85 +308,6 @@ string* MenuItems() // this function returns a pointer to a string.
 	return item;
 }
 //-----------------------------------------------------------------------------------------------
-void CheckItem() {
-	int attemptsToCatch = 0;
-	for (int i = 0; i < 6; i++)
-	{
-		switch (ItemSlotID[i])
-		{
-		case 0:
-		default:
-			break;
-		}
-
-		if (ItemSlotID[i] == -1)
-		{
-			gotoxy(1, 7 + attemptsToCatch);
-			cout << "Empty.";
-			gotoxy(1, 9 + attemptsToCatch);
-			cout << "-----------------------------";
-			attemptsToCatch += 3;
-		}
-		else if (ItemSlotID[0] == 0)
-		{
-			gotoxy(1, 7 + attemptsToCatch);
-			cout << gray << "Dao." << def;
-			gotoxy(1, 8 + attemptsToCatch);
-			cout << red << "dmg: " << ShopItems[0].damage << def;
-			gotoxy(10, 8 + attemptsToCatch);
-			cout << brcyan << "lv: " << ShopItems[0].LvlToEqp << def;
-			gotoxy(17, 8 + attemptsToCatch);
-			cout << green << "cost: " << ShopItems[0].cost << def;
-			gotoxy(1, 9 + attemptsToCatch);
-			cout << "-----------------------------";
-			attemptsToCatch += 3;
-		}
-		else if (ItemSlotID[0] == 1)
-		{
-			gotoxy(1, 7 + attemptsToCatch);
-			cout << gray << "Quelling Blade." << def;
-			gotoxy(1, 8 + attemptsToCatch);
-			cout << red << "dmg: " << ShopItems[1].damage << def;
-			gotoxy(10, 8 + attemptsToCatch);
-			cout << brcyan << "lv: " << ShopItems[1].LvlToEqp << def;
-			gotoxy(17, 8 + attemptsToCatch);
-			cout << green << "cost: " << ShopItems[1].cost << def;
-			gotoxy(1, 9 + attemptsToCatch);
-			cout << "-----------------------------";
-			attemptsToCatch += 3;
-		}
-		else if (ItemSlotID[0] == 2)
-		{
-			gotoxy(1, 7 + attemptsToCatch);
-			cout << gray << "Ogre Axe." << def;
-			gotoxy(1, 8 + attemptsToCatch);
-			cout << red << "dmg: " << ShopItems[2].damage << def;
-			gotoxy(10, 8 + attemptsToCatch);
-			cout << brcyan << "lv: " << ShopItems[2].LvlToEqp << def;
-			gotoxy(17, 8 + attemptsToCatch);
-			cout << green << "cost: " << ShopItems[2].cost << def;
-			gotoxy(1, 9 + attemptsToCatch);
-			cout << "-----------------------------";
-			attemptsToCatch += 3;
-		}
-		else if (ItemSlotID[0] == 3)
-		{
-			gotoxy(1, 7 + attemptsToCatch);
-			cout << gray << "Katana." << def;
-			gotoxy(1, 8 + attemptsToCatch);
-			cout << red << "dmg: " << ShopItems[3].damage << def;
-			gotoxy(10, 8 + attemptsToCatch);
-			cout << brcyan << "lv: " << ShopItems[3].LvlToEqp << def;
-			gotoxy(17, 8 + attemptsToCatch);
-			cout << green << "cost: " << ShopItems[3].cost << def;
-			gotoxy(1, 9 + attemptsToCatch);
-			cout << "-----------------------------";
-			attemptsToCatch += 3;
-		}
-	}
-	attemptsToCatch = 0;
-}
-//-----------------------------------------------------------------------------------------------
 int getRandomNumber(int min, int max)
 {
 	static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
@@ -509,166 +340,87 @@ void InitializationLeftMenu()
 {
 	for (int j = 1; j < 34; j++)
 	{
-		gotoxy(0, 0 + j);
+		systems::gotoxy(0, 0 + j);
 		cout << "|" << "\n";
-		gotoxy(30, 0 + j);
+		systems::gotoxy(30, 0 + j);
 		cout << "|" << "\n";
 	}
 	for (int i = 0; i < 31; i++)
 	{
-		gotoxy(0 + i, 0);
+		systems::gotoxy(0 + i, 0);
 		cout << "-";
 	}
 	for (int i = 0; i < 31; i++)
 	{
-		gotoxy(0 + i, 34);
+		systems::gotoxy(0 + i, 34);
 		cout << "-";
 	}
-	gotoxy(1, 1);
+	systems::gotoxy(1, 1);
 	cout << red << "hp: " << Player.hp << " / " << Player.MaxHP << def;
 	if (Player.hp < 100)
 	{
-		gotoxy(7, 1);
+		systems::gotoxy(7, 1);
 		cout << " ";
-		gotoxy(13, 1);
+		systems::gotoxy(13, 1);
 		cout << " ";
 	}
 
-	gotoxy(15, 1);
+	systems::gotoxy(15, 1);
 	cout << magenta << "xp: " << Player.exp << " / " << Player.forNextlvl << def;
-	gotoxy(15, 2);
+	systems::gotoxy(15, 2);
 	cout << brcyan << "lv: " << Player.lvl << def;
-	gotoxy(1, 2);
+	systems::gotoxy(1, 2);
 	cout << green << "Coins: " << Player.coins << def;
-	gotoxy(1, 3);
+	systems::gotoxy(1, 3);
 	cout << orange << "Difficulty: " << difficulty << def;
-	gotoxy(15, 3);
+	systems::gotoxy(15, 3);
 	cout << blue << "Stage: " << Stage << def;
-	gotoxy(1, 4);
+	systems::gotoxy(1, 4);
 	cout << "-----------------------------";
-	gotoxy(1, 5);
+	systems::gotoxy(1, 5);
 	cout << "Items:";
-	gotoxy(1, 6);
+	systems::gotoxy(1, 6);
 	cout << "-----------------------------";
 	CheckItem();
-	gotoxy(1, 25);
+	systems::gotoxy(1, 25);
 	cout << brwhite << "Curret state: " << CurrentState << def;
-	gotoxy(1, 26);
+	systems::gotoxy(1, 26);
 	cout << brwhite << CurrentState2 << def;
 }
 //-----------------------------------------------------------------------------------------------
+void UpgradeLvl()
+{
+	Player.lvl += 1;
+	Player.exp = 0;
+	ShopItems[0].damage += 15 + ((Player.lvl / 10) * 15);
+	//
+	ShopItems[1].damage = 20 + ((Player.lvl / 10) * 20);
+	//
+	ShopItems[2].damage = 25 + ((Player.lvl / 10) * 25);
+	//
+	ShopItems[3].damage = 30 + ((Player.lvl / 10) * 30);
+	//
+	ShopItems[4].damage = 35 + ((Player.lvl / 10) * 35);
+	//
+	ShopItems[5].damage = 40 + ((Player.lvl / 10) * 40);
+	//
+	ShopItems[6].damage = 45 + ((Player.lvl / 10) * 45);
+	//
+	ShopItems[7].damage = 50 + ((Player.lvl / 10) * 50);
+	//
+	ShopItems[8].damage = 55 + ((Player.lvl / 10) * 55);
+	//
+	ShopItems[9].damage = 70 + ((Player.lvl / 10) * 70);
+	//
+	Player.MaxHP += (Player.lvl / 50) * 100;
+	Player.hp += (Player.lvl / 50) * 100;
+	Player.armor += (Player.lvl / 75) * 100;
+	InitializationLeftMenu();
+}
+//
 int enemyCount(int xEnemy, int yEnemy)
 {
 	return map[yEnemy][xEnemy] - 7;
-}
-//-----------------------------------------------------------------------------------------------
-bool IsNothingDisturbingThePlayer(int x, int y, char Where) // если вхере U - UP; D - DOWN; L - LEFT; R - RIGHT
-{
-	if (Where == 'U')
-	{
-		// up
-		if (y <= 1)
-		{
-			return false;
-		}
-		if (map[y - 1][x] == 0)
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else if (Where == 'D')
-	{
-		// down
-		if (y > 33)
-		{
-			return false;
-		}
-		if (map[y + 1][x] == 0)
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else if (Where == 'L')
-	{
-		// left
-		if (x <= 0)
-		{
-			return false;
-		}
-		if (map[y][x - 1] == 0)
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else if (Where == 'R')
-	{
-		// right
-		if (x > 91 + 1)
-		{
-			return false;
-		}
-#pragma warning(suppress: 6385)
-		if (map[y][x + 1] == 0)
-		{
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	else
-	{
-		exit(-1);
-	}
-}
-//-----------------------------------------------------------------------------------------------
-bool CanYouHitAEnemy(int x, int y)
-{
-	for (int i = 0; i < 20; i++)
-	{
-		if (map[y - 1][x] == 7 + i)	//up
-		{
-			return true;
-		}
-		else if (map[y + 1][x] == 7 + i) // down
-		{
-			return true;
-		}
-		else if (map[y][x - 1] == 7 + i) // left
-		{
-			return true;
-		}
-		else if (map[y][x + 1] == 7 + i) // right
-		{
-			return true;
-		}
-		else if (map[y - 1][x - 1] == 7 + i) // left up
-		{
-			return true;
-		}
-		else if (map[y - 1][x + 1] == 7 + i) // right up
-		{
-			return true;
-		}
-		else if (map[y + 1][x - 1] == 7 + i) // left down
-		{
-			return true;
-		}
-		else if (map[y + 1][x + 1] == 7 + i) // right down
-		{
-			return true;
-		}
-	}
-	return false;
 }
 //-----------------------------------------------------------------------------------------------
 void InitializationEnemyStats(int count) // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
@@ -851,157 +603,13 @@ void OpenChest(int x, int y)
 		Player.coins += 5;
 		CurrentState = "You got 5 coins";
 		map[y][x] = 0;
-		gotoxy(31 + x, y);
+		systems::gotoxy(31 + x, y);
 		cout << " ";
 		InitializationLeftMenu();
 	}
 }
 //
-void OpenShop()
-{ //int map[35][93]
-	system("cls");
-	typedef void (*TMenuShop)(); // typedef for defining a 'pointer to function' type.
-	int ShopItemsCount = 3; // This variable holds the number of menu items.
-	int ShopMenuChoice = 1; // This variable holds the position of the cursor. 
-	char key; //for entering the key (up arrow,down arrow,etc...);
-	TMenuShop* MenuShopOption = new TMenuShop[ShopItemsCount];//array of pointers to functions (dynamic).
-	MenuShopOption[0] = ShopBuy0; //filling the array with the functions.
-	MenuShopOption[1] = ShopBuy1;
-	MenuShopOption[2] = ShopBuy2;
-	//	PlaySound(TEXT("C:\\Dont_talk_with_me.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-	while (1) //infinite loop. (this loop will not break that's why we need an exit function).
-	{
-		int ItemsCount = 5;
-		gotoxy(47, 5 + ItemsCount);
-		cout << "------------------------------";
-		for (int i = 0; i < ShopItemsCount; i++) // Draw the menu.
-		{
-			gotoxy(47, 6 + i + ItemsCount);
-			ShopMenuChoice == i + 1 ? cout << " -> " : cout << "    "; // if (i+1) == the cursor then
-														   //    print ' -> ' else print '    '.
-														   //    by the way i call '->' the cursor
-			cout << ShopMenuItems()[i] << endl; // print the name of the item.
-			gotoxy(40, 8 + i + ItemsCount);
-			cout << ShopMenuItemsSpecs(false, true, false)[i] << endl;
-			gotoxy(45, 8 + i + ItemsCount);
-			cout << ShopMenuItemsSpecs(true, false, false)[i] << endl;
-			//gotoxy(40, 7 + i + ItemsCount);
-			//cout << ShopMenuItemsSpecs(false, false, true)[i] << endl;
-			gotoxy(47, 11 + i + ItemsCount);
-			cout << "------------------------------";
-			ItemsCount += 5;
-			//ShopItems[i]
-		} // finish the drawing.
 
-		key = _getch(); //get the key.
-		/*
-		   _getch() is like cin>>bla;
-		   but the differance is that by 'cin' you can enter char,double,int,etc...
-		   with more than one digit and the value you entered is printed on the screen
-		   but with _getch you can only enter ONE CHARACTER and will not be printed on
-		   the sceen and return the entered key to the variable 'key' in this case.
-		*/
-		switch (key) //check the entered key.
-		{
-		case '\r': // if the entered key is 'Enter'.
-			try
-			{
-				(*MenuShopOption[ShopMenuChoice - 1])(); // call the function of the index 'cursor-1' in
-											   //     the 'pointer to function' array.
-			}
-			catch (...)
-			{
-			}  // we have to use try and catch coz if we did'nt fill that index with a function.
-			   //                     a runtime error will appear.
-
-			break;
-
-		case 'P': // if the entered key is the 'up arrow' notice that its equal to 'P' (capital)
-			ShopMenuChoice++; //then we will increment the cursor by one.
-			if (ShopMenuChoice > ShopItemsCount) // if the cursor value is more than the items count.
-				ShopMenuChoice = 1;         //    then it will return back to the first item.
-			break;
-
-		case 'H': // same but with 'down arrow' and decrement the cursor.
-			ShopMenuChoice--;
-			if (ShopMenuChoice < 1)
-				ShopMenuChoice = ShopItemsCount;
-			break;
-
-		case 27: // 27 is the asscii to the escape key (Esc)
-			try { (*MenuShopOption[ShopItemsCount - 1])(); break; } // useually when the 'Esc' key is pressed the last
-												//     item will be called (executed). but you can
-												//     change it to whatever you want.
-			catch (...) {}
-			break;
-		default:// any another key.
-			if (key >= '1' && key <= char(ShopItemsCount + '0'))//check if the pressed key is in the range
-													  //    of (1,2,3,...,#of items) [all char(s)]
-			{
-				try { (*MenuShopOption[int(key) - '0' - 1])(); } //call the function of the pressed number.
-					 //  you can make the cursor move to that item instead of calling (executing)
-					 //  it by replacing all the code between 'if (bla){' and '}' with this
-					 //  statement MenuChooice=int(key)-'0'
-				catch (...) {}
-			}
-		}
-	}
-
-	delete[] MenuShopOption;
-}
-//
-string* ShopMenuItems() // this function returns a pointer to a string.
-{
-	string* item = new string[5];
-	item[0] = ShopItems[ShopItemsIDs[0]].Name;
-	item[1] = ShopItems[ShopItemsIDs[1]].Name;
-	item[2] = ShopItems[ShopItemsIDs[2]].Name;
-	return item;
-}
-string* ShopMenuItemsSpecs(bool cost, bool dmg, bool desc) // this function returns a pointer to a string.
-{
-	if (cost == true)
-	{
-		string* item = new string[5];
-		item[0] = to_string(ShopItems[ShopItemsIDs[0]].cost);
-		item[1] = to_string(ShopItems[ShopItemsIDs[1]].cost);
-		item[2] = to_string(ShopItems[ShopItemsIDs[2]].cost);
-		return item;
-	}
-	else if (dmg == true)
-	{
-		string* item = new string[5];
-		item[0] = to_string(ShopItems[ShopItemsIDs[0]].damage);
-		item[1] = to_string(ShopItems[ShopItemsIDs[1]].damage);
-		item[2] = to_string(ShopItems[ShopItemsIDs[2]].damage);
-		return item;
-	}
-	else if (desc == true)
-	{
-		string* item = new string[5];
-		item[0] = ShopItems[ShopItemsIDs[0]].Desc;
-		item[1] = ShopItems[ShopItemsIDs[1]].Desc;
-		item[2] = ShopItems[ShopItemsIDs[2]].Desc;
-		return item;
-	}
-}
-//
-void ShopBuy0()
-{
-	if (ShopItems[ShopItemsIDs[0]].cost <= Player.coins)
-	{
-		Player.coins -= ShopItems[ShopItemsIDs[0]].cost;
-		ItemSlotID[0] = ShopItems[ShopItemsIDs[0]].ID;
-	}
-}
-void ShopBuy1()
-{
-
-}
-void ShopBuy2()
-{
-
-}
 //-----------------------------------------------------------------------------------------------
 void actionOnTheEnemy(int x, int y, int count, bool attack) //attack = false - check enemy, attack = true - attack enemy
 {
@@ -1010,7 +618,7 @@ void actionOnTheEnemy(int x, int y, int count, bool attack) //attack = false - c
 		if (Enemy[count].hp <= 0)
 		{
 			map[y][x] = 0;
-			gotoxy(31 + x, y);
+			systems::gotoxy(31 + x, y);
 			cout << " ";
 		}
 		else if (Enemy[count].hp > 0)
@@ -1039,7 +647,7 @@ void actionOnTheEnemy(int x, int y, int count, bool attack) //attack = false - c
 		if (Enemy[count].hp <= 0)
 		{
 			map[y][x] = 0;
-			gotoxy(31 + x, y);
+			systems::gotoxy(31 + x, y);
 			cout << " ";
 #pragma warning(suppress: 4244)
 			Player.coins += 10 + (5 * difficulty);
@@ -1180,11 +788,11 @@ void ShowMap()
 	int Symbol = 0;
 	for (int j = 0; j < 35; j++)
 	{
-		gotoxy(31, 0 + j);
+		systems::gotoxy(31, 0 + j);
 		for (int i = 0; i < 93; i++) // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
 		{
 			Symbol++;
-			gotoxy(31 + Symbol, 0);
+			systems::gotoxy(31 + Symbol, 0);
 			if (map[j][i] == 0)
 			{
 				cout << FloorSymbol;
@@ -1236,7 +844,7 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		/*randNum = 1 + rand() % 3;*/ // 1 - left, 2 - up, 3 - right, 4 - down
 		if (Player.x > Enemy[i].x)
 		{
-			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'R') == true)
+			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'R', map) == true)
 			{
 				randNum = 3;
 			}
@@ -1244,7 +852,7 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		}
 		else if (Player.x < Enemy[i].x)
 		{
-			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'L') == true)
+			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'L', map) == true)
 			{
 				randNum = 1;
 			}
@@ -1252,7 +860,7 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		}
 		else if (Player.y > Enemy[i].y)
 		{
-			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'D') == true)
+			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'D', map) == true)
 			{
 				randNum = 4;
 			}
@@ -1260,7 +868,7 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		}
 		else if (Player.y < Enemy[i].y)
 		{
-			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'U') == true)
+			if (IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'U', map) == true)
 			{
 				randNum = 2;
 			}
@@ -1268,12 +876,12 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		}		switch (randNum)
 		{
 		case 1: //1 - left
-			if (map[Enemy[i].y][Enemy[i].x - 1] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'L') == true)
+			if (map[Enemy[i].y][Enemy[i].x - 1] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'L', map) == true)
 			{
-				map[Enemy[i].y][Enemy[i].x - 1] = 7 + i;
-				gotoxy(31 + (Enemy[i].x - 1), 0 + Enemy[i].y);
+				map[Enemy[i].y][Enemy[i].x - 1] = 7 + i; 
+				systems::gotoxy(31 + (Enemy[i].x - 1), 0 + Enemy[i].y);
 				cout << red << EnemySymbol << def;
-				gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
+				systems::gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
 				map[Enemy[i].y][Enemy[i].x] = 0;
 				cout << FloorSymbol;
 				Enemy[i].x--;
@@ -1281,12 +889,12 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 			}
 			break;
 		case 2://2 - up
-			if (map[Enemy[i].y - 1][Enemy[i].x] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'U') == true)
+			if (map[Enemy[i].y - 1][Enemy[i].x] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'U', map) == true)
 			{
 				map[Enemy[i].y - 1][Enemy[i].x] = 7 + i;
-				gotoxy(31 + Enemy[i].x, 0 + (Enemy[i].y - 1));
+				systems::gotoxy(31 + Enemy[i].x, 0 + (Enemy[i].y - 1));
 				cout << red << EnemySymbol << def;
-				gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
+				systems::gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
 				map[Enemy[i].y][Enemy[i].x] = 0;
 				cout << FloorSymbol;
 				Enemy[i].y--;
@@ -1294,12 +902,12 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 			}
 			break;
 		case 3: // 3 - right
-			if (map[Enemy[i].y][Enemy[i].x + 1] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'R') == true)
+			if (map[Enemy[i].y][Enemy[i].x + 1] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'R', map) == true)
 			{
 				map[Enemy[i].y][Enemy[i].x + 1] = 7 + i;
-				gotoxy(31 + (Enemy[i].x + 1), 0 + Enemy[i].y);
+				systems::gotoxy(31 + (Enemy[i].x + 1), 0 + Enemy[i].y);
 				cout << red << EnemySymbol << def;
-				gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
+				systems::gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
 				map[Enemy[i].y][Enemy[i].x] = 0;
 				cout << FloorSymbol;
 				Enemy[i].x++;
@@ -1307,12 +915,12 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 			}
 			break;
 		case 4: // 4 - down
-			if (map[Enemy[i].y + 1][Enemy[i].x] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'D') == true)
+			if (map[Enemy[i].y + 1][Enemy[i].x] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'D', map) == true)
 			{
 				map[Enemy[i].y + 1][Enemy[i].x] = 7 + i;
-				gotoxy(31 + Enemy[i].x, 0 + (Enemy[i].y + 1));
+				systems::gotoxy(31 + Enemy[i].x, 0 + (Enemy[i].y + 1));
 				cout << red << EnemySymbol << def;
-				gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
+				systems::gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
 				map[Enemy[i].y][Enemy[i].x] = 0;
 				cout << FloorSymbol;
 				Enemy[i].y++;
@@ -1338,36 +946,6 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 	}
 }
 //-----------------------------------------------------------------------------------------------
-void UpgradeLvl()
-{
-	Player.lvl += 1;
-	Player.exp = 0;
-	ShopItems[0].damage += 15 + ((Player.lvl / 10) * 15);
-	//
-	ShopItems[1].damage = 20 + ((Player.lvl / 10) * 20);
-	//
-	ShopItems[2].damage = 25 + ((Player.lvl / 10) * 25);
-	//
-	ShopItems[3].damage = 30 + ((Player.lvl / 10) * 30);
-	//
-	ShopItems[4].damage = 35 + ((Player.lvl / 10) * 35);
-	//
-	ShopItems[5].damage = 40 + ((Player.lvl / 10) * 40);
-	//
-	ShopItems[6].damage = 45 + ((Player.lvl / 10) * 45);
-	//
-	ShopItems[7].damage = 50 + ((Player.lvl / 10) * 50);
-	//
-	ShopItems[8].damage = 55 + ((Player.lvl / 10) * 55);
-	//
-	ShopItems[9].damage = 70 + ((Player.lvl / 10) * 70);
-	//
-	Player.MaxHP += (Player.lvl / 50) * 100;
-	Player.hp += (Player.lvl / 50) * 100;
-	Player.armor += (Player.lvl / 75) * 100;
-	InitializationLeftMenu();
-}
-
 void Gameplay(int map[35][93])
 {
 	char key;
@@ -1384,13 +962,13 @@ void Gameplay(int map[35][93])
 		{
 			UpgradeLvl();
 		}
-		gotoxy(1, 27);
+		systems::gotoxy(1, 27);
 		cout << brwhite << "x: " << Player.x << def;
-		gotoxy(10, 27);
+		systems::gotoxy(10, 27);
 		cout << brwhite << "y: " << Player.y << def;
 		if (Player.y < 10)
 		{
-			gotoxy(14, 26);
+			systems::gotoxy(14, 26);
 			cout << " ";
 		}
 		if (key = _getch() == '\r')
@@ -1443,7 +1021,7 @@ void Gameplay(int map[35][93])
 			break;
 
 		case 'P': // down arrow key
-			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'D');
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'D', map);
 			if (IsNothingDisturbing == true)
 			{
 				if (Player.y < 1)
@@ -1452,9 +1030,9 @@ void Gameplay(int map[35][93])
 				}
 				else {
 					map[Player.y + 1][Player.x] = 4;
-					gotoxy(31 + Player.x, 0 + (Player.y + 1));
+					systems::gotoxy(31 + Player.x, 0 + (Player.y + 1));
 					cout << green << PlayerSymbol << def;
-					gotoxy(31 + Player.x, 0 + Player.y);
+					systems::gotoxy(31 + Player.x, 0 + Player.y);
 					map[Player.y][Player.x] = 0;
 					cout << FloorSymbol;
 					Player.y++;
@@ -1465,7 +1043,7 @@ void Gameplay(int map[35][93])
 			break;
 
 		case 'H': // up arrow key
-			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'U');
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'U', map);
 			if (IsNothingDisturbing == true)
 			{
 				if (Player.y <= 1)
@@ -1474,9 +1052,9 @@ void Gameplay(int map[35][93])
 				}
 				else {
 					map[Player.y - 1][Player.x] = 4;
-					gotoxy(31 + Player.x, 0 + (Player.y - 1));
+					systems::gotoxy(31 + Player.x, 0 + (Player.y - 1));
 					cout << green << PlayerSymbol << def;
-					gotoxy(31 + Player.x, 0 + Player.y);
+					systems::gotoxy(31 + Player.x, 0 + Player.y);
 					map[Player.y][Player.x] = 0;
 					cout << FloorSymbol;
 					Player.y--;
@@ -1486,13 +1064,13 @@ void Gameplay(int map[35][93])
 			else if (IsNothingDisturbing == false) {}
 			break;
 		case 'K': // left arrow key
-			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'L');
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'L', map);
 			if (IsNothingDisturbing == true)
 			{
 				map[Player.y][Player.x - 1] = 4;
-				gotoxy(31 + (Player.x - 1), 0 + Player.y);
+				systems::gotoxy(31 + (Player.x - 1), 0 + Player.y);
 				cout << green << PlayerSymbol << def;
-				gotoxy(31 + Player.x, 0 + Player.y);
+				systems::gotoxy(31 + Player.x, 0 + Player.y);
 				map[Player.y][Player.x] = 0;
 				cout << FloorSymbol;
 				Player.x--;
@@ -1500,13 +1078,13 @@ void Gameplay(int map[35][93])
 			else if (IsNothingDisturbing == false) {}
 			break;
 		case 'M': // right arrow key
-			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'R');
+			IsNothingDisturbing = IsNothingDisturbingThePlayer(Player.x, Player.y, 'R', map);
 			if (IsNothingDisturbing == true)
 			{
 				map[Player.y][Player.x + 1] = 4;
-				gotoxy(31 + (Player.x + 1), 0 + Player.y);
+				systems::gotoxy(31 + (Player.x + 1), 0 + Player.y);
 				cout << green << PlayerSymbol << def;
-				gotoxy(31 + Player.x, 0 + Player.y);
+				systems::gotoxy(31 + Player.x, 0 + Player.y);
 				map[Player.y][Player.x] = 0;
 				cout << FloorSymbol;
 				Player.x++;
@@ -1534,15 +1112,6 @@ void Gameplay(int map[35][93])
 		}
 	}
 	cin.ignore();
-	//	system("cls");
-}
-//-----------------------------------------------------------------------------------------------
-void gotoxy(int xpos, int ypos)  // just take this function as it is.
-{
-	COORD scrn;
-	HANDLE hOuput = GetStdHandle(STD_OUTPUT_HANDLE);
-	scrn.X = xpos; scrn.Y = ypos;
-	SetConsoleCursorPosition(hOuput, scrn);
 }
 //-----------------------------------------------------------------------------------------------
 void MenuStart()
@@ -1558,7 +1127,7 @@ void MenuStart()
 void MenuStartTutorial()
 {
 	system("cls"); //clear the screen.
-	gotoxy(50, 14);
+	systems::gotoxy(50, 14);
 	cout << "There is no game (Will be)" << endl;
 	cin.ignore();
 	system("cls");
@@ -1567,7 +1136,7 @@ void MenuStartTutorial()
 void MenuSettings()
 {
 	system("cls");
-	gotoxy(50, 14);
+	systems::gotoxy(50, 14);
 	cout << "No settings there, maybe later" << endl;
 	cin.ignore();
 	system("cls");
@@ -1576,7 +1145,7 @@ void MenuSettings()
 void MenuAchievements()
 {
 	system("cls");
-	gotoxy(50, 14);
+	systems::gotoxy(50, 14);
 	cout << "There is nothing" << endl;
 	cin.ignore();
 	system("cls");
@@ -1585,27 +1154,7 @@ void MenuAchievements()
 void ExitOption()
 {
 	system("cls");
-	gotoxy(50, 14);
+	systems::gotoxy(50, 14);
 	cout << "Exitting..." << endl;
 	exit(0);
 }
-//-----------------------------------------------------------------------------------------------
-void ChangeCursorStatus(bool Visible)
-{
-	CONSOLE_CURSOR_INFO* c = new CONSOLE_CURSOR_INFO;
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	if (Visible)
-	{
-		c->bVisible = TRUE;
-		c->dwSize = 0;//(0) is invild so the default value is set
-	}
-	else
-	{
-		c->bVisible = FALSE;
-		c->dwSize = 1;//it must be assigned to a valid value
-	}
-
-	SetConsoleCursorInfo(h, c);
-}
-//-----------------------------------------------------------------------------------------------
