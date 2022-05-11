@@ -1,4 +1,31 @@
-﻿#include <iostream>
+﻿void MenuStart(); // every menu item needs a seperate function, so this is for the first item.
+void MenuSettings(); //    and the second item etc...
+void MenuAchievements();
+void Gameplay(int map[35][93]);
+void GenerateMap();
+void difficultyIncrease();
+void MenuStartTutorial(); // TODO
+int getRandomNumber(int min, int max);
+int WhereX(int x, int y, int fiend, bool IsEnemy);
+int WhereY(int x, int y, int fiend, bool IsEnemy);
+void OpenChest(int x, int y);
+void EnemyAI(int i);
+void ExitOption(); // this is also an item function but i named it like this coz every menu must have an exit item
+void InitializationLeftMenu();
+void actionOnTheEnemy(int x, int y, int count, bool attack);
+void InitializationEnemyStats(int count);
+void DebugHelp();
+int map[35][93]; // map \\ level
+#define WallSymbol '#'
+#define FloorSymbol ' '
+#define ChestSymbol '*'
+#define EnemySymbol 'E'
+#define PlayerSymbol 'P'
+#define ShopSymbol '$' // TODO
+#define BossTeleporterSymbol '@' // TODO
+#define DEBUG 1
+//-----------------------------------------------------------------------------------------------
+#include <iostream>
 #include <string>
 #include <windows.h> // we need this header for the 'systems::gotoxy' function.
 #include <conio.h> // we need this header for the '_getch' function.
@@ -18,52 +45,11 @@ using namespace shopNitems;
 using namespace player;
 #pragma comment(lib, "winmm")
 //-----------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------
-string* MenuItems(); // a function that returns the name of a menu item.
-
-void MenuStart(); // every menu item needs a seperate function, so this is for the first item.
-
-void MenuSettings(); //    and the second item etc...
-
-void MenuAchievements();
-
-void Gameplay(int map[35][93]);
-
-void GenerateMap();
-
-void difficultyIncrease();
-
-void InitializationLeftMenu();
-
-void ShowMap();
-
-void MenuStartTutorial(); // TODO
-
-void InitializationEnemyStats(int count);
-
-int getRandomNumber(int min, int max);
-
-void actionOnTheEnemy(int x, int y, int count, bool attack);
-
-int WhereX(int x, int y, int fiend, bool IsEnemy);
-
-int WhereY(int x, int y, int fiend, bool IsEnemy);
-
-void OpenChest(int x, int y);
-
-void EnemyAI(int i);
-
-void ExitOption(); // this is also an item function but i named it like this coz every menu must
-				   //    have an exit item.
-//-----------------------------------------------------------------------------------------------
-//
-int map[35][93]; // map \\ level
-
+int NumberOfEnemy = 0;
 float difficulty = 1;
 int Stage = 1;
 int EnemyDefaultStats[4] = { 15,10,20,5 }; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
-//int enemyTurn = 0;
+string* MenuItems(); // a function that returns the name of a menu item.
 struct EnemyStats
 {
 	int x;
@@ -75,16 +61,7 @@ struct EnemyStats
 	int toTurn;
 };
 EnemyStats Enemy[2];
-
 string CurrentState = "", CurrentState2 = "";
-char WallSymbol = '#';
-char FloorSymbol = ' ';
-char ChestSymbol = '*';
-char EnemySymbol = 'E';
-int NumberOfEnemy = 0;
-char PlayerSymbol = 'P';
-char ShopSymbol = '$'; // TODO
-char BossTeleporterSymbol = '@'; // TODO
 //-----------------------------------------------------------------------------------------------
 int main()
 {
@@ -194,8 +171,10 @@ int main()
 	Player.armor = 0;
 	Player.MaxHP = 100;
 	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
-
-	system("title Roguelike v0.3.6 by rizze // hakerhd93 // Beta");
+	if (DEBUG == 1)
+		system("title Roguelike v0.3.7 by shiro // hakerhd93 // DEBUG");
+	else if (DEBUG == 0)
+		system("title Roguelike v0.3.7 by shiro // hakerhd93 // Beta");
 	srand((unsigned int)time(NULL));
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
@@ -215,7 +194,6 @@ int main()
 	SetCurrentConsoleFontEx(hout, false, &cfi);
 	///////////////////////////////////Меняем шрифт
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
-
 	int ItemCount = 5; // This variable holds the number of menu items.
 	int MenuChoice = 1; // This variable holds the position of the cursor. 
 	char key; //for entering the key (up arrow,down arrow,etc...);
@@ -226,6 +204,10 @@ int main()
 	MenuOption[2] = MenuSettings;
 	MenuOption[3] = MenuAchievements;
 	MenuOption[4] = ExitOption;
+	if (DEBUG == 1)
+	{
+		MenuOption[1] = DebugHelp;
+	}
 	//	PlaySound(TEXT("C:\\Dont_talk_with_me.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	while (1) //infinite loop. (this loop will not break that's why we need an exit function).
 	{
@@ -300,11 +282,13 @@ string* MenuItems() // this function returns a pointer to a string.
 {
 	string* item = new string[5];
 	item[0] = "Start new game.";
-	item[1] = "Tutorial.";
+	if (DEBUG == 1)
+		item[1] = "Debug help.";
+	else
+		item[1] = "Tutorial.";
 	item[2] = "Settings.";
 	item[3] = "Achivments.";
 	item[4] = "Exit.";
-
 	return item;
 }
 //-----------------------------------------------------------------------------------------------
@@ -386,6 +370,19 @@ void InitializationLeftMenu()
 	cout << brwhite << "Curret state: " << CurrentState << def;
 	systems::gotoxy(1, 26);
 	cout << brwhite << CurrentState2 << def;
+	if (DEBUG == 1)
+	{
+		systems::gotoxy(1, 29);
+		cout << Color::red << "// DEBUG // DEBUG // DEBUG //" << Color::def;
+		systems::gotoxy(1, 30);
+		cout << Color::red << "// DEBUG // DEBUG // DEBUG //" << Color::def;
+		systems::gotoxy(1, 31);
+		cout << Color::red << "// DEBUG // DEBUG // DEBUG //" << Color::def;
+		systems::gotoxy(1, 32);
+		cout << Color::red << "// DEBUG // DEBUG // DEBUG //" << Color::def;
+		systems::gotoxy(1, 33);
+		cout << Color::red << "// DEBUG // DEBUG // DEBUG //" << Color::def;
+	}
 }
 //-----------------------------------------------------------------------------------------------
 void UpgradeLvl()
@@ -608,8 +605,6 @@ void OpenChest(int x, int y)
 		InitializationLeftMenu();
 	}
 }
-//
-
 //-----------------------------------------------------------------------------------------------
 void actionOnTheEnemy(int x, int y, int count, bool attack) //attack = false - check enemy, attack = true - attack enemy
 {
@@ -783,54 +778,6 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 	}
 }
 //-----------------------------------------------------------------------------------------------
-void ShowMap()
-{
-	int Symbol = 0;
-	for (int j = 0; j < 35; j++)
-	{
-		systems::gotoxy(31, 0 + j);
-		for (int i = 0; i < 93; i++) // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
-		{
-			Symbol++;
-			systems::gotoxy(31 + Symbol, 0);
-			if (map[j][i] == 0)
-			{
-				cout << FloorSymbol;
-			}
-			else if (map[j][i] == 1)
-			{
-				cout << WallSymbol;
-			}
-			else if (map[j][i] == 2)
-			{
-				cout << yellow << ChestSymbol << def;
-			}
-			else if (map[j][i] == 4)
-			{
-				cout << green << PlayerSymbol << def;
-			}
-			else if (map[j][i] == 5)
-			{
-				cout << orange << ShopSymbol << def;
-			}
-			else if (map[j][i] == 6)
-			{
-				cout << FloorSymbol;
-			}
-			else if (map[j][i] >= 7)
-			{
-				for (int g = 0; g < 2; g++)
-				{
-					actionOnTheEnemy(i, j, g, false);
-					cout << red << EnemySymbol << def;
-					break;
-				}
-			}
-		}
-
-	}
-}
-//-----------------------------------------------------------------------------------------------
 void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 {
 	if (WhereX(Enemy[i].x, Enemy[i].y, 0, false) != -1 && WhereY(Enemy[i].x, Enemy[i].y, 0, false) != -1)
@@ -878,7 +825,7 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		case 1: //1 - left
 			if (map[Enemy[i].y][Enemy[i].x - 1] == 0 && IsNothingDisturbingThePlayer(Enemy[i].x, Enemy[i].y, 'L', map) == true)
 			{
-				map[Enemy[i].y][Enemy[i].x - 1] = 7 + i; 
+				map[Enemy[i].y][Enemy[i].x - 1] = 7 + i;
 				systems::gotoxy(31 + (Enemy[i].x - 1), 0 + Enemy[i].y);
 				cout << red << EnemySymbol << def;
 				systems::gotoxy(31 + Enemy[i].x, 0 + Enemy[i].y);
@@ -954,7 +901,7 @@ void Gameplay(int map[35][93])
 	GenerateMap();
 	NumberOfEnemy = 0;
 	InitializationLeftMenu();
-	ShowMap();
+	ShowMap(map);
 	while (1)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -971,29 +918,41 @@ void Gameplay(int map[35][93])
 			systems::gotoxy(14, 26);
 			cout << " ";
 		}
-		if (key = _getch() == '\r')
+		key = _getch();
+		if (key == '\r' || key == 1)
 		{
-			key = '\r';
 		}
 		else {
-			/*key = _getch();*/  key = _getch(); // Я ЕБАЛ МЕЛКОМЯГКИХ КАКОГО ХУЯ Я ДОЛЖЕН ПИСАТЬ ДВА РАЗА ГЕТЧ ЧТО БЫ ВСЁ НОРМАЛЬНО РАБОТАЛО СУ КА, FIX BRAIN MICROSOFT
+			key = _getch();   // Я ЕБАЛ МЕЛКОМЯГКИХ КАКОГО ХУЯ Я ДОЛЖЕН ПИСАТЬ ДВА РАЗА ГЕТЧ ЧТО БЫ ВСЁ НОРМАЛЬНО РАБОТАЛО СУ КА, FIX BRAIN MICROSOFT
 		}
 		switch (key) //check the entered key.
 		{
-		case '<':
-			for (int i = 0; i < 3; i++)
+		case '<': // f2 mb
+			if (DEBUG == 1)
 			{
-				if (i == 0)
+				for (int i = 0; i < 3; i++)
 				{
-					do {
-						ShopItemsIDs[0] = getRandomNumber(0, 9);
-					} while (ShopItems[ShopItemsIDs[0]].StageReq != Stage && ShopItems[ShopItemsIDs[0]].LvlToEqp != Player.lvl);
+					if (i == 0)
+					{
+						do {
+							ShopItemsIDs[0] = getRandomNumber(0, 9);
+						} while (ShopItems[ShopItemsIDs[0]].StageReq != Stage && ShopItems[ShopItemsIDs[0]].LvlToEqp != Player.lvl);
+					}
+					else {
+						ShopItemsIDs[i] = getRandomNumber(11, 12);
+					}
 				}
-				else {
-					ShopItemsIDs[i] = getRandomNumber(11, 12);
-				}
+				OpenShop();
 			}
-			OpenShop();
+			else {}
+			break;
+			// https://adventuregamestudio.github.io/ags-manual/ASCIIcodes.html
+		case 1: // Ctrl + A
+			if (DEBUG == 1)
+			{
+				Gameplay(map);
+			}
+			else {}
 			break;
 		case '\r': // if the entered key is 'Enter'.
 			try
@@ -1117,10 +1076,7 @@ void Gameplay(int map[35][93])
 void MenuStart()
 {
 	system("cls");
-	int delay = 1;
-	delay *= CLOCKS_PER_SEC;
-	clock_t now = clock();
-	while (clock() - now < delay);
+	std::this_thread::sleep_for(std::chrono::milliseconds(250));
 	Gameplay(map);
 }
 //-----------------------------------------------------------------------------------------------
@@ -1157,4 +1113,13 @@ void ExitOption()
 	systems::gotoxy(50, 14);
 	cout << "Exitting..." << endl;
 	exit(0);
+}
+void DebugHelp()
+{
+	system("cls");
+	systems::gotoxy(50, 13);
+	cout << Color::red << "F2 - Open shop" << Color::def;
+	systems::gotoxy(50, 14);
+	cout << Color::red << "Ctrl + A - reGenerate map" << Color::def;
+	cin.ignore();
 }

@@ -26,4 +26,51 @@ namespace systems {
 
 		SetConsoleCursorInfo(h, c);
 	}
+	void ShowMap(int map[35][93])
+	{
+		int Symbol = 0;
+		for (int j = 0; j < 35; j++)
+		{
+			systems::gotoxy(31, 0 + j);
+			for (int i = 0; i < 93; i++) // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
+			{
+				Symbol++;
+				systems::gotoxy(31 + Symbol, 0);
+				if (map[j][i] == 0)
+				{
+					std::cout << FloorSymbol;
+				}
+				else if (map[j][i] == 1)
+				{
+					std::cout << WallSymbol;
+				}
+				else if (map[j][i] == 2)
+				{
+					std::cout << Color::yellow << ChestSymbol << Color::def;
+				}
+				else if (map[j][i] == 4)
+				{
+					std::cout << Color::green << PlayerSymbol << Color::def;
+				}
+				else if (map[j][i] == 5)
+				{
+					std::cout << Color::orange << ShopSymbol << Color::def;
+				}
+				else if (map[j][i] == 6)
+				{
+					std::cout << FloorSymbol;
+				}
+				else if (map[j][i] >= 7)
+				{
+					for (int g = 0; g < 2; g++)
+					{
+						actionOnTheEnemy(i, j, g, false);
+						std::cout << Color::red << EnemySymbol << Color::def;
+						break;
+					}
+				}
+			}
+
+		}
+	}
 }

@@ -43,7 +43,7 @@ namespace Color {
     Color::Modifier orange(Color::FG_ORANGE);// " << ora << "
     Color::Modifier pink(Color::FG_PINK);// " << pin << "
     Color::Modifier black(Color::FG_BLACK);// " << bla << "
-    Color::Modifier gray(Color::FG_GREY);// " << gry << "
+    Color::Modifier grey(Color::FG_GREY);// " << gry << "
     Color::Modifier white(Color::FG_WHITE);// " << whi << "
     Color::Modifier brwhite(Color::BG_BRWHITE);// " << big << "
     Color::Modifier brcyan(Color::FG_BRCYAN);// " << bcc << "

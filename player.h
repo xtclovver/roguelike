@@ -13,7 +13,7 @@ namespace player {
 		int MaxHP;
 	};
 	PlayerStats Player;
-	bool IsNothingDisturbingThePlayer(int x, int y, char Where, int map[35][93]) // если вхере U - UP; D - DOWN; L - LEFT; R - RIGHT
+	bool IsNothingDisturbingThePlayer(int x, int y, char Where, int map[35][93]) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ U - UP; D - DOWN; L - LEFT; R - RIGHT
 	{
 		if (Where == 'U')
 		{

@@ -23,5 +23,14 @@
     <ClInclude Include="colorfull.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="systems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shopNitems.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
