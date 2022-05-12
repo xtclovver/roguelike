@@ -1,6 +1,11 @@
 #pragma once
-#include <windows.h>
 namespace systems {
+	int getRandomNumber(int min, int max)
+	{
+		static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
+		// Равномерно распределяем рандомное число в нашем диапазоне
+		return static_cast<int>(rand() * fraction * (max - min + 1) + min);
+	}
 	void gotoxy(int xpos, int ypos)  // just take this function as it is.
 	{
 		COORD scrn;
@@ -26,51 +31,180 @@ namespace systems {
 
 		SetConsoleCursorInfo(h, c);
 	}
-	void ShowMap(int map[35][93])
+	int WhereX(int x, int y, int fiend, bool IsEnemy)
 	{
-		int Symbol = 0;
-		for (int j = 0; j < 35; j++)
+		if (IsEnemy == false)
 		{
-			systems::gotoxy(31, 0 + j);
-			for (int i = 0; i < 93; i++) // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player.
+			if (variableKeeper::map[y + 1][x] == fiend) 
 			{
-				Symbol++;
-				systems::gotoxy(31 + Symbol, 0);
-				if (map[j][i] == 0)
+				return x;
+			}
+			else if (variableKeeper::map[y - 1][x] == fiend)
+			{
+				return x;
+			}
+			else if (variableKeeper::map[y][x + 1] == fiend)
+			{
+				return x + 1;
+			}
+			else if (variableKeeper::map[y][x - 1] == fiend)
+			{
+				return x - 1;
+			}
+			else if (variableKeeper::map[y + 1][x + 1] == fiend)
+			{
+				return x + 1;
+			}
+			else if (variableKeeper::map[y + 1][x - 1] == fiend)
+			{
+				return x - 1;
+			}
+			else if (variableKeeper::map[y - 1][x + 1] == fiend)
+			{
+				return x + 1;
+			}
+			else if (variableKeeper::map[y - 1][x - 1] == fiend)
+			{
+				return x - 1;
+			}
+			else
+			{
+				return -1;
+			}
+		}
+		if (IsEnemy == true)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				if (variableKeeper::map[y][x - 1] == 7 + i) // left
 				{
-					std::cout << FloorSymbol;
+					return x - 1;
 				}
-				else if (map[j][i] == 1)
+				else if (variableKeeper::map[y][x + 1] == 7 + i) // right
 				{
-					std::cout << WallSymbol;
+					return x + 1;
 				}
-				else if (map[j][i] == 2)
+				else if (variableKeeper::map[y + 1][x] == 7 + i) // up
 				{
-					std::cout << Color::yellow << ChestSymbol << Color::def;
+					return x;
 				}
-				else if (map[j][i] == 4)
+				else if (variableKeeper::map[y - 1][x] == 7 + i) // down
 				{
-					std::cout << Color::green << PlayerSymbol << Color::def;
+					return x;
 				}
-				else if (map[j][i] == 5)
+				else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
 				{
-					std::cout << Color::orange << ShopSymbol << Color::def;
+					return x - 1;
 				}
-				else if (map[j][i] == 6)
+				else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
 				{
-					std::cout << FloorSymbol;
+					return x + 1;
 				}
-				else if (map[j][i] >= 7)
+				else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
 				{
-					for (int g = 0; g < 2; g++)
-					{
-						actionOnTheEnemy(i, j, g, false);
-						std::cout << Color::red << EnemySymbol << Color::def;
-						break;
-					}
+					return x - 1;
+				}
+				else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
+				{
+					return x + 1;
 				}
 			}
-
 		}
+		return -1;
+	}
+	//
+	int WhereY(int x, int y, int fiend, bool IsEnemy) //fiend = whatneedtofind
+	{
+		if (IsEnemy == false)
+		{
+			if (variableKeeper::map[y + 1][x] == fiend)
+			{
+				return y + 1;
+			}
+			else if (variableKeeper::map[y - 1][x] == fiend)
+			{
+				return y - 1;
+			}
+			else if (variableKeeper::map[y][x + 1] == fiend)
+			{
+				return y;
+			}
+			else if (variableKeeper::map[y][x - 1] == fiend)
+			{
+				return y;
+			}
+			else if (variableKeeper::map[y + 1][x + 1] == fiend)
+			{
+				return y + 1;
+			}
+			else if (variableKeeper::map[y + 1][x - 1] == fiend)
+			{
+				return y + 1;
+			}
+			else if (variableKeeper::map[y - 1][x + 1] == fiend)
+			{
+				return y - 1;
+			}
+			else if (variableKeeper::map[y - 1][x - 1] == fiend)
+			{
+				return y - 1;
+			}
+			else
+			{
+				return -1;
+			}
+		}
+		if (IsEnemy == true)
+		{
+			for (int i = 0; i < 20; i++)
+			{
+				if (variableKeeper::map[y - 1][x] == 7 + i)	//up
+				{
+					return y - 1;
+				}
+				else if (variableKeeper::map[y + 1][x] == 7 + i) // down
+				{
+					return y + 1;
+				}
+				else if (variableKeeper::map[y][x - 1] == 7 + i) //left
+				{
+					return y;
+				}
+				else if (variableKeeper::map[y][x + 1] == 7 + i) // right
+				{
+					return y;
+				}
+				else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
+				{
+					return y - 1;
+				}
+				else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
+				{
+					return y - 1;
+				}
+				else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
+				{
+					return y + 1;
+				}
+				else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
+				{
+					return y + 1;
+				}
+			}
+			return -1;
+		}
+		return -1;
+	}
+	void difficultyIncrease() // TODO
+	{
+		variableKeeper::difficulty += 0.2f;
+#pragma warning(suppress: 4244)
+		variableKeeper::EnemyDefaultStats[0] += variableKeeper::EnemyDefaultStats[0] * variableKeeper::difficulty;
+#pragma warning(suppress: 4244)
+		variableKeeper::EnemyDefaultStats[1] += variableKeeper::EnemyDefaultStats[1] * variableKeeper::difficulty;
+#pragma warning(suppress: 4244)
+		variableKeeper::EnemyDefaultStats[2] += variableKeeper::EnemyDefaultStats[2] * variableKeeper::difficulty;
+#pragma warning(suppress: 4244)
+		variableKeeper::EnemyDefaultStats[3] += variableKeeper::EnemyDefaultStats[3] * variableKeeper::difficulty;
 	}
 }

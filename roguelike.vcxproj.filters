@@ -26,10 +26,10 @@
     <ClInclude Include="systems.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="shopNitems.h">
+    <ClInclude Include="player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
+    <ClInclude Include="variableKeeper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
