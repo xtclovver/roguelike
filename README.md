@@ -1,6 +1,6 @@
 # Roguelike // @hakerhd93
 ![Void_Energy](https://user-images.githubusercontent.com/44809071/169587153-9becb7fe-e3bb-4edf-a5d3-54873e1b2b3c.png)
-
+# **_ВНИМАНИЕ! EXE-ШНИК И ПАПКА AUDIO ДОЛЖНЫ ЛЕЖАТЬ В ОДНОЙ ПАПКЕ, ИНАЧЕ ЗВУКА НЕ БУДЕТ_**
 # Последнее обновление
 ## Большое обновление
 ### **_1.0.0_**
