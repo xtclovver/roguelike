@@ -37,7 +37,9 @@ namespace Color {
     };
     Color::Modifier magenta(Color::FG_MAGENTA);// " << mag << "
     Color::Modifier red(Color::FG_RED);// " << rou << "
+    Color::Modifier redBG(Color::BG_RED);// " << rou << "
     Color::Modifier def(Color::FG_DEFAULT);// " << def << "
+    Color::Modifier defBG(Color::BG_DEFAULT);// " << def << "
     Color::Modifier yellow(Color::FG_YELLOW);// " << yel << "
     Color::Modifier green(Color::FG_GREEN);// " << gre << "
     Color::Modifier orange(Color::FG_ORANGE);// " << ora << "

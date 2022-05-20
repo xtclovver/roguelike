@@ -1,0 +1,4 @@
+﻿  roguelike.cpp
+C:\Users\shiro\source\repos\roguelike\roguelike.cpp(1246,18): warning C4244: '/=': conversion from 'double' to 'int', possible loss of data
+C:\Users\shiro\source\repos\roguelike\player.h(593): warning C4715: 'player::ShopMenuItemsSpecs': not all control paths return a value
+  roguelike.vcxproj -> C:\Users\shiro\source\repos\roguelike\Debug\roguelike.exe

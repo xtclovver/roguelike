@@ -6,6 +6,10 @@ namespace systems {
 		// Равномерно распределяем рандомное число в нашем диапазоне
 		return static_cast<int>(rand() * fraction * (max - min + 1) + min);
 	}
+	unsigned GetNumberOfDigits(unsigned i)
+	{
+		return i > 0 ? (int)log10((double)i) + 1 : 1;
+	}
 	void gotoxy(int xpos, int ypos)  // just take this function as it is.
 	{
 		COORD scrn;
@@ -31,11 +35,11 @@ namespace systems {
 
 		SetConsoleCursorInfo(h, c);
 	}
-	int WhereX(int x, int y, int fiend, bool IsEnemy)
+	int WhereX(int x, int y, int fiend, bool IsEnemy, bool TpPool = false)
 	{
 		if (IsEnemy == false)
 		{
-			if (variableKeeper::map[y + 1][x] == fiend) 
+			if (variableKeeper::map[y + 1][x] == fiend)
 			{
 				return x;
 			}
@@ -74,46 +78,87 @@ namespace systems {
 		}
 		if (IsEnemy == true)
 		{
-			for (int i = 0; i < 20; i++)
+			if (TpPool == false)
 			{
-				if (variableKeeper::map[y][x - 1] == 7 + i) // left
+				for (int i = 0; i < variableKeeper::NumberOfEnemy; i++)
 				{
-					return x - 1;
+					if (variableKeeper::map[y][x - 1] == 7 + i) // left
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y][x + 1] == 7 + i) // right
+					{
+						return x + 1;
+					}
+					else if (variableKeeper::map[y + 1][x] == 7 + i) // up
+					{
+						return x;
+					}
+					else if (variableKeeper::map[y - 1][x] == 7 + i) // down
+					{
+						return x;
+					}
+					else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
+					{
+						return x + 1;
+					}
+					else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
+					{
+						return x + 1;
+					}
 				}
-				else if (variableKeeper::map[y][x + 1] == 7 + i) // right
+			}
+			else if (TpPool == true)
+			{
+				for (int i = 0; i < variableKeeper::NumberOfEnemy; i++)
 				{
-					return x + 1;
-				}
-				else if (variableKeeper::map[y + 1][x] == 7 + i) // up
-				{
-					return x;
-				}
-				else if (variableKeeper::map[y - 1][x] == 7 + i) // down
-				{
-					return x;
-				}
-				else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
-				{
-					return x - 1;
-				}
-				else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
-				{
-					return x + 1;
-				}
-				else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
-				{
-					return x - 1;
-				}
-				else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
-				{
-					return x + 1;
+					if (variableKeeper::map[y][x - 1] == 607 + i) // left
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y][x + 1] == 607 + i) // right
+					{
+						return x + 1;
+					}
+					else if (variableKeeper::map[y + 1][x] == 607 + i) // up
+					{
+						return x;
+					}
+					else if (variableKeeper::map[y - 1][x] == 607 + i) // down
+					{
+						return x;
+					}
+					else if (variableKeeper::map[y - 1][x - 1] == 607 + i) // left up
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y - 1][x + 1] == 607 + i) // right up
+					{
+						return x + 1;
+					}
+					else if (variableKeeper::map[y + 1][x - 1] == 607 + i) // left down
+					{
+						return x - 1;
+					}
+					else if (variableKeeper::map[y + 1][x + 1] == 607 + i) // right down
+					{
+						return x + 1;
+					}
 				}
 			}
 		}
 		return -1;
 	}
 	//
-	int WhereY(int x, int y, int fiend, bool IsEnemy) //fiend = whatneedtofind
+	int WhereY(int x, int y, int fiend, bool IsEnemy, bool TpPool = false) //fiend = whatneedtofind
 	{
 		if (IsEnemy == false)
 		{
@@ -156,39 +201,80 @@ namespace systems {
 		}
 		if (IsEnemy == true)
 		{
-			for (int i = 0; i < 20; i++)
+			if (TpPool == true)
 			{
-				if (variableKeeper::map[y - 1][x] == 7 + i)	//up
+				for (int i = 0; i < variableKeeper::NumberOfEnemy; i++)
 				{
-					return y - 1;
+					if (variableKeeper::map[y - 1][x] == 607 + i)	//up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y + 1][x] == 607 + i) // down
+					{
+						return y + 1;
+					}
+					else if (variableKeeper::map[y][x - 1] == 607 + i) //left
+					{
+						return y;
+					}
+					else if (variableKeeper::map[y][x + 1] == 607 + i) // right
+					{
+						return y;
+					}
+					else if (variableKeeper::map[y - 1][x - 1] == 607 + i) // left up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y - 1][x + 1] == 607 + i) // right up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y + 1][x - 1] == 607 + i) // left down
+					{
+						return y + 1;
+					}
+					else if (variableKeeper::map[y + 1][x + 1] == 607 + i) // right down
+					{
+						return y + 1;
+					}
 				}
-				else if (variableKeeper::map[y + 1][x] == 7 + i) // down
+			}
+			else if (TpPool == false)
+			{
+				for (int i = 0; i < variableKeeper::NumberOfEnemy; i++)
 				{
-					return y + 1;
-				}
-				else if (variableKeeper::map[y][x - 1] == 7 + i) //left
-				{
-					return y;
-				}
-				else if (variableKeeper::map[y][x + 1] == 7 + i) // right
-				{
-					return y;
-				}
-				else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
-				{
-					return y - 1;
-				}
-				else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
-				{
-					return y - 1;
-				}
-				else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
-				{
-					return y + 1;
-				}
-				else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
-				{
-					return y + 1;
+					if (variableKeeper::map[y - 1][x] == 7 + i)	//up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y + 1][x] == 7 + i) // down
+					{
+						return y + 1;
+					}
+					else if (variableKeeper::map[y][x - 1] == 7 + i) //left
+					{
+						return y;
+					}
+					else if (variableKeeper::map[y][x + 1] == 7 + i) // right
+					{
+						return y;
+					}
+					else if (variableKeeper::map[y - 1][x - 1] == 7 + i) // left up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y - 1][x + 1] == 7 + i) // right up
+					{
+						return y - 1;
+					}
+					else if (variableKeeper::map[y + 1][x - 1] == 7 + i) // left down
+					{
+						return y + 1;
+					}
+					else if (variableKeeper::map[y + 1][x + 1] == 7 + i) // right down
+					{
+						return y + 1;
+					}
 				}
 			}
 			return -1;
@@ -197,14 +283,14 @@ namespace systems {
 	}
 	void difficultyIncrease() // TODO
 	{
-		variableKeeper::difficulty += 0.2f;
+		variableKeeper::difficulty += 0.25f;
 #pragma warning(suppress: 4244)
-		variableKeeper::EnemyDefaultStats[0] += variableKeeper::EnemyDefaultStats[0] * variableKeeper::difficulty;
+		variableKeeper::EnemyDefaultStats[0] += variableKeeper::EnemyDefaultStats[0] * (variableKeeper::difficulty * 0.4);
 #pragma warning(suppress: 4244)
-		variableKeeper::EnemyDefaultStats[1] += variableKeeper::EnemyDefaultStats[1] * variableKeeper::difficulty;
+		variableKeeper::EnemyDefaultStats[1] += variableKeeper::EnemyDefaultStats[1] * (variableKeeper::difficulty * 0.4);
 #pragma warning(suppress: 4244)
-		variableKeeper::EnemyDefaultStats[2] += variableKeeper::EnemyDefaultStats[2] * variableKeeper::difficulty;
+		variableKeeper::EnemyDefaultStats[2] += variableKeeper::EnemyDefaultStats[2] * (variableKeeper::difficulty * 0.4);
 #pragma warning(suppress: 4244)
-		variableKeeper::EnemyDefaultStats[3] += variableKeeper::EnemyDefaultStats[3] * variableKeeper::difficulty;
+		variableKeeper::EnemyDefaultStats[3] += variableKeeper::EnemyDefaultStats[3] * (variableKeeper::difficulty * 0.4);
 	}
 }
