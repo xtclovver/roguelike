@@ -266,13 +266,29 @@ namespace player {
 		}
 		systems::gotoxy(1, 1);
 		std::cout << Color::red << "hp: " << player::Player.hp << " / " << player::Player.MaxHP << Color::def;
-		if (player::Player.hp < 100)
+		if (player::Player.hp < 10)
+		{
+			systems::gotoxy(5, 1);
+			std::cout << Color::red << Player.hp << Color::def;
+			systems::gotoxy(6, 1);
+			std::cout << " ";
+			systems::gotoxy(7, 1);
+			std::cout << Color::red << "/" << Color::def;
+			systems::gotoxy(8, 1);
+			std::cout << " ";
+			systems::gotoxy(9, 1);
+			std::cout << Color::red << player::Player.MaxHP << Color::def;
+			systems::gotoxy(12, 1);
+			std::cout << " ";
+		}
+		else if (player::Player.hp < 100)
 		{
 			systems::gotoxy(7, 1);
 			std::cout << " ";
 			systems::gotoxy(13, 1);
 			std::cout << " ";
 		}
+
 
 		systems::gotoxy(15, 1);
 		std::cout << Color::magenta << "xp: " << player::Player.exp << " / " << player::Player.forNextlvl << Color::def;
@@ -292,7 +308,7 @@ namespace player {
 		std::cout << "-----------------------------";
 		CheckItem();
 		systems::gotoxy(1, 25);
-		std::cout << Color::brwhite << "Curret state: " << variableKeeper::CurrentState << Color::def;
+		std::cout << Color::brwhite << "Last action: " << variableKeeper::CurrentState << Color::def;
 		systems::gotoxy(1, 26);
 		std::cout << Color::brwhite << variableKeeper::CurrentState2 << Color::def;
 		systems::gotoxy(1, 28);
@@ -711,15 +727,17 @@ namespace player {
 			int ItemsCount = 5;
 			if (DebugMode == 1)
 			{
-				systems::gotoxy(47, 0 + ItemsCount);
+				systems::gotoxy(47, -1 + ItemsCount);
 				std::cout << "ShopMenuChoise: " << ShopMenuChoice;
-				systems::gotoxy(47, 1 + ItemsCount);
+				systems::gotoxy(47, 0 + ItemsCount);
 				std::cout << "ShopItemsIDs[0]: " << variableKeeper::ShopItemsIDs[0];
-				systems::gotoxy(47, 2 + ItemsCount);
+				systems::gotoxy(47, 1 + ItemsCount);
 				std::cout << "ShopItemsIDs[1]: " << variableKeeper::ShopItemsIDs[1];
-				systems::gotoxy(47, 3 + ItemsCount);
+				systems::gotoxy(47, 2 + ItemsCount);
 				std::cout << "ShopItemsIDs[2]: " << variableKeeper::ShopItemsIDs[2];
 			}
+			systems::gotoxy(47, 3 + ItemsCount);
+			std::cout << Color::green << "Coins: " << Color::yellow << Player.coins << Color::def;
 			systems::gotoxy(47, 5 + ItemsCount);
 			std::cout << "------------------------------";
 			for (int i = 0; i < ShopItemsCount; i++) // Draw the menu.
@@ -727,8 +745,8 @@ namespace player {
 				bool skippedDamage = false;
 				systems::gotoxy(47, 6 + i + ItemsCount);
 				ShopMenuChoice == i + 1 ? std::cout << " -> " : std::cout << "    "; // if (i+1) == the cursor then
-															   //    print ' -> ' else print '    '.
-															   //    by the way i call '->' the cursor
+				//    print ' -> ' else print '    '.
+				//    by the way i call '->' the cursor
 				std::cout << ShopMenuItems()[i] << std::endl; // print the name of the item.
 				if (ShopMenuItemsSpecs(false, true, false, false)[i] != "0")
 				{
@@ -811,18 +829,18 @@ namespace player {
 				break;
 			case 27: // 27 is the asscii to the escape key (Esc)
 				try { /*(*MenuShopOption[ShopItemsCount - 1])(); break;*/system("cls"); InitializationLeftMenu(); ShowMap(variableKeeper::map); return; } // useually when the 'Esc' key is pressed the last
-													//     item will be called (executed). but you can
-													//     change it to whatever you want.
+				//     item will be called (executed). but you can
+				//     change it to whatever you want.
 				catch (...) {}
 				break;
 			default:// any another key.
 				if (key >= '1' && key <= char(ShopItemsCount + '0'))//check if the pressed key is in the range
-														  //    of (1,2,3,...,#of items) [all char(s)]
+					//    of (1,2,3,...,#of items) [all char(s)]
 				{
 					try { (*MenuShopOption[int(key) - '0' - 1])(); } //call the function of the pressed number.
-						 //  you can make the cursor move to that item instead of calling (executing)
-						 //  it by replacing all the code between 'if (bla){' and '}' with this
-						 //  statement MenuChooice=int(key)-'0'
+					//  you can make the cursor move to that item instead of calling (executing)
+					//  it by replacing all the code between 'if (bla){' and '}' with this
+					//  statement MenuChooice=int(key)-'0'
 					catch (...) {}
 				}
 			}

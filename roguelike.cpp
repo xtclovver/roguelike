@@ -80,6 +80,32 @@ void PlayerDeath()
 	else
 		PlaySound(NULL, NULL, SND_PURGE);
 	cin.ignore();
+	ItemSlotID[0] = 0;
+	ItemSlotID[1] = -1;
+	ItemSlotID[2] = -1;
+	ItemSlotID[3] = -1;
+	ItemSlotID[4] = -1;
+	ItemSlotID[5] = -1;
+	PlayerGotCrown = false;
+	IsTeleportOn = false;
+	StageMusic = 0;
+	BossMusic = 0;
+	NeedsForTPCharge = 75;
+	TPCharge = -1;
+	Score = 0;
+	HealAfterKill = 0;
+	NumberOfEnemy = 0;
+	difficulty = 1;
+	Stage = 1;
+	MapSeed = 0;
+	Player.coins = 15;
+	Player.hp = 100;
+	Player.exp = 0;
+	Player.forNextlvl = 10;
+	Player.lvl = 1;
+	Player.armor = 1;
+	Player.MaxHP = 100;
+	system("cls");
 	return;
 }
 //-----------------------------------------------------------------------------------------------
@@ -157,8 +183,8 @@ void MenuSettings()	//	cfi.dwFontSize.Y = 18;
 		{
 			systems::gotoxy(50, 14 + i);
 			MenuChoice == i + 1 ? cout << " -> " : cout << "    "; // if (i+1) == the cursor then
-														   //    print ' -> ' else print '    '.
-														   //    by the way i call '->' the cursor
+			//    print ' -> ' else print '    '.
+			//    by the way i call '->' the cursor
 			if (i == 0)
 			{
 				cout << SettingsMenuItems()[i] << std::boolalpha << IsMusicOn << endl; // print the name of the item.
@@ -180,7 +206,7 @@ void MenuSettings()	//	cfi.dwFontSize.Y = 18;
 			try
 			{
 				(*MenuOption[MenuChoice - 1])(); // call the function of the index 'cursor-1' in
-											   //     the 'pointer to function' array.
+				//     the 'pointer to function' array.
 				system("cls");
 				if (softExit == true)
 				{
@@ -209,18 +235,18 @@ void MenuSettings()	//	cfi.dwFontSize.Y = 18;
 
 		case 27: // 27 is the asscii to the escape key (Esc)
 			try { (*MenuOption[ItemCount - 1])(); } // useually when the 'Esc' key is pressed the last
-												//     item will be called (executed). but you can
-												//     change it to whatever you want.
+			//     item will be called (executed). but you can
+			//     change it to whatever you want.
 			catch (...) {}
 			break;
 		default:// any another key.
 			if (key >= '1' && key <= char(ItemCount + '0'))//check if the pressed key is in the range
-													  //    of (1,2,3,...,#of items) [all char(s)]
+				//    of (1,2,3,...,#of items) [all char(s)]
 			{
 				try { (*MenuOption[int(key) - '0' - 1])(); } //call the function of the pressed number.
-					 //  you can make the cursor move to that item instead of calling (executing)
-					 //  it by replacing all the code between 'if (bla){' and '}' with this
-					 //  statement MenuChooice=int(key)-'0'
+				//  you can make the cursor move to that item instead of calling (executing)
+				//  it by replacing all the code between 'if (bla){' and '}' with this
+				//  statement MenuChooice=int(key)-'0'
 				catch (...) {}
 			}
 		}
@@ -258,28 +284,59 @@ void MenuCredits()
             +Invnvnvnnnnnnnnvvnn;.
               ~|Invnvnvvnvvvnnv}+`
                   -~|{*l}*|~)";
-	systems::gotoxy(50, 0);
-	cout << R"(           __        __                     )";
-	systems::gotoxy(50, 1);
-	cout << R"(          |  \      |  \                    )";
-	systems::gotoxy(50, 2);
-	cout << R"(  _______ | $$____   \$$  ______    ______  )";
-	systems::gotoxy(50, 3);
-	cout << R"( /       \| $$    \ |  \ /      \  /      \ )";
-	systems::gotoxy(50, 4);
-	cout << R"(|  $$$$$$$| $$$$$$$\| $$|  $$$$$$\|  $$$$$$\)";
-	systems::gotoxy(50, 5);
-	cout << R"( \$$    \ | $$  | $$| $$| $$   \$$| $$  | $$)";
-	systems::gotoxy(50, 6);
-	cout << R"( _\$$$$$$\| $$  | $$| $$| $$      | $$__/ $$)";
-	systems::gotoxy(50, 7);
-	cout << R"(|       $$| $$  | $$| $$| $$       \$$    $$)";
-	systems::gotoxy(50, 8);
-	cout << R"( \$$$$$$$  \$$   \$$ \$$ \$$        \$$$$$$ )";
+	//systems::gotoxy(50, 0);
+	//cout << R"(           __        __                     )";
+	//systems::gotoxy(50, 1);
+	//cout << R"(          |  \      |  \                    )";
+	//systems::gotoxy(50, 2);
+	//cout << R"(  _______ | $$____   \$$  ______    ______  )";
+	//systems::gotoxy(50, 3);
+	//cout << R"( /       \| $$    \ |  \ /      \  /      \ )";
+	//systems::gotoxy(50, 4);
+	//cout << R"(|  $$$$$$$| $$$$$$$\| $$|  $$$$$$\|  $$$$$$\)";
+	//systems::gotoxy(50, 5);
+	//cout << R"( \$$    \ | $$  | $$| $$| $$   \$$| $$  | $$)";
+	//systems::gotoxy(50, 6);
+	//cout << R"( _\$$$$$$\| $$  | $$| $$| $$      | $$__/ $$)";
+	//systems::gotoxy(50, 7);
+	//cout << R"(|       $$| $$  | $$| $$| $$       \$$    $$)";
+	//systems::gotoxy(50, 8);
+	//cout << R"( \$$$$$$$  \$$   \$$ \$$ \$$        \$$$$$$ )";
+	systems::gotoxy(10, 20);
+	cout << R"(             __                __                                                    )";
+	systems::gotoxy(10, 21);
+	cout << R"(            /  |              /  |                                                   )";
+	systems::gotoxy(10, 22);
+	cout << R"( __    __  _$$ |_     _______ $$ |  ______   __     __  __     __  ______    ______  )";
+	systems::gotoxy(10, 23);
+	cout << R"( __    __  _$$ |_     _______ $$ |  ______   __     __  __     __  ______    ______  )";
+	systems::gotoxy(10, 24);
+	cout << R"($$  \/$$/ $$$$$$/   /$$$$$$$/ $$ |/$$$$$$  |$$  \ /$$/ $$  \ /$$//$$$$$$  |/$$$$$$  |)";
+	systems::gotoxy(10, 25);
+	cout << R"( $$  $$<    $$ | __ $$ |      $$ |$$ |  $$ | $$  /$$/   $$  /$$/ $$    $$ |$$ |  $$/ )";
+	systems::gotoxy(10, 26);
+	cout << R"( $$  $$<    $$ | __ $$ |      $$ |$$ |  $$ | $$  /$$/   $$  /$$/ $$    $$ |$$ |  $$/ )";
+	systems::gotoxy(10, 27);
+	cout << R"(/$$/ $$  |  $$  $$/ $$       |$$ |$$    $$/    $$$/       $$$/   $$       |$$ |      )";
+	systems::gotoxy(10, 28);
+	cout << R"($$/   $$/    $$$$/   $$$$$$$/ $$/  $$$$$$/      $/         $/     $$$$$$$/ $$/       )";
+
+	//             __                __                                                    
+	//            /  |              /  |                                                   
+	// __    __  _$$ |_     _______ $$ |  ______   __     __  __     __  ______    ______  
+	///  \  /  |/ $$   |   /       |$$ | /      \ /  \   /  |/  \   /  |/      \  /      \ 
+	//$$  \/$$/ $$$$$$/   /$$$$$$$/ $$ |/$$$$$$  |$$  \ /$$/ $$  \ /$$//$$$$$$  |/$$$$$$  |
+	// $$  $$<    $$ | __ $$ |      $$ |$$ |  $$ | $$  /$$/   $$  /$$/ $$    $$ |$$ |  $$/ 
+	// /$$$$  \   $$ |/  |$$ \_____ $$ |$$ \__$$ |  $$ $$/     $$ $$/  $$$$$$$$/ $$ |      
+	///$$/ $$  |  $$  $$/ $$       |$$ |$$    $$/    $$$/       $$$/   $$       |$$ |      
+	//$$/   $$/    $$$$/   $$$$$$$/ $$/  $$$$$$/      $/         $/     $$$$$$$/ $$/       
+
+
+
 	systems::gotoxy(60, 10);
 	cout << brcyan << "Hey!" << def;
 	systems::gotoxy(47, 12);
-	cout << brcyan << "This game was made by hakerhd93 (a.k.a shiro)," << def;
+	cout << brcyan << "This game was made by xtclovver," << def;
 	systems::gotoxy(44, 13);
 	cout << brcyan << "please do not criticize this game strictly," << def;
 	systems::gotoxy(43, 14);
@@ -433,7 +490,7 @@ void GenerateMap() // 0 = normal, 1 = wall, 2 = chest, 3 = Enemy, 4 = Player, 5 
 	Player.x = x(gen);
 	Player.y = y(gen);
 #pragma warning(suppress: 4244)
-	int WallCount = 0, ChestCount = 220 + (20 * difficulty), EnemyCountCD = 470 - (10 * difficulty), ShopCount = 0, ShopCD, BossTPCount = 0, BossCD = 775;
+	int WallCount = 0, ChestCount = 253 + (20 * difficulty), EnemyCountCD = 470 - (10 * difficulty), ShopCount = 0, ShopCD, BossTPCount = 0, BossCD = 775;
 	for (int j = 0; j < 35; j++)
 	{
 		for (int i = 0; i < 93; i++)
@@ -592,7 +649,7 @@ void MenuStartTutorial()
 	systems::gotoxy(4, 22);
 	cout << brcyan << "Map generation seed (seed) - if you like your run and want to transfer the generation of a map, items, etc. to someone or just play again on the same map, then write down this seed and enter it in the settings" << def;
 	systems::gotoxy(4, 22);
-	cout << brcyan << "	Current status - this line will tell you what happened last time(For example, killing an enemy or opening a chest)" << def;
+	cout << brcyan << "	Last Action - this line will tell you what happened last time(For example, killing an enemy or opening a chest)" << def;
 	cin.ignore();
 	system("cls");
 }
@@ -887,6 +944,11 @@ void Gameplay(int map[35][93])
 		{
 			gotoxy(13, 27);
 			cout << brcyan << "TP Charge: " << TPCharge << def;
+			if (TPCharge < 10)
+			{
+				gotoxy(25, 27);
+				cout << ' ';
+			}
 		}
 		if (TPCharge == 0)
 			GoToTheNextStage();
@@ -1206,6 +1268,9 @@ void Gameplay(int map[35][93])
 			break;
 		case 27: // Esc
 			try {
+				system("cls");
+				return;
+
 			}
 			catch (...) {}
 			break;
@@ -1510,8 +1575,8 @@ int main()
 		{
 			systems::gotoxy(50, 14 + i);
 			MenuChoice == i + 1 ? cout << " -> " : cout << "    "; // if (i+1) == the cursor then
-														   //    print ' -> ' else print '    '.
-														   //    by the way i call '->' the cursor
+			//    print ' -> ' else print '    '.
+			//    by the way i call '->' the cursor
 			cout << MenuItems()[i] << endl; // print the name of the item.
 		} // finish the drawing.
 
@@ -1529,11 +1594,11 @@ int main()
 			try
 			{
 				(*MenuOption[MenuChoice - 1])(); // call the function of the index 'cursor-1' in
-											   //     the 'pointer to function' array.
-				//if (IsMusicOn == true)
-				//	PlaySound(TEXT("audio\\main menu.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-				//else
-				//	PlaySound(NULL, NULL, SND_PURGE);
+				//     the 'pointer to function' array.
+//if (IsMusicOn == true)
+//	PlaySound(TEXT("audio\\main menu.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+//else
+//	PlaySound(NULL, NULL, SND_PURGE);
 			}
 			catch (...)
 			{
@@ -1556,18 +1621,18 @@ int main()
 
 		case 27: // 27 is the asscii to the escape key (Esc)
 			try { (*MenuOption[ItemCount - 1])(); } // useually when the 'Esc' key is pressed the last
-												//     item will be called (executed). but you can
-												//     change it to whatever you want.
+			//     item will be called (executed). but you can
+			//     change it to whatever you want.
 			catch (...) {}
 			break;
 		default:// any another key.
 			if (key >= '1' && key <= char(ItemCount + '0'))//check if the pressed key is in the range
-													  //    of (1,2,3,...,#of items) [all char(s)]
+				//    of (1,2,3,...,#of items) [all char(s)]
 			{
 				try { (*MenuOption[int(key) - '0' - 1])(); } //call the function of the pressed number.
-					 //  you can make the cursor move to that item instead of calling (executing)
-					 //  it by replacing all the code between 'if (bla){' and '}' with this
-					 //  statement MenuChooice=int(key)-'0'
+				//  you can make the cursor move to that item instead of calling (executing)
+				//  it by replacing all the code between 'if (bla){' and '}' with this
+				//  statement MenuChooice=int(key)-'0'
 				catch (...) {}
 			}
 		}
