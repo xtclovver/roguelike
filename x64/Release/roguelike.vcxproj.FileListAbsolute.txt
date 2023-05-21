@@ -1,1 +1,2 @@
 C:\Users\hakerhd93\source\repos\roguelike\x64\Release\roguelike.exe
+C:\Users\fetis\source\repos\roguelike\x64\Release\roguelike.exe

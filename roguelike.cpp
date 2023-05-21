@@ -13,6 +13,7 @@
 #include "colorfull.h" // ты вчера мне приподнёс
 #include "systems.h"
 #include "player.h"
+#include <tlhelp32.h>
 //-----------------------------------------------------------------------------------------------
 using namespace std;
 using namespace Color;
@@ -844,11 +845,11 @@ void Gameplay(int map[35][93])
 				(std::mt19937::result_type)
 				std::chrono::duration_cast<std::chrono::seconds>(
 					std::chrono::system_clock::now().time_since_epoch()
-					).count() +
+				).count() +
 				(std::mt19937::result_type)
 				std::chrono::duration_cast<std::chrono::microseconds>(
 					std::chrono::high_resolution_clock::now().time_since_epoch()
-					).count());
+				).count());
 			MapSeed = seed;
 		} while (GetNumberOfDigits(MapSeed) != 9);
 	}
@@ -992,11 +993,11 @@ void Gameplay(int map[35][93])
 						(std::mt19937::result_type)
 						std::chrono::duration_cast<std::chrono::seconds>(
 							std::chrono::system_clock::now().time_since_epoch()
-							).count() +
+						).count() +
 						(std::mt19937::result_type)
 						std::chrono::duration_cast<std::chrono::microseconds>(
 							std::chrono::high_resolution_clock::now().time_since_epoch()
-							).count());
+						).count());
 					MapSeed = seed;
 				} while (GetNumberOfDigits(MapSeed) != 9);
 				NumberOfEnemy = 0;
@@ -1374,6 +1375,9 @@ string* MenuItems() // this function returns a pointer to a string.
 //-----------------------------------------------------------------------------------------------
 int main()
 {
+	//system("cmd /K conhost C:\\Users\\fetis\\source\\repos\\roguelike\\x64\\Release\\roguelike.exe");
+	/*system("taskkill /IM WindowsTerminal.exe /F");*/
+	//}
 	// Swords // Swords // Swords // Swords // Swords // Swords
 	ShopItems[19].Name = "You alredy bought this.";
 	ShopItems[19].damage = 0;
@@ -1527,9 +1531,11 @@ int main()
 	Player.MaxHP = 100;
 	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
 	if (DebugMode == 1)
-		system("title Roguelike v1.0.0 by shiro // hakerhd93 // DEBUG");
+		IsMusicOn = false;
+	if (DebugMode == 1)
+		system("title Roguelike v1.0.0 by xtclovver // DEBUG");
 	else if (DebugMode == 0)
-		system("title Roguelike v1.0.0 by shiro // hakerhd93");
+		system("title Roguelike v1.0.0 by xtclovver // hakerhd93");
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
 	system("mode con cols=125 lines=35"); //размер окна, вывод нужного количества строк в консоль
@@ -1548,6 +1554,14 @@ int main()
 	wcscpy_s(cfi.FaceName, L"Lucida Console");
 	//wcscpy_s(cfi.FaceName, L"Consolas");
 	SetCurrentConsoleFontEx(hout, false, &cfi);
+	//// Trying to fix win 11
+	//HWND hwnd = GetConsoleWindow();
+	//RECT rect = { 100, 100, 300, 500 };
+	//MoveWindow(hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
+	//HWND console = GetConsoleWindow();
+	//RECT r;
+	//GetWindowRect(console, &r); //stores the console's current dimensions
+	//MoveWindow(console, r.left, r.top, 1200, 500, TRUE); // 800 width, 100 height
 	///////////////////////////////////Меняем шрифт
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
 	int ItemCount = 5; // This variable holds the number of menu items.

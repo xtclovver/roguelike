@@ -5,6 +5,11 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "roguelike", "roguelike.vcxproj", "{5F151BEF-AF8E-4C4B-82DE-466AF8991A97}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "roguelikeWin11", "..\roguelikeWin11\roguelikeWin11.vcxproj", "{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F151BEF-AF8E-4C4B-82DE-466AF8991A97} = {5F151BEF-AF8E-4C4B-82DE-466AF8991A97}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +26,14 @@ Global
 		{5F151BEF-AF8E-4C4B-82DE-466AF8991A97}.Release|x64.Build.0 = Release|x64
 		{5F151BEF-AF8E-4C4B-82DE-466AF8991A97}.Release|x86.ActiveCfg = Release|Win32
 		{5F151BEF-AF8E-4C4B-82DE-466AF8991A97}.Release|x86.Build.0 = Release|Win32
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Debug|x64.ActiveCfg = Debug|x64
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Debug|x64.Build.0 = Debug|x64
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Debug|x86.ActiveCfg = Debug|Win32
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Debug|x86.Build.0 = Debug|Win32
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Release|x64.ActiveCfg = Release|x64
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Release|x64.Build.0 = Release|x64
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Release|x86.ActiveCfg = Release|Win32
+		{A98F44B2-C8BE-4E5B-8829-2FA829A2BF1D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
