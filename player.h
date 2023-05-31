@@ -18,21 +18,14 @@ namespace player {
 		{
 			switch (variableKeeper::ItemSlotID[i])
 			{
-			case 0:
-			default:
-				break;
-			}
-
-			if (variableKeeper::ItemSlotID[i] == -1)
-			{
+			case -1:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << "Empty.";
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 0)
-			{
+				break;
+			case 0:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::grey << "Dao." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -44,9 +37,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 1)
-			{
+				break;
+			case 1:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::white << "Quelling Blade." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -58,9 +50,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 2)
-			{
+				break;
+			case 2:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::white << "Ogre Axe." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -72,9 +63,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 3)
-			{
+				break;
+			case 3:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::green << "Katana." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -86,9 +76,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 4)
-			{
+				break;
+			case 4:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::green << "Desolator." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -100,9 +89,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 5)
-			{
+				break;
+			case 5:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::blue << "Skull Basher." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -114,9 +102,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 6)
-			{
+				break;
+			case 6:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::pink << "Heavens Halberd." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -128,9 +115,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 7)
-			{
+				break;
+			case 7:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::magenta << "Sacred Relic." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -142,9 +128,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 8)
-			{
+				break;
+			case 8:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::cyan << "Ethereal blade." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -156,9 +141,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 9)
-			{
+				break;
+			case 9:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::brcyan << "Divine Rapier." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -170,10 +154,9 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			// Items
-			else if (variableKeeper::ItemSlotID[i] == 12)
-			{
+				break;
+				// Items
+			case 12:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::pink << "Morbid Mask." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -185,9 +168,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 13)
-			{
+				break;
+			case 13:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::magenta << "Chainmail." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -199,9 +181,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 14)
-			{
+				break;
+			case 14:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::cyan << "Ring of Regen." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -213,9 +194,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 15)
-			{
+				break;
+			case 15:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::brcyan << "Focused Convergence." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -227,9 +207,8 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
-			}
-			else if (variableKeeper::ItemSlotID[i] == 16)
-			{
+				break;
+			case 16:
 				systems::gotoxy(1, 7 + attemptsToCatch);
 				std::cout << Color::cyan << "Cyan crown." << Color::def;
 				systems::gotoxy(1, 8 + attemptsToCatch);
@@ -241,6 +220,9 @@ namespace player {
 				systems::gotoxy(1, 9 + attemptsToCatch);
 				std::cout << "-----------------------------";
 				attemptsToCatch += 3;
+				break;
+			default:
+				break;
 			}
 		}
 		attemptsToCatch = 0;
@@ -412,46 +394,7 @@ namespace player {
 		}
 		else if (attack == true)
 		{
-			if (variableKeeper::ItemSlotID[0] == 0)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[0].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 1)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[1].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 2)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[2].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 3)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[3].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 4)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[4].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 5)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[5].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 6)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[6].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 7)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[7].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 8)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[8].damage - variableKeeper::EnemyDefaultStats[3];
-			}
-			else if (variableKeeper::ItemSlotID[0] == 9)
-			{
-				variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[9].damage - variableKeeper::EnemyDefaultStats[3];
-			}
+			variableKeeper::Enemy[count].hp -= variableKeeper::ShopItems[variableKeeper::ItemSlotID[0]].damage - variableKeeper::EnemyDefaultStats[3];
 			if (variableKeeper::Enemy[count].hp <= 0)
 			{
 				if (TpPool == true)
@@ -471,7 +414,7 @@ namespace player {
 				Player.exp += 2.5 + (2.5 * variableKeeper::difficulty);
 				if (variableKeeper::PlayerGotCrown == true) {
 #pragma warning(suppress: 4244)
-					player::Player.exp += (2.5 + (2.5 * variableKeeper::difficulty)) * 25 / 100;
+					player::Player.exp += (2.5 + (2.5 * variableKeeper::difficulty)) * (25 + variableKeeper::Stage / 100);
 				}
 				variableKeeper::CurrentState = "You killed a en";
 				variableKeeper::CurrentState2 = "emy and got money & exp";
@@ -492,31 +435,48 @@ namespace player {
 			{
 				Symbol++;
 				systems::gotoxy(31 + Symbol, 0);
-				if (map[j][i] == 0)
+				switch (map[j][i])
 				{
+				case 0:
 					std::cout << variableKeeper::FloorSymbol;
-				}
-				else if (map[j][i] == 1)
-				{
+					break;
+				case 1:
 					std::cout << variableKeeper::WallSymbol;
-				}
-				else if (map[j][i] == 2)
-				{
+					break;
+				case 2:
 					std::cout << Color::yellow << variableKeeper::ChestSymbol << Color::def;
-				}
-				else if (map[j][i] == 4)
-				{
+					break;
+				case 4:
 					std::cout << Color::green << variableKeeper::PlayerSymbol << Color::def;
-				}
-				else if (map[j][i] == 5)
-				{
+					break;
+				case 5:
 					std::cout << Color::orange << variableKeeper::ShopSymbol << Color::def;
-				}
-				else if (map[j][i] == 6)
-				{
+					break;
+				case 6:
 					std::cout << Color::magenta << variableKeeper::EventTeleporterSymbol << Color::def;
+					break;
+				case 600:
+					std::cout << Color::redBG << variableKeeper::FloorSymbol << Color::defBG;
+					break;
+				case 601:
+					std::cout << Color::redBG << variableKeeper::WallSymbol << Color::defBG;
+					break;
+				case 602:
+					std::cout << Color::redBG << Color::yellow << variableKeeper::ChestSymbol << Color::def << Color::defBG;
+					break;
+				case 604:
+					std::cout << Color::redBG << Color::green << variableKeeper::PlayerSymbol << Color::def << Color::defBG;
+					break;
+				case 605:
+					std::cout << Color::redBG << Color::orange << variableKeeper::ShopSymbol << Color::def << Color::defBG;
+					break;
+				case 606:
+					std::cout << Color::redBG << Color::magenta << variableKeeper::EventTeleporterSymbol << Color::def << Color::defBG;
+					break;
+				default:
+					break;
 				}
-				else if (map[j][i] < 500 && map[j][i] >= 7)
+				if (map[j][i] < 500 && map[j][i] >= 7)
 				{
 					for (int g = 0; g < 2; g++)
 					{
@@ -524,30 +484,6 @@ namespace player {
 						std::cout << Color::red << variableKeeper::EnemySymbol << Color::def;
 						break;
 					}
-				}
-				else if (map[j][i] == 600)
-				{
-					std::cout << Color::redBG << variableKeeper::FloorSymbol << Color::defBG;
-				}
-				else if (map[j][i] == 601)
-				{
-					std::cout << Color::redBG << variableKeeper::WallSymbol << Color::defBG;
-				}
-				else if (map[j][i] == 602)
-				{
-					std::cout << Color::redBG << Color::yellow << variableKeeper::ChestSymbol << Color::def << Color::defBG;
-				}
-				else if (map[j][i] == 604)
-				{
-					std::cout << Color::redBG << Color::green << variableKeeper::PlayerSymbol << Color::def << Color::defBG;
-				}
-				else if (map[j][i] == 605)
-				{
-					std::cout << Color::redBG << Color::orange << variableKeeper::ShopSymbol << Color::def << Color::defBG;
-				}
-				else if (map[j][i] == 606)
-				{
-					std::cout << Color::redBG << Color::magenta << variableKeeper::EventTeleporterSymbol << Color::def << Color::defBG;
 				}
 				else if (map[j][i] >= 607)
 				{
@@ -684,17 +620,16 @@ namespace player {
 	{
 		if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].cost <= player::Player.coins && variableKeeper::ShopItemsIDs[2] != 19 && variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].LvlToEqp <= player::Player.lvl)
 		{
-			if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].ID == 10)
+			switch (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].ID)
 			{
-				Player.hp += 45;
-				if (Player.hp > Player.MaxHP)
-				{
-					Player.hp = Player.MaxHP;
-				}
-			}
-			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].ID == 11)
-			{
-				Player.exp += 15;
+			case 10:
+				Player.hp = Player.MaxHP;
+				break;
+			case 11:
+				Player.exp += 10 + (Player.lvl * 2);
+				break;
+			default:
+				break;
 			}
 			player::Player.coins -= variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[2]].cost;
 			variableKeeper::ShopItemsIDs[2] = 19;

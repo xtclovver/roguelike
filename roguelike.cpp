@@ -464,18 +464,20 @@ void StartTeleportEvent() {
 		Enemy[NumberOfEnemy].y = yEnemy;
 		NumberOfEnemy++;
 	}
-	for (int o = -9 - 1; o < 9 + 1; o++)
+	for (int o = -9; o < 9; o++)
 	{
-		for (int p = -5 - 1; p < 6 + 1; p++)
+		for (int p = -5; p < 6; p++)
 		{
 			gotoxy(xTP + 31, yTP + p);
 			map[yTP + p][xTP + o] = CheckTPZone(xTP + o, yTP + p);
-			cout << redBG << ' ' << defBG;
+			//cout << redBG << ' ' << defBG;
 			gotoxy(xTP + 31, yTP - p);
 			map[yTP - p][xTP - o] = CheckTPZone(xTP - o, yTP - p);
-			cout << redBG << ' ' << defBG;
+			//cout << redBG << ' ' << defBG;
 		}
 	}
+	system("cls");
+	InitializationLeftMenu();
 	ShowMap(map);
 }
 
@@ -660,8 +662,8 @@ void OpenChest(int x, int y)
 	if (map[y][x] == 2)
 	{
 		Score += 10;
-		Player.coins += 5;
-		CurrentState = "You got 5 coins";
+		Player.coins += 3 + (Stage * 2);
+		CurrentState = "You open a chest!";
 		map[y][x] = 0;
 		systems::gotoxy(31 + x, y);
 		cout << " ";
@@ -894,7 +896,7 @@ void Gameplay(int map[35][93])
 		else
 			PlaySound(NULL, NULL, SND_PURGE);
 	}
-	int MinStage = Stage - 1;
+	MinStage = Stage - 1;
 	for (int i = 0; i < 3; i++)
 	{
 		if (i == 0)

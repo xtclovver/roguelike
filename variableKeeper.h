@@ -25,6 +25,7 @@ namespace variableKeeper {
 	int NumberOfEnemy = 0;
 	float difficulty = 1;
 	int Stage = 1;
+	int MinStage;
 	int EnemyDefaultStats[4] = { 15,10,20,5 }; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
 	struct EnemyStats
 	{
