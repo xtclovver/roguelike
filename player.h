@@ -277,11 +277,20 @@ namespace player {
 		systems::gotoxy(15, 2);
 		std::cout << Color::brcyan << "lv: " << player::Player.lvl << Color::def;
 		systems::gotoxy(1, 2);
-		std::cout << Color::green << "Coins: " << player::Player.coins << Color::def;
+		std::cout << Color::green << "coins: " << player::Player.coins << Color::def;
 		systems::gotoxy(1, 3);
-		std::cout << Color::orange << "Difficulty: " << variableKeeper::difficulty << Color::def;
-		systems::gotoxy(15, 3);
-		std::cout << Color::blue << "Stage: " << variableKeeper::Stage << Color::def;
+		std::cout << Color::blue << "stage: " << variableKeeper::Stage << Color::def;
+		if (systems::IsEven(variableKeeper::difficulty / 0.25) == true)
+		{
+			systems::gotoxy(15, 3);
+			std::cout << Color::orange << "difficulty: " << variableKeeper::difficulty << Color::def;
+
+		}
+		else
+		{
+			systems::gotoxy(14, 3);
+			std::cout << Color::orange << "difficulty: " << variableKeeper::difficulty << Color::def;
+		}
 		systems::gotoxy(1, 4);
 		std::cout << "-----------------------------";
 		systems::gotoxy(1, 5);
@@ -589,11 +598,11 @@ namespace player {
 			}
 			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[1]].ID == 13)
 			{
-				player::Player.armor += variableKeeper::ShopItems[13].special;
+				player::Player.armor += variableKeeper::ShopItems[13].special + Player.lvl;
 			}
 			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[1]].ID == 14)
 			{
-				player::Player.armor += variableKeeper::ShopItems[14].special;
+				player::Player.MaxHP += variableKeeper::ShopItems[14].special + (Player.MaxHP / 10);
 			}
 			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[1]].ID == 15)
 			{

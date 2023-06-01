@@ -35,6 +35,20 @@ namespace systems {
 
 		SetConsoleCursorInfo(h, c);
 	}
+	bool IsEven(int x)
+	{
+		switch (x % 2)
+		{
+		case 0:
+			return true;
+			break;
+		case 1:
+			return false;
+			break;
+		default:
+			break;
+		}
+	}
 	int WhereX(int x, int y, int fiend, bool IsEnemy, bool TpPool = false)
 	{
 		if (IsEnemy == false)

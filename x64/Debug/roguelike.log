@@ -1,3 +1,0 @@
-﻿  roguelike.cpp
-C:\Users\hakerhd93\source\repos\roguelike\shopNitems.h(133): warning C4715: 'shopNitems::ShopMenuItemsSpecs': not all control paths return a value
-  roguelike.vcxproj -> C:\Users\hakerhd93\Source\Repos\roguelike\x64\Debug\roguelike.exe

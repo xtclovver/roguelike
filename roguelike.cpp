@@ -1,4 +1,4 @@
-﻿#define DebugMode 1
+﻿#define DebugMode 0
 //-----------------------------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -62,6 +62,22 @@ void UpgradeLvl()
 		HealAfterKill += 2;
 	}
 	Player.MaxHP += Player.lvl * 2;
+	bool HaveStim = false;
+	for (int i = 0; i < 6; i++)
+	{
+		if (variableKeeper::ItemSlotID[i] == 13)
+			Player.armor += 1;
+		else if (variableKeeper::ItemSlotID[i] == 14)
+			HaveStim = true;
+	}
+	if (HaveStim == true) {
+		Player.MaxHP = (Player.MaxHP - (Player.MaxHP / 10)) + Player.lvl * 2;
+		Player.MaxHP += (Player.MaxHP / 10);
+	}
+	else
+		Player.MaxHP += Player.lvl * 2;
+	if (variableKeeper::ItemSlotID[0] == 9)
+		ShopItems[9].damage += Player.lvl * 2;
 #pragma warning(suppress: 4244)
 	Player.hp += Player.lvl * 4;
 #pragma warning(suppress: 4244)
@@ -104,7 +120,7 @@ void PlayerDeath()
 	Player.exp = 0;
 	Player.forNextlvl = 10;
 	Player.lvl = 1;
-	Player.armor = 1;
+	Player.armor = 2;
 	Player.MaxHP = 100;
 	system("cls");
 	return;
@@ -662,7 +678,7 @@ void OpenChest(int x, int y)
 	if (map[y][x] == 2)
 	{
 		Score += 10;
-		Player.coins += 3 + (Stage * 2);
+		Player.coins += 3 + (Stage * 3);
 		CurrentState = "You open a chest!";
 		map[y][x] = 0;
 		systems::gotoxy(31 + x, y);
@@ -937,10 +953,6 @@ void Gameplay(int map[35][93])
 				cout << ' ';
 			}
 		}
-		systems::gotoxy(1, 27);
-		std::cout << Color::brwhite << "x: " << player::Player.x << Color::def;
-		systems::gotoxy(10, 27);
-		std::cout << Color::brwhite << "y: " << player::Player.y << Color::def;
 		gotoxy(1, 29);
 		cout << brcyan << "Score: " << Score << def;
 		if (IsTeleportOn == true)
@@ -962,6 +974,10 @@ void Gameplay(int map[35][93])
 		}
 		if (DebugMode == 1)
 		{
+			systems::gotoxy(1, 27);
+			std::cout << Color::brwhite << "x: " << player::Player.x << Color::def;
+			systems::gotoxy(10, 27);
+			std::cout << Color::brwhite << "y: " << player::Player.y << Color::def;
 			systems::gotoxy(1, 29);
 			std::cout << "up: '" << variableKeeper::map[Player.y - 1][Player.x] << "'";
 			systems::gotoxy(1, 30);
@@ -1303,15 +1319,18 @@ void GoToTheNextStage() // TODO
 	NumberOfEnemy = 0;
 #pragma warning(suppress: 4244)
 	MapSeed = 1 + (MapSeed / Stage) * (Stage * 0.93); // 333826495
-	if (GetNumberOfDigits(MapSeed) == 8)
-	{
-#pragma warning(suppress: 4244)
-		MapSeed *= (Stage * 0.15) + 1;
-	}
+	do {
+		if (GetNumberOfDigits(MapSeed) == 8)
+			MapSeed *= (Stage * 0.15) + 1;
+		else if (GetNumberOfDigits(MapSeed) >= 10)
+			MapSeed /= (Stage * 0.15) + 1;
+		else if (MapSeed <= 200000000)
+			MapSeed *= 2;
+	} while (GetNumberOfDigits(MapSeed) != 9);
 	Stage += 1;
 #pragma warning(suppress: 4244)
 	Score += Player.coins;
-	Player.coins /= 0.5;
+	Player.coins = 0;
 	if (IsMusicOn == true)
 		PlaySound(TEXT("audio\\stage complited.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	else
@@ -1399,14 +1418,14 @@ int main()
 	//
 	ShopItems[1].Name = "Quelling Blade";
 	ShopItems[1].damage = 20;
-	ShopItems[1].cost = 25;
+	ShopItems[1].cost = 40;
 	ShopItems[1].LvlToEqp = 1;
 	ShopItems[1].ID = 1;
 	ShopItems[1].StageReq = 1;
 	ShopItems[1].Desc = "Low cost, good perfomace";
 	//
 	ShopItems[2].Name = "Ogre Axe";
-	ShopItems[2].cost = 50;
+	ShopItems[2].cost = 60;
 	ShopItems[2].damage = 25;
 	ShopItems[2].LvlToEqp = 2;
 	ShopItems[2].ID = 2;
@@ -1414,59 +1433,59 @@ int main()
 	ShopItems[2].Desc = "Stolen axe from ogre lair";
 	//
 	ShopItems[3].Name = "Katana";
-	ShopItems[3].cost = 75;
+	ShopItems[3].cost = 95;
 	ShopItems[3].damage = 30;
 	ShopItems[3].LvlToEqp = 2;
 	ShopItems[3].ID = 3;
-	ShopItems[3].StageReq = 2;
+	ShopItems[3].StageReq = 3;
 	ShopItems[3].Desc = "A samurai should always be prepared for death – whether his own or someone else's";
 	//
 	ShopItems[4].Name = "Desolator";
-	ShopItems[4].cost = 100;
-	ShopItems[4].damage = 35;
+	ShopItems[4].cost = 120;
+	ShopItems[4].damage = 40;
 	ShopItems[4].LvlToEqp = 4;
 	ShopItems[4].ID = 4;
-	ShopItems[4].StageReq = 3;
+	ShopItems[4].StageReq = 4;
 	ShopItems[4].Desc = "A wicked weapon";
 	//
 	ShopItems[5].Name = "Skull Basher";
 	ShopItems[5].cost = 125;
-	ShopItems[5].damage = 40;
+	ShopItems[5].damage = 50;
 	ShopItems[5].LvlToEqp = 5;
 	ShopItems[5].ID = 5;
-	ShopItems[5].StageReq = 4;
+	ShopItems[5].StageReq = 5;
 	ShopItems[5].Desc = "A feared weapon in the right hands, this maul's ability to shatter the defenses of its opponents should not be underestimated.";
 	//
 	ShopItems[6].Name = "Heavens Halberd";
-	ShopItems[6].cost = 125;
-	ShopItems[6].damage = 45;
+	ShopItems[6].cost = 180;
+	ShopItems[6].damage = 60;
 	ShopItems[6].LvlToEqp = 7;
 	ShopItems[6].ID = 6;
-	ShopItems[6].StageReq = 5;
+	ShopItems[6].StageReq = 6;
 	ShopItems[6].Desc = "This halberd moves with the speed of a smaller weapon, allowing the bearer to win duels that a heavy edge would not.";
 	//
 	ShopItems[7].Name = "Sacred Relic";
-	ShopItems[7].cost = 150;
-	ShopItems[7].damage = 50;
+	ShopItems[7].cost = 200;
+	ShopItems[7].damage = 85;
 	ShopItems[7].LvlToEqp = 8;
 	ShopItems[7].ID = 7;
-	ShopItems[7].StageReq = 6;
+	ShopItems[7].StageReq = 7;
 	ShopItems[7].Desc = "An ancient weapon that often turns the tides of war.";
 	//
 	ShopItems[8].Name = "Ethereal blade";
-	ShopItems[8].cost = 175;
-	ShopItems[8].damage = 55;
+	ShopItems[8].cost = 300;
+	ShopItems[8].damage = 135;
 	ShopItems[8].LvlToEqp = 10;
 	ShopItems[8].ID = 8;
-	ShopItems[8].StageReq = 7;
+	ShopItems[8].StageReq = 8;
 	ShopItems[8].Desc = "A flickering blade of a ghastly nature, it is capable of crushing damage to the enemy.";
 	//
 	ShopItems[9].Name = "Divine Rapier";
-	ShopItems[9].cost = 293;
-	ShopItems[9].damage = 70;
+	ShopItems[9].cost = 450;
+	ShopItems[9].damage = 325;
 	ShopItems[9].LvlToEqp = 12;
 	ShopItems[9].ID = 9;
-	ShopItems[9].StageReq = 8;
+	ShopItems[9].StageReq = 10;
 	ShopItems[9].Desc = "He is so powerful that even God cannot control him.";
 	// Swords // Swords // Swords // Swords // Swords // Swords
 
@@ -1501,12 +1520,12 @@ int main()
 	ShopItems[13].StageReq = 2;
 	ShopItems[13].Desc = "Gives you 3 armor (scales w/ lvl)";
 	//
-	ShopItems[14].Name = "Ring of Regen";
+	ShopItems[14].Name = "Combat Implant";
 	ShopItems[14].cost = 75;
 	ShopItems[14].ID = 14;
-	ShopItems[14].special = 5;
+	ShopItems[14].special = 0;
 	ShopItems[14].StageReq = 3;
-	ShopItems[14].Desc = "Heals you for 5 hp every 15 moves";
+	ShopItems[14].Desc = "Permanently grants an additional 10% to your health";
 	//
 	ShopItems[15].Name = "Focused Convergence";
 	ShopItems[15].cost = 150;
@@ -1524,20 +1543,20 @@ int main()
 	// Items
 	// ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS // ITEMS 
 	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
-	Player.coins = 15;
+	Player.coins = 25;
 	Player.hp = 100;
 	Player.exp = 0;
 	Player.forNextlvl = 10;
 	Player.lvl = 1;
-	Player.armor = 1;
+	Player.armor = 2;
 	Player.MaxHP = 100;
 	// PlayerStats // PlayerStats // PlayerStats // PlayerStats 
 	if (DebugMode == 1)
 		IsMusicOn = false;
 	if (DebugMode == 1)
-		system("title Roguelike v1.0.0 by xtclovver // DEBUG");
+		system("title Roguelike v1.0.3 by xtclovver // DEBUG");
 	else if (DebugMode == 0)
-		system("title Roguelike v1.0.0 by xtclovver // hakerhd93");
+		system("title Roguelike v1.0.3 by xtclovver");
 	ChangeCursorStatus(false);
 	////////////////////меняем размер консоли 
 	system("mode con cols=125 lines=35"); //размер окна, вывод нужного количества строк в консоль
@@ -1554,16 +1573,7 @@ int main()
 	cfi.FontFamily = FF_DONTCARE;
 	cfi.FontWeight = FW_NORMAL;
 	wcscpy_s(cfi.FaceName, L"Lucida Console");
-	//wcscpy_s(cfi.FaceName, L"Consolas");
 	SetCurrentConsoleFontEx(hout, false, &cfi);
-	//// Trying to fix win 11
-	//HWND hwnd = GetConsoleWindow();
-	//RECT rect = { 100, 100, 300, 500 };
-	//MoveWindow(hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
-	//HWND console = GetConsoleWindow();
-	//RECT r;
-	//GetWindowRect(console, &r); //stores the console's current dimensions
-	//MoveWindow(console, r.left, r.top, 1200, 500, TRUE); // 800 width, 100 height
 	///////////////////////////////////Меняем шрифт
 	typedef void (*TMenuOption)(); // typedef for defining a 'pointer to function' type.
 	int ItemCount = 5; // This variable holds the number of menu items.

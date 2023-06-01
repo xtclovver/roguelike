@@ -1,5 +1,7 @@
 ﻿  roguelike.cpp
-C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244: '/=': conversion from 'double' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(283,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1324,30): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1326,30): warning C4244: '/=': conversion from 'double' to 'unsigned int', possible loss of data
   Starting pass 1
   Processed /DEFAULTLIB:msvcprt
   Processed /DEFAULTLIB:uuid.lib
@@ -7,7 +9,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
   Processed /DEFAULTLIB:MSVCRT
   Processed /DEFAULTLIB:OLDNAMES
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
         Found __imp_SetConsoleScreenBufferSize
           Referenced in roguelike.obj
           Loaded kernel32.lib(KERNEL32.dll)
@@ -36,18 +38,18 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found KERNEL32_NULL_THUNK_DATA
           Referenced in kernel32.lib(KERNEL32.dll)
           Loaded kernel32.lib(KERNEL32.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
         Found _Mbrtowc
           Referenced in roguelike.obj
           Loaded msvcprt.lib(MSVCP140.dll)
@@ -213,7 +215,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found MSVCP140_NULL_THUNK_DATA
           Referenced in msvcprt.lib(MSVCP140.dll)
           Loaded msvcprt.lib(MSVCP140.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
         Found __imp_PlaySoundW
           Referenced in roguelike.obj
           Loaded winmm.lib(WINMM.dll)
@@ -223,7 +225,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found WINMM_NULL_THUNK_DATA
           Referenced in winmm.lib(WINMM.dll)
           Loaded winmm.lib(WINMM.dll)
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
         Found __security_check_cookie
           Referenced in roguelike.obj
           Loaded MSVCRT.lib(amdsecgs.obj)
@@ -355,8 +357,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found _guard_xfg_dispatch_icall_nop
           Referenced in MSVCRT.lib(guard_support.obj)
           Loaded MSVCRT.lib(guard_xfg_dispatch.obj)
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
         Found __CxxFrameHandler4
           Referenced in roguelike.obj
           Loaded vcruntime.lib(VCRUNTIME140_1.dll)
@@ -414,7 +416,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found VCRUNTIME140_NULL_THUNK_DATA
           Referenced in vcruntime.lib(VCRUNTIME140.dll)
           Loaded vcruntime.lib(VCRUNTIME140.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
         Found __imp_exit
           Referenced in roguelike.obj
           Loaded ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
@@ -599,7 +601,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found api-ms-win-crt-locale-l1-1-0_NULL_THUNK_DATA
           Referenced in ucrt.lib(api-ms-win-crt-locale-l1-1-0.dll)
           Loaded ucrt.lib(api-ms-win-crt-locale-l1-1-0.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
         Found __imp_RtlCaptureContext
           Referenced in MSVCRT.lib(gs_report.obj)
           Referenced in MSVCRT.lib(utility_desktop.obj)
@@ -654,85 +656,85 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found __imp_InitializeSListHead
           Referenced in MSVCRT.lib(tncleanup.obj)
           Loaded kernel32.lib(KERNEL32.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
         Found __scrt_stub_for_acrt_initialize
           Loaded MSVCRT.lib(ucrt_stubs.obj)
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Finished pass 1
       Discarded "const std::exception::`vftable'" (??_7exception@std@@6B@) from MSVCRT.lib(throw_bad_alloc.obj)
@@ -941,26 +943,27 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded __guard_xfg_table_dispatch_icall_fptr from MSVCRT.lib(guard_support.obj)
       Discarded __castguard_check_failure_os_handled_fptr from MSVCRT.lib(guard_support.obj)
   Generating code
-  2 of 263 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\fetis\source\repos\roguelike\systems.h(51): warning C4715: 'systems::IsEven': not all control paths return a value
+C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::ShopMenuItemsSpecs': not all control paths return a value
+  All 263 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
         Found __GSHandlerCheck
           Referenced in roguelike.obj
           Loaded MSVCRT.lib(gshandler.obj)
@@ -973,8 +976,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found _fltused
           Referenced in roguelike.obj
           Loaded MSVCRT.lib(fltused.obj)
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
         Found memcmp
           Referenced in roguelike.obj
           Loaded vcruntime.lib(VCRUNTIME140.dll)
@@ -984,88 +987,88 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
         Found memmove
           Referenced in roguelike.obj
           Loaded vcruntime.lib(VCRUNTIME140.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
         Found log10
           Referenced in roguelike.obj
           Loaded ucrt.lib(api-ms-win-crt-math-l1-1-0.dll)
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\ucrt\x64\ucrt.lib:
   Finished searching libraries
   Searching libraries
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\msvcprt.lib:
-      Searching C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\MSVCRT.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\kernel32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\msvcprt.lib:
+      Searching D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winmm.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\MSVCRT.lib:
         Found _load_config_used
           Loaded MSVCRT.lib(loadcfg.obj)
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib:
-      Searching C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\vcruntime.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib:
+      Searching D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\vcruntime.lib:
         Found __guard_memcpy_fptr
           Referenced in MSVCRT.lib(loadcfg.obj)
           Loaded vcruntime.lib(softmemtag.obj)
@@ -1074,45 +1077,45 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
    /v
    /x
    /fo
-   "C:\Users\HAKERH~1\AppData\Local\Temp\lnk{778E9093-7085-489C-8406-588FF1265A85}.tmp"
-   "C:\Users\HAKERH~1\AppData\Local\Temp\lnk{0F6D32E5-0F4B-43A3-AEF5-C671F2BD9C7E}.tmp"
+   "C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp"
+   "C:\Users\fetis\AppData\Local\Temp\lnk{BB6D60D0-1DFB-4CAD-BD02-7395DC68E57A}.tmp"
   Microsoft (R) Windows (R) Resource Compiler Version 10.0.10011.16384
   
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   
   Using codepage 1251 as default
-  Creating C:\Users\HAKERH~1\AppData\Local\Temp\lnk{778E9093-7085-489C-8406-588FF1265A85}.tmp
+  Creating C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp
   
   
-  C:\Users\HAKERH~1\AppData\Local\Temp\lnk{0F6D32E5-0F4B-43A3-AEF5-C671F2BD9C7E}.tmp.
+  C:\Users\fetis\AppData\Local\Temp\lnk{BB6D60D0-1DFB-4CAD-BD02-7395DC68E57A}.tmp.
   Writing 24:1,	lang:0x409,	size 381
   Invoking cvtres.exe:
    /machine:amd64
    /verbose
-   /out:"C:\Users\HAKERH~1\AppData\Local\Temp\lnk{B20FBB90-53C6-456E-AE42-1DCB792A9EBF}.tmp"
+   /out:"C:\Users\fetis\AppData\Local\Temp\lnk{83D500A7-F668-4D58-996E-3829E39305AD}.tmp"
    /readonly
    "x64\Release\roguelike.res"
-   "C:\Users\HAKERH~1\AppData\Local\Temp\lnk{778E9093-7085-489C-8406-588FF1265A85}.tmp"
-  Microsoft (R) Windows Resource To Object Converter Version 14.34.31937.0
+   "C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp"
+  Microsoft (R) Windows Resource To Object Converter Version 14.35.32217.1
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   adding resource. type:ICON, name:1, language:0x0409, flags:0x1010, size:165640
   adding resource. type:GROUP_ICON, name:102, language:0x0409, flags:0x1030, size:20
   adding resource. type:MANIFEST, name:1, language:0x0409, flags:0x30, size:381
   Unused libraries:
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib
-    C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib
-    C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64\OLDNAMES.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\user32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\gdi32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\winspool.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\comdlg32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\advapi32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\shell32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\ole32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\oleaut32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\uuid.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbc32.lib
+    D:\Windows Kits\10\lib\10.0.22000.0\um\x64\odbccp32.lib
+    D:\Program Files (x86)\VisualStudio\VC\Tools\MSVC\14.35.32215\lib\x64\OLDNAMES.lib
   Processing /ORDER options
       External code objects not listed in the /ORDER file:
           ??_C@_07ODLDJHKJ@Heals?3?5@		; roguelike.obj
@@ -1146,7 +1149,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           __imp___setusermatherr		; ucrt.lib(api-ms-win-crt-math-l1-1-0.dll)
           ??_R2type_info@@8		; MSVCRT.lib(std_type_info_static.obj)
           ??_C@_0CM@BEFLLOFK@please?5do?5not?5criticize?5this?5ga@		; roguelike.obj
-          ??_C@_0CN@FBDDHOPM@title?5Roguelike?5v1?40?40?5by?5xtclo@		; roguelike.obj
           ?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QEBADXZ		; msvcprt.lib(MSVCP140.dll)
           __real@3e800000		; roguelike.obj
           ??_C@_01JOAMLHOP@?9@		; roguelike.obj
@@ -1158,7 +1160,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           ??_R1A@?0A@EA@bad_alloc@std@@8		; roguelike.obj
           _initialize_narrow_environment		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __scrt_stub_for_acrt_thread_detach		; MSVCRT.lib(ucrt_stubs.obj)
-          ??_C@_07BGJBEPM@Stage?3?5@		; roguelike.obj
           __report_gsfailure		; MSVCRT.lib(gs_report.obj)
           ??_C@_0BG@KCGBICBM@Ctrl?5?$CL?5C?5?9?5?$CL150?5coins@		; roguelike.obj
           ReadNoFence64		; MSVCRT.lib(guard_support.obj)
@@ -1273,6 +1274,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           __imp_terminate		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __imp_malloc		; ucrt.lib(api-ms-win-crt-heap-l1-1-0.dll)
           ??_C@_0P@HGMPOFPE@Ring?5of?5Regen?4@		; roguelike.obj
+          ??_C@_0CN@JCNNHNE@title?5Roguelike?5v1?40?43?5by?5xtclo@		; roguelike.obj
           ??_C@_0BA@JFNIOLAK@string?5too?5long@		; roguelike.obj
           __real@3fc3333333333333		; roguelike.obj
           ??_R4exception@std@@6B@		; roguelike.obj
@@ -1283,6 +1285,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           ??_C@_0BC@BMFCEAFC@ShopItemsIDs?$FL1?$FN?3?5@		; roguelike.obj
           __imp___current_exception_context		; vcruntime.lib(VCRUNTIME140.dll)
           __imp_?_Getdays@_Locinfo@std@@QEBAPEBDXZ		; msvcprt.lib(MSVCP140.dll)
+          ??_C@_0DE@LGJJMHOE@Permanently?5grants?5an?5additiona@		; roguelike.obj
           _configthreadlocale		; ucrt.lib(api-ms-win-crt-locale-l1-1-0.dll)
           ?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHD@Z		; msvcprt.lib(MSVCP140.dll)
           IsProcessorFeaturePresent		; kernel32.lib(KERNEL32.dll)
@@ -1296,7 +1299,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           free		; ucrt.lib(api-ms-win-crt-heap-l1-1-0.dll)
           ??_C@_0BH@POHPPLEM@Ctrl?5?$CL?5F?5?9?5Full?5health@		; roguelike.obj
           __imp_IsDebuggerPresent		; kernel32.lib(KERNEL32.dll)
-          ??_C@_0DB@CIJOHFCA@title?5Roguelike?5v1?40?40?5by?5xtclo@		; roguelike.obj
           __imp_GetSystemTimeAsFileTime		; kernel32.lib(KERNEL32.dll)
           ??_R1A@?0A@EA@bad_array_new_length@std@@8		; roguelike.obj
           ??_C@_0GP@LEIMPLJD@The?5first?5item?5slot?5can?5ONLY?5ha@		; roguelike.obj
@@ -1356,7 +1358,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           __imp_system		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           ??_C@_0O@BBOOKME@Skull?5Basher?4@		; roguelike.obj
           ??_C@_09COEBKBDB@Seed?5run?4@		; roguelike.obj
-          ??_C@_0CC@GBELLHCC@Heals?5you?5for?55?5hp?5every?515?5mov@		; roguelike.obj
           _get_startup_commit_mode		; MSVCRT.lib(commit_mode.obj)
           GetCurrentProcessId		; kernel32.lib(KERNEL32.dll)
           __imp___p__commode		; ucrt.lib(api-ms-win-crt-stdio-l1-1-0.dll)
@@ -1386,7 +1387,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           _set_app_type		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           ??_C@_07POLJKKMO@down?3?5?8@		; roguelike.obj
           __std_exception_destroy		; vcruntime.lib(VCRUNTIME140.dll)
-          ??_C@_0N@JFADHBGC@Difficulty?3?5@		; roguelike.obj
           __imp_?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAA_JPEBD_J@Z		; msvcprt.lib(MSVCP140.dll)
           _get_startup_file_mode		; MSVCRT.lib(file_mode.obj)
           __scrt_stub_for_is_c_termination_complete		; MSVCRT.lib(ucrt_stubs.obj)
@@ -1433,6 +1433,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           _execute_onexit_table		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __dyn_tls_dtor_callback
           ??_C@_0NC@HANKACHC@Map?5generation?5seed?5?$CIseed?$CJ?5?9?5if@		; roguelike.obj
+          ??_C@_0CE@BMGPCALJ@title?5Roguelike?5v1?40?43?5by?5xtclo@		; roguelike.obj
           __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAVios_base@1@AEAV21@@Z@Z		; msvcprt.lib(MSVCP140.dll)
           __scrt_stub_for_acrt_thread_attach		; MSVCRT.lib(ucrt_stubs.obj)
           __real@3fedc28f5c28f5c3		; roguelike.obj
@@ -1601,9 +1602,11 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           __imp__Thrd_sleep		; msvcprt.lib(MSVCP140.dll)
           GetModuleHandleW		; kernel32.lib(KERNEL32.dll)
           __xmm@000000000000000f0000000000000000		; roguelike.obj
+          ??_C@_0P@EJIPNJBN@Combat?5Implant@		; roguelike.obj
           ?_Getmonths@_Locinfo@std@@QEBAPEBDXZ		; msvcprt.lib(MSVCP140.dll)
           __imp__initialize_onexit_table		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           ?_Xlength_error@std@@YAXPEBD@Z		; msvcprt.lib(MSVCP140.dll)
+          ??_C@_07HFEMGHOK@coins?3?5@		; roguelike.obj
           ??_C@_0GP@GNIEFPPP@E?5?9?5This?5is?5an?5enemy?0?5if?5you?5ap@		; roguelike.obj
           ??_C@_03LCPHGAHP@cls@		; roguelike.obj
           __imp__set_new_mode		; ucrt.lib(api-ms-win-crt-heap-l1-1-0.dll)
@@ -1641,18 +1644,21 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           __imp__set_fmode		; ucrt.lib(api-ms-win-crt-stdio-l1-1-0.dll)
           ??_C@_0L@FELNJAKP@Cyan?5crown@		; roguelike.obj
           ??_7type_info@@6B@		; MSVCRT.lib(std_type_info_static.obj)
+          ??_C@_0N@CGHNDKJH@difficulty?3?5@		; roguelike.obj
           ??_C@_0BE@FNMDDGAM@You?5died?$CB?5At?5stage?5@		; roguelike.obj
+          __xmm@0000000a000000000000006400000019		; roguelike.obj
           __scrt_dllmain_exception_filter		; MSVCRT.lib(utility.obj)
           ??_C@_0IM@PIPAEHJO@P?5?9?5It?8s?5you?0?5the?5player?$CB?5You?5c@		; roguelike.obj
           ??_R2bad_array_new_length@std@@8		; roguelike.obj
-          ??_C@_0O@MPHCGJIP@Ring?5of?5Regen@		; roguelike.obj
           _configure_narrow_argv		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __xmm@ffffffffffffffffffffffff00000000		; roguelike.obj
           __imp_?_W_Getdays@_Locinfo@std@@QEBAPEBGXZ		; msvcprt.lib(MSVCP140.dll)
+          __real@4010000000000000		; roguelike.obj
           __scrt_initialize_crt		; MSVCRT.lib(utility.obj)
           ??_C@_0EK@KAKBODFB@coins?5?9?5For?5coins?5you?5can?5buy?5w@		; roguelike.obj
           ??_R3bad_array_new_length@std@@8		; roguelike.obj
           ??_C@_01GOHFPIOK@m@		; roguelike.obj
+          ??_C@_07PIBPHGKK@stage?3?5@		; roguelike.obj
           __castguard_check_failure_fastfail		; MSVCRT.lib(guard_support.obj)
           ??1type_info@@UEAA@XZ		; MSVCRT.lib(std_type_info_static.obj)
           __imp_GetModuleHandleW		; kernel32.lib(KERNEL32.dll)
@@ -1687,26 +1693,32 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           ?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QEAAXH_N@Z		; msvcprt.lib(MSVCP140.dll)
           __imp___std_exception_destroy		; vcruntime.lib(VCRUNTIME140.dll)
   Finished processing /ORDER options
+      Discarded "`string'" (??_C@_0BO@LCIJDKIL@?1?1?5DEBUG?5?1?1?5DEBUG?5?1?1?5DEBUG?5?1?1@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BB@HJGCKIAL@ShopMenuChoise?3?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BC@CBDCGJOC@ShopItemsIDs?$FL0?$FN?3?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BC@BMFCEAFC@ShopItemsIDs?$FL1?$FN?3?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BC@FLPCDKIC@ShopItemsIDs?$FL2?$FN?3?5@) from roguelike.obj
       Discarded "`string'" (??_C@_01GBGANLPD@0@) from roguelike.obj
       Discarded "`string'" (??_C@_0BB@CPKLLDGB@There?5is?5nothing@) from roguelike.obj
-      Discarded "`string'" (??_C@_0DC@INNKCEPK@hp?5?9?5This?5your?5health?5point?0?5if@) from roguelike.obj
-      Discarded "`string'" (??_C@_0EK@KAKBODFB@coins?5?9?5For?5coins?5you?5can?5buy?5w@) from roguelike.obj
-      Discarded "`string'" (??_C@_0GM@KLOFONEP@Difficulty?5?9?5The?5higher?5the?5dif@) from roguelike.obj
-      Discarded "`string'" (??_C@_0EO@MMGNPPC@xp?5?9?5For?5killing?5enemies?5you?5ge@) from roguelike.obj
-      Discarded "`string'" (??_C@_0GJ@MNHDMCDO@lv?5?$CIlevel?0?5lvl?$CJ?5?9?5For?5each?5leve@) from roguelike.obj
-      Discarded "`string'" (??_C@_0IH@INBNBBEE@Stage?5?9?5After?5completing?5the?5te@) from roguelike.obj
-      Discarded "`string'" (??_C@_0GP@LEIMPLJD@The?5first?5item?5slot?5can?5ONLY?5ha@) from roguelike.obj
-      Discarded "`string'" (??_C@_0IM@PIPAEHJO@P?5?9?5It?8s?5you?0?5the?5player?$CB?5You?5c@) from roguelike.obj
-      Discarded "`string'" (??_C@_0EN@ECBHGLLE@The?5empty?5space?5?9?5is?5the?5floor?0@) from roguelike.obj
-      Discarded "`string'" (??_C@_0FE@EDPKDB@?$CK?5?9?5This?5is?5a?5chest?0?5by?5pressin@) from roguelike.obj
-      Discarded "`string'" (??_C@_0CK@BEOPBMFO@?$CD?5?9?5It?8s?5a?5wall?0?5you?5can?8t?5go?5t@) from roguelike.obj
-      Discarded "`string'" (??_C@_0GP@GNIEFPPP@E?5?9?5This?5is?5an?5enemy?0?5if?5you?5ap@) from roguelike.obj
-      Discarded "`string'" (??_C@_0IK@LPEPECBF@$?5?9?5This?5is?5a?5store?0?5you?5can?5op@) from roguelike.obj
-      Discarded "`string'" (??_C@_0HB@OMHGBNFK@?$EA?5?9?5This?5is?5an?5event?5teleport?0?5@) from roguelike.obj
-      Discarded "`string'" (??_C@_0NC@HANKACHC@Map?5generation?5seed?5?$CIseed?$CJ?5?9?5if@) from roguelike.obj
-      Discarded "`string'" (??_C@_0HB@GPGDNHCO@?7Last?5Action?5?9?5this?5line?5will?5t@) from roguelike.obj
-      Discarded "`string'" (??_C@_09FIMCIGLP@Tutorial?4@) from roguelike.obj
-      Discarded "`string'" (??_C@_0DB@CIJOHFCA@title?5Roguelike?5v1?40?40?5by?5xtclo@) from roguelike.obj
+      Discarded "`string'" (??_C@_03MMEIOMHE@x?3?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_03HEPEILBB@y?3?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_01GEODFPGF@?8@) from roguelike.obj
+      Discarded "`string'" (??_C@_05JBBOMOKB@up?3?5?8@) from roguelike.obj
+      Discarded "`string'" (??_C@_07POLJKKMO@down?3?5?8@) from roguelike.obj
+      Discarded "`string'" (??_C@_07GLPGLACI@left?3?5?8@) from roguelike.obj
+      Discarded "`string'" (??_C@_08NDPNOOIB@right?3?5?8@) from roguelike.obj
+      Discarded "`string'" (??_C@_0P@MOIBHOAL@F2?5?9?5Open?5shop@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BK@PAEOMBC@Ctrl?5?$CL?5A?5?9?5reGenerate?5map@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BO@JBNJJMIA@Ctrl?5?$CL?5B?5?9?5Refresh?5shop?5items@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BG@KCGBICBM@Ctrl?5?$CL?5C?5?9?5?$CL150?5coins@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BC@IDFBKEEL@Ctrl?5?$CL?5D?5?9?5?$CL5?5exp@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BC@EIKPAGEA@Ctrl?5?$CL?5E?5?9?5?$CL1?5lvl@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BH@POHPPLEM@Ctrl?5?$CL?5F?5?9?5Full?5health@) from roguelike.obj
+      Discarded "`string'" (??_C@_0CG@NKNJAKBN@Ctrl?5?$CL?5G?5?9?5Force?5start?5teleport@) from roguelike.obj
+      Discarded "`string'" (??_C@_0CL@NJAPAPNL@Ctrl?5?$CL?5H?5?9?5Force?5re?9render?5map?5@) from roguelike.obj
+      Discarded "`string'" (??_C@_0BG@JMMGPHCE@Ctrl?5?$CL?5i?5?9?5Next?5stage@) from roguelike.obj
+      Discarded "`string'" (??_C@_0M@HHAKBBEB@Debug?5help?4@) from roguelike.obj
+      Discarded "`string'" (??_C@_0CN@JCNNHNE@title?5Roguelike?5v1?40?43?5by?5xtclo@) from roguelike.obj
       Discarded "`string'" (??_C@_0N@LPFKKEBD@?3AM?3am?3PM?3pm@) from roguelike.obj
       Discarded "`string'" (??_C@_1BK@MHIKGOKE@?$AA?3?$AAA?$AAM?$AA?3?$AAa?$AAm?$AA?3?$AAP?$AAM?$AA?3?$AAp?$AAm@) from roguelike.obj
       Discarded "struct std::_Fake_allocator const std::_Fake_alloc" (?_Fake_alloc@std@@3U_Fake_allocator@1@B) from roguelike.obj
@@ -1733,8 +1745,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded $unwind$?IsNothingDisturbingThePlayer@player@@YA_NHHDQEAY0FN@H@Z from roguelike.obj
       Discarded $unwind$?ShopMenuItems@player@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
       Discarded $unwind$?SettingsMenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
-      Discarded $unwind$?MenuStartTutorial@@YAXXZ from roguelike.obj
       Discarded $unwind$?OpenChest@@YAXHH@Z from roguelike.obj
+      Discarded $unwind$?DebugHelp@@YAXXZ from roguelike.obj
       Discarded $unwind$?MenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
       Discarded $unwind$??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@AEBV01@@Z from roguelike.obj
       Discarded $unwind$??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@$$QEAV01@@Z from roguelike.obj
@@ -1768,9 +1780,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded $unwind$??$sleep_until@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@this_thread@std@@YAXAEBV?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@1@@Z from roguelike.obj
       Discarded $unwind$??$_Allocate_manually_vector_aligned@U_Default_allocate_traits@std@@@std@@YAPEAX_K@Z from roguelike.obj
       Discarded $unwind$??$_Traits_equal@U?$char_traits@D@std@@@std@@YA_NQEBD_K01@Z from roguelike.obj
-      Discarded $unwind$?_Get_all_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAIXZ from roguelike.obj
-      Discarded $unwind$??R?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z from roguelike.obj
-      Discarded $unwind$?_Get_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAAIXZ from roguelike.obj
+      Discarded $unwind$??R?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z from roguelike.obj
+      Discarded $unwind$?_Get_random_product@?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAA_KII@Z from roguelike.obj
       Discarded $unwind$?_Refill_lower@?$mersenne_twister@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@@std@@IEAAXXZ from roguelike.obj
       Discarded $unwind$??$_Construct@$00PEAD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXQEAD_K@Z from roguelike.obj
       Discarded $chain$0$??$_Construct@$00PEAD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXQEAD_K@Z from roguelike.obj
@@ -1827,9 +1838,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded $pdata$2$??$_Construct@$00PEAD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXQEAD_K@Z from roguelike.obj
       Discarded $pdata$3$??$_Construct@$00PEAD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXQEAD_K@Z from roguelike.obj
       Discarded $pdata$?_Refill_lower@?$mersenne_twister@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@@std@@IEAAXXZ from roguelike.obj
-      Discarded $pdata$?_Get_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAAIXZ from roguelike.obj
-      Discarded $pdata$??R?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z from roguelike.obj
-      Discarded $pdata$?_Get_all_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAIXZ from roguelike.obj
+      Discarded $pdata$?_Get_random_product@?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAA_KII@Z from roguelike.obj
+      Discarded $pdata$??R?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z from roguelike.obj
       Discarded $pdata$??$_Traits_equal@U?$char_traits@D@std@@@std@@YA_NQEBD_K01@Z from roguelike.obj
       Discarded $pdata$??$_Allocate_manually_vector_aligned@U_Default_allocate_traits@std@@@std@@YAPEAX_K@Z from roguelike.obj
       Discarded $pdata$??$sleep_until@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@this_thread@std@@YAXAEBV?$time_point@Usteady_clock@chrono@std@@V?$duration@_JU?$ratio@$00$0DLJKMKAA@@std@@@23@@chrono@1@@Z from roguelike.obj
@@ -1860,8 +1870,8 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded $pdata$??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@$$QEAV01@@Z from roguelike.obj
       Discarded $pdata$??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@AEBV01@@Z from roguelike.obj
       Discarded $pdata$?MenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
+      Discarded $pdata$?DebugHelp@@YAXXZ from roguelike.obj
       Discarded $pdata$?OpenChest@@YAXHH@Z from roguelike.obj
-      Discarded $pdata$?MenuStartTutorial@@YAXXZ from roguelike.obj
       Discarded $pdata$?SettingsMenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
       Discarded $pdata$?ShopMenuItems@player@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ from roguelike.obj
       Discarded $pdata$?IsNothingDisturbingThePlayer@player@@YA_NHHDQEAY0FN@H@Z from roguelike.obj
@@ -1987,32 +1997,32 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded "private: class std::allocator<char> & __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Getal(void)" (?_Getal@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV?$allocator@D@2@XZ) from roguelike.obj
       Discarded "public: class std::allocator<char> & __cdecl std::_Compressed_pair<class std::allocator<char>,class std::_String_val<struct std::_Simple_types<char> >,1>::_Get_first(void)" (?_Get_first@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAAAEAV?$allocator@D@2@XZ) from roguelike.obj
       Discarded "public: static char * __cdecl std::_Char_traits<char,int>::move(char * const,char const * const,unsigned __int64)" (?move@?$_Char_traits@DH@std@@SAPEADQEADQEBD_K@Z) from roguelike.obj
-      Discarded "public: __cdecl std::_Compressed_pair<class std::allocator<char>,class std::_String_val<struct std::_Simple_types<char> >,1>::~_Compressed_pair<class std::allocator<char>,class std::_String_val<struct std::_Simple_types<char> >,1>(void)" (??1?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@XZ) from roguelike.obj
-      Discarded "public: __cdecl std::_String_val<struct std::_Simple_types<char> >::~_String_val<struct std::_Simple_types<char> >(void)" (??1?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ) from roguelike.obj
-      Discarded "private: void __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Tidy_init(void)" (?_Tidy_init@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXXZ) from roguelike.obj
-      Discarded "public: void __cdecl std::_String_val<struct std::_Simple_types<char> >::_Activate_SSO_buffer(void)" (?_Activate_SSO_buffer@?$_String_val@U?$_Simple_types@D@std@@@std@@QEAAXXZ) from roguelike.obj
       Discarded "public: static void __cdecl std::_Narrow_char_traits<char,int>::assign(char &,char const &)" (?assign@?$_Narrow_char_traits@DH@std@@SAXAEADAEBD@Z) from roguelike.obj
       Discarded "public: static void __cdecl std::_Char_traits<char,int>::assign(char &,char const &)" (?assign@?$_Char_traits@DH@std@@SAXAEADAEBD@Z) from roguelike.obj
       Discarded "char * __cdecl std::addressof<char>(char &)" (??$addressof@D@std@@YAPEADAEAD@Z) from roguelike.obj
       Discarded "char * __cdecl std::construct_at<char,char const &,0>(char * const,char const &)" (??$construct_at@DAEBD$0A@@std@@YAPEADQEADAEBD@Z) from roguelike.obj
       Discarded "void * __cdecl std::_Voidify_iter<char *>(char *)" (??$_Voidify_iter@PEAD@std@@YAPEAXPEAD@Z) from roguelike.obj
       Discarded "char const & __cdecl std::forward<char const &>(char const &)" (??$forward@AEBD@std@@YAAEBDAEBD@Z) from roguelike.obj
+      Discarded "public: __cdecl std::_Compressed_pair<class std::allocator<char>,class std::_String_val<struct std::_Simple_types<char> >,1>::~_Compressed_pair<class std::allocator<char>,class std::_String_val<struct std::_Simple_types<char> >,1>(void)" (??1?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@XZ) from roguelike.obj
+      Discarded "public: __cdecl std::_String_val<struct std::_Simple_types<char> >::~_String_val<struct std::_Simple_types<char> >(void)" (??1?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ) from roguelike.obj
+      Discarded "private: void __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Tidy_init(void)" (?_Tidy_init@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXXZ) from roguelike.obj
+      Discarded "public: void __cdecl std::_String_val<struct std::_Simple_types<char> >::_Activate_SSO_buffer(void)" (?_Activate_SSO_buffer@?$_String_val@U?$_Simple_types@D@std@@@std@@QEAAXXZ) from roguelike.obj
       Discarded "public: __cdecl Color::Modifier::Modifier(enum Color::Code)" (??0Modifier@Color@@QEAA@W4Code@1@@Z) from roguelike.obj
       Discarded "class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl Color::operator<<(class std::basic_ostream<char,struct std::char_traits<char> > &,class Color::Modifier const &)" (??6Color@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AEAV12@AEBVModifier@0@@Z) from roguelike.obj
       Discarded "unsigned int __cdecl systems::GetNumberOfDigits(unsigned int)" (?GetNumberOfDigits@systems@@YAII@Z) from roguelike.obj
       Discarded "void __cdecl systems::ChangeCursorStatus(bool)" (?ChangeCursorStatus@systems@@YAX_N@Z) from roguelike.obj
+      Discarded "bool __cdecl systems::IsEven(int)" (?IsEven@systems@@YA_NH@Z) from roguelike.obj
       Discarded "int __cdecl systems::WhereX(int,int,int,bool,bool)" (?WhereX@systems@@YAHHHH_N0@Z) from roguelike.obj
       Discarded "int __cdecl systems::WhereY(int,int,int,bool,bool)" (?WhereY@systems@@YAHHHH_N0@Z) from roguelike.obj
       Discarded "void __cdecl systems::difficultyIncrease(void)" (?difficultyIncrease@systems@@YAXXZ) from roguelike.obj
       Discarded "bool __cdecl player::IsNothingDisturbingThePlayer(int,int,char,int (* const)[93])" (?IsNothingDisturbingThePlayer@player@@YA_NHHDQEAY0FN@H@Z) from roguelike.obj
       Discarded "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * __cdecl player::ShopMenuItems(void)" (?ShopMenuItems@player@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) from roguelike.obj
-      Discarded "void __cdecl UpgradeLvl(void)" (?UpgradeLvl@@YAXXZ) from roguelike.obj
       Discarded "int __cdecl enemyCount(int,int,bool)" (?enemyCount@@YAHHH_N@Z) from roguelike.obj
       Discarded "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * __cdecl SettingsMenuItems(void)" (?SettingsMenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) from roguelike.obj
       Discarded "void __cdecl InitializationEnemyStats(int)" (?InitializationEnemyStats@@YAXH@Z) from roguelike.obj
       Discarded "int __cdecl CheckTPZone(int,int)" (?CheckTPZone@@YAHHH@Z) from roguelike.obj
-      Discarded "void __cdecl MenuStartTutorial(void)" (?MenuStartTutorial@@YAXXZ) from roguelike.obj
       Discarded "void __cdecl OpenChest(int,int)" (?OpenChest@@YAXHH@Z) from roguelike.obj
+      Discarded "void __cdecl DebugHelp(void)" (?DebugHelp@@YAXXZ) from roguelike.obj
       Discarded "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > * __cdecl MenuItems(void)" (?MenuItems@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) from roguelike.obj
       Discarded "public: __cdecl std::uniform_int_distribution<int>::uniform_int_distribution<int>(int,int)" (??0?$uniform_int_distribution@H@std@@QEAA@HH@Z) from roguelike.obj
       Discarded "public: __cdecl std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253>::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253>(unsigned int)" (??0?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@QEAA@I@Z) from roguelike.obj
@@ -2105,13 +2115,12 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Discarded "char * & __cdecl std::forward<char * &>(char * &)" (??$forward@AEAPEAD@std@@YAAEAPEADAEAPEAD@Z) from roguelike.obj
       Discarded "char * * __cdecl std::construct_at<char *,char * &,0>(char * * const,char * &)" (??$construct_at@PEADAEAPEAD$0A@@std@@YAPEAPEADQEAPEADAEAPEAD@Z) from roguelike.obj
       Discarded "bool __cdecl std::_Traits_equal<struct std::char_traits<char> >(char const * const,unsigned __int64,char const * const,unsigned __int64)" (??$_Traits_equal@U?$char_traits@D@std@@@std@@YA_NQEBD_K01@Z) from roguelike.obj
-      Discarded "public: unsigned int __cdecl std::_Rng_from_urng<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Get_all_bits(void)" (?_Get_all_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAIXZ) from roguelike.obj
-      Discarded "public: unsigned int __cdecl std::_Rng_from_urng<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::operator()(unsigned int)" (??R?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z) from roguelike.obj
-      Discarded "public: __cdecl std::_Rng_from_urng<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Rng_from_urng<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >(class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> &)" (??0?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAA@AEAV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@1@@Z) from roguelike.obj
+      Discarded "public: unsigned int __cdecl std::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Get_all_bits(void)" (?_Get_all_bits@?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAIXZ) from roguelike.obj
+      Discarded "public: unsigned int __cdecl std::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::operator()(unsigned int)" (??R?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAAII@Z) from roguelike.obj
+      Discarded "public: __cdecl std::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >(class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> &)" (??0?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@QEAA@AEAV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@1@@Z) from roguelike.obj
       Discarded "private: static unsigned int __cdecl std::uniform_int<int>::_Adjust(unsigned int)" (?_Adjust@?$uniform_int@H@std@@CAII@Z) from roguelike.obj
-      Discarded "private: unsigned int __cdecl std::_Rng_from_urng<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Get_bits(void)" (?_Get_bits@?$_Rng_from_urng@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAAIXZ) from roguelike.obj
-      Discarded "public: static unsigned int __cdecl std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253>::max(void)" (?max@?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@SAIXZ) from roguelike.obj
-      Discarded "public: static unsigned int __cdecl std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253>::min(void)" (?min@?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@SAIXZ) from roguelike.obj
+      Discarded "private: unsigned __int64 __cdecl std::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Get_random_product(unsigned int,unsigned int)" (?_Get_random_product@?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAA_KII@Z) from roguelike.obj
+      Discarded "private: unsigned int __cdecl std::_Rng_from_urng_v2<unsigned int,class std::mersenne_twister_engine<unsigned int,32,624,397,31,2567483615,11,4294967295,7,2636928640,15,4022730752,18,1812433253> >::_Get_bits(void)" (?_Get_bits@?$_Rng_from_urng_v2@IV?$mersenne_twister_engine@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$0PPPPPPPP@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@$0GMAHIJGF@@std@@@std@@AEAAIXZ) from roguelike.obj
       Discarded "protected: void __cdecl std::mersenne_twister<unsigned int,32,624,397,31,2567483615,11,7,2636928640,15,4022730752,18>::_Refill_upper(void)" (?_Refill_upper@?$mersenne_twister@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@@std@@IEAAXXZ) from roguelike.obj
       Discarded "protected: void __cdecl std::mersenne_twister<unsigned int,32,624,397,31,2567483615,11,7,2636928640,15,4022730752,18>::_Refill_lower(void)" (?_Refill_lower@?$mersenne_twister@I$0CA@$0CHA@$0BIN@$0BP@$0JJAILANP@$0L@$06$0JNCMFGIA@$0P@$0OPMGAAAA@$0BC@@std@@IEAAXXZ) from roguelike.obj
       Discarded "private: void __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Construct<1,char *>(char * const,unsigned __int64)" (??$_Construct@$00PEAD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXQEAD_K@Z) from roguelike.obj
@@ -2282,11 +2291,6 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           main$catch$0 from roguelike.obj
           "int `void __cdecl MenuSettings(void)'::`1'::catch$0" (?catch$0@?0??MenuSettings@@YAXXZ@4HA) from roguelike.obj
       Selected symbol:
-          "public: virtual void * __cdecl std::exception::`scalar deleting destructor'(unsigned int)" (??_Gexception@std@@UEAAPEAXI@Z) from roguelike.obj
-      Replaced symbol(s):
-          "public: virtual void * __cdecl std::bad_array_new_length::`scalar deleting destructor'(unsigned int)" (??_Gbad_array_new_length@std@@UEAAPEAXI@Z) from roguelike.obj
-          "public: virtual void * __cdecl std::bad_alloc::`scalar deleting destructor'(unsigned int)" (??_Gbad_alloc@std@@UEAAPEAXI@Z) from roguelike.obj
-      Selected symbol:
           "int `class catch$4::basic_ostream<char,struct std::char_traits<char> > & __cdecl std::operator<<<struct std::char_traits<char> >(class catch$4::std &,char const *)'::`1'::catch$4" (?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z@4HA) from roguelike.obj
       Replaced symbol(s):
           "int `class catch$4::basic_ostream<char,struct std::char_traits<char> > & __cdecl std::operator<<<struct std::char_traits<char> >(class catch$4::std &,char)'::`1'::catch$4" (?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@D@Z@4HA) from roguelike.obj
@@ -2300,6 +2304,11 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Replaced symbol(s):
           "void __cdecl __scrt_throw_std_bad_array_new_length(void)" (?__scrt_throw_std_bad_array_new_length@@YAXXZ) from MSVCRT.lib(throw_bad_alloc.obj)
       Selected symbol:
+          "public: virtual void * __cdecl std::exception::`scalar deleting destructor'(unsigned int)" (??_Gexception@std@@UEAAPEAXI@Z) from roguelike.obj
+      Replaced symbol(s):
+          "public: virtual void * __cdecl std::bad_array_new_length::`scalar deleting destructor'(unsigned int)" (??_Gbad_array_new_length@std@@UEAAPEAXI@Z) from roguelike.obj
+          "public: virtual void * __cdecl std::bad_alloc::`scalar deleting destructor'(unsigned int)" (??_Gbad_alloc@std@@UEAAPEAXI@Z) from roguelike.obj
+      Selected symbol:
           $unwind$?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z@4HA from roguelike.obj
       Replaced symbol(s):
           $unwind$?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@D@Z@4HA from roguelike.obj
@@ -2309,69 +2318,66 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Replaced symbol(s):
           $unwind$?__scrt_throw_std_bad_array_new_length@@YAXXZ from MSVCRT.lib(throw_bad_alloc.obj)
           $unwind$?__scrt_throw_std_bad_alloc@@YAXXZ from MSVCRT.lib(throw_bad_alloc.obj)
-          $unwind$?GoToTheNextStage@@YAXXZ from roguelike.obj
-      Selected symbol:
-          $unwind$?_Xlen_string@std@@YAXXZ from roguelike.obj
-      Replaced symbol(s):
-          $unwind$?MenuSeedRun@@YAXXZ from roguelike.obj
-          $unwind$?pre_cpp_initialization@@YAXXZ from MSVCRT.lib(exe_main.obj)
-          $unwind$?post_pgo_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
-          $unwind$?ExitOption@@YAXXZ from roguelike.obj
-          $unwind$atexit from MSVCRT.lib(utility.obj)
-          $unwind$?PlayerDeath@@YAXXZ from roguelike.obj
-          $unwind$?ShopBuyConsume@player@@YAXXZ from roguelike.obj
-          $unwind$?ShopBuyWeapon@player@@YAXXZ from roguelike.obj
-          $unwind$__scrt_acquire_startup_lock from MSVCRT.lib(utility.obj)
-          $unwind$??__FCurrentState@variableKeeper@@YAXXZ from roguelike.obj
-          $unwind$__GSHandlerCheck from MSVCRT.lib(gshandler.obj)
-          $unwind$__scrt_initialize_default_local_stdio_options from MSVCRT.lib(default_local_stdio_options.obj)
-          $unwind$__scrt_is_managed_app from MSVCRT.lib(utility_desktop.obj)
-          $unwind$??__FCurrentState2@variableKeeper@@YAXXZ from roguelike.obj
-          $unwind$?MenuStart@@YAXXZ from roguelike.obj
-          $unwind$mainCRTStartup from MSVCRT.lib(exe_main.obj)
-      Selected symbol:
-          $unwind$?fin$0@?0???_M@YAXPEAX_K1P6AX0@Z@Z@4HA from MSVCRT.lib(ehvecdtr.obj)
-      Replaced symbol(s):
-          $unwind$?fin$0@?0???_L@YAXPEAX_K1P6AX0@Z2@Z@4HA from MSVCRT.lib(ehvecctr.obj)
-          $unwind$?filt$0@?0??__scrt_common_main_seh@@YAHXZ@4HA from MSVCRT.lib(exe_main.obj)
       Selected symbol:
           $unwind$??0exception@std@@QEAA@AEBV01@@Z from roguelike.obj
       Replaced symbol(s):
-          $unwind$__scrt_uninitialize_crt from MSVCRT.lib(utility.obj)
-          $unwind$__scrt_initialize_onexit_tables from MSVCRT.lib(utility.obj)
-          $unwind$?pre_c_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
-          $unwind$__scrt_release_startup_lock from MSVCRT.lib(utility.obj)
-          $unwind$?ShopBuyItem@player@@YAXXZ from roguelike.obj
-          $unwind$??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z from roguelike.obj
-          $unwind$_onexit from MSVCRT.lib(utility.obj)
-          $unwind$__scrt_initialize_crt from MSVCRT.lib(utility.obj)
-          $unwind$?MenuCredits@@YAXXZ from roguelike.obj
-          $unwind$??_Gtype_info@@UEAAPEAXI@Z from MSVCRT.lib(std_type_info_static.obj)
           $unwind$??1ItemsSpecifications@variableKeeper@@QEAA@XZ from roguelike.obj
-          $unwind$??0bad_array_new_length@std@@QEAA@AEBV01@@Z from roguelike.obj
-          $unwind$??2@YAPEAX_K@Z from MSVCRT.lib(new_scalar.obj)
-          $unwind$?DebugHelp@@YAXXZ from roguelike.obj
-          $unwind$??0bad_alloc@std@@QEAA@AEBV01@@Z from roguelike.obj
+          $unwind$__scrt_initialize_onexit_tables from MSVCRT.lib(utility.obj)
+          $unwind$__scrt_uninitialize_crt from MSVCRT.lib(utility.obj)
+          $unwind$__scrt_initialize_crt from MSVCRT.lib(utility.obj)
           $unwind$??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ from roguelike.obj
+          $unwind$_onexit from MSVCRT.lib(utility.obj)
+          $unwind$__scrt_release_startup_lock from MSVCRT.lib(utility.obj)
+          $unwind$??2@YAPEAX_K@Z from MSVCRT.lib(new_scalar.obj)
+          $unwind$??0bad_alloc@std@@QEAA@AEBV01@@Z from roguelike.obj
+          $unwind$?pre_c_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
           $unwind$__raise_securityfailure from MSVCRT.lib(gs_report.obj)
+          $unwind$?MenuCredits@@YAXXZ from roguelike.obj
+          $unwind$??0bad_array_new_length@std@@QEAA@AEBV01@@Z from roguelike.obj
+          $unwind$??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z from roguelike.obj
+          $unwind$??_Gtype_info@@UEAAPEAXI@Z from MSVCRT.lib(std_type_info_static.obj)
       Selected symbol:
           $stateUnwindMap$?OpenShop@player@@YAXXZ from roguelike.obj
       Replaced symbol(s):
-          $stateUnwindMap$?MenuSettings@@YAXXZ from roguelike.obj
           $stateUnwindMap$main from roguelike.obj
+          $stateUnwindMap$?MenuSettings@@YAXXZ from roguelike.obj
           $stateUnwindMap$?Gameplay@@YAXQEAY0FN@H@Z from roguelike.obj
       Selected symbol:
           $unwind$?catch$2@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
       Replaced symbol(s):
-          $unwind$?catch$0@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$0@?0??Gameplay@@YAXQEAY0FN@H@Z@4HA from roguelike.obj
           $unwind$?catch$1@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
+          $unwind$?catch$0@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$0@?0??MenuSettings@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$1@?0??MenuSettings@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$2@?0??MenuSettings@@YAXXZ@4HA from roguelike.obj
           $unwind$main$catch$0 from roguelike.obj
           $unwind$main$catch$1 from roguelike.obj
           $unwind$main$catch$2 from roguelike.obj
+      Selected symbol:
+          $unwind$?fin$0@?0???_M@YAXPEAX_K1P6AX0@Z@Z@4HA from MSVCRT.lib(ehvecdtr.obj)
+      Replaced symbol(s):
+          $unwind$?fin$0@?0???_L@YAXPEAX_K1P6AX0@Z2@Z@4HA from MSVCRT.lib(ehvecctr.obj)
+          $unwind$?filt$0@?0??__scrt_common_main_seh@@YAHXZ@4HA from MSVCRT.lib(exe_main.obj)
+      Selected symbol:
+          $unwind$?_Xlen_string@std@@YAXXZ from roguelike.obj
+      Replaced symbol(s):
+          $unwind$?MenuSeedRun@@YAXXZ from roguelike.obj
+          $unwind$__scrt_initialize_default_local_stdio_options from MSVCRT.lib(default_local_stdio_options.obj)
+          $unwind$?ExitOption@@YAXXZ from roguelike.obj
+          $unwind$atexit from MSVCRT.lib(utility.obj)
+          $unwind$?PlayerDeath@@YAXXZ from roguelike.obj
+          $unwind$?MenuStart@@YAXXZ from roguelike.obj
+          $unwind$?ShopBuyWeapon@player@@YAXXZ from roguelike.obj
+          $unwind$?ShopBuyConsume@player@@YAXXZ from roguelike.obj
+          $unwind$__scrt_acquire_startup_lock from MSVCRT.lib(utility.obj)
+          $unwind$__GSHandlerCheck from MSVCRT.lib(gshandler.obj)
+          $unwind$__scrt_is_managed_app from MSVCRT.lib(utility_desktop.obj)
+          $unwind$??__FCurrentState@variableKeeper@@YAXXZ from roguelike.obj
+          $unwind$??__FCurrentState2@variableKeeper@@YAXXZ from roguelike.obj
+          $unwind$mainCRTStartup from MSVCRT.lib(exe_main.obj)
+          $unwind$?post_pgo_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
+          $unwind$?pre_cpp_initialization@@YAXXZ from MSVCRT.lib(exe_main.obj)
       Selected symbol:
           $unwind$?gotoxy@systems@@YAXHH@Z from roguelike.obj
       Replaced symbol(s):
@@ -2380,8 +2386,9 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
           $unwind$??_Gexception@std@@UEAAPEAXI@Z from roguelike.obj
       Replaced symbol(s):
           $unwind$_RTC_Terminate from MSVCRT.lib(initsect.obj)
-          $unwind$__scrt_unhandled_exception_filter from MSVCRT.lib(utility_desktop.obj)
+          $unwind$?ShopBuyItem@player@@YAXXZ from roguelike.obj
           $unwind$_RTC_Initialize from MSVCRT.lib(initsect.obj)
+          $unwind$__scrt_unhandled_exception_filter from MSVCRT.lib(utility_desktop.obj)
           $unwind$??_Gbad_array_new_length@std@@UEAAPEAXI@Z from roguelike.obj
           $unwind$??_Gbad_alloc@std@@UEAAPEAXI@Z from roguelike.obj
       Selected symbol:
@@ -2418,7 +2425,7 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
       Replaced symbol(s):
           $pdata$?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z@4HA from roguelike.obj
           $pdata$?catch$4@?0???$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@D@Z@4HA from roguelike.obj
-      ICF total savings: 1227 bytes
+      ICF total savings: 1215 bytes
   Starting pass 2
        * CIL library *(* CIL module *)
        roguelike.res
@@ -2606,4 +2613,4 @@ C:\Users\hakerhd93\source\repos\roguelike\roguelike.cpp(1314,18): warning C4244:
        ucrt.lib(api-ms-win-crt-conio-l1-1-0.dll)
        ucrt.lib(api-ms-win-crt-conio-l1-1-0.dll)
   Finished pass 2
-  roguelike.vcxproj -> C:\Users\hakerhd93\source\repos\roguelike\x64\Release\roguelike.exe
+  roguelike.vcxproj -> C:\Users\fetis\source\repos\roguelike\x64\Release\roguelike.exe
