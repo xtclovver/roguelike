@@ -26,7 +26,7 @@ namespace variableKeeper {
 	float difficulty = 1;
 	int Stage = 1;
 	int MinStage;
-	int EnemyDefaultStats[4] = { 15,10,20,5 }; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
+	int EnemyDefaultStats[4] = { 20,10,15,5 }; // [0] = dmg, [1] = hp, [2] = how many gold drops, [3] = armor
 	struct EnemyStats
 	{
 		int x;
@@ -50,7 +50,7 @@ namespace variableKeeper {
 		int StageReq = 0;
 		int LvlToEqp = 0;
 		int cost = 0;
-		int special = 0;
+		float special = 0;
 		std::string Desc; // Description
 	};
 	ItemsSpecifications ShopItems[20];

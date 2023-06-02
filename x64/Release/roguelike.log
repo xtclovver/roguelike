@@ -1,7 +1,11 @@
 ﻿  roguelike.cpp
-C:\Users\fetis\source\repos\roguelike\player.h(283,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1324,30): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
-C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1326,30): warning C4244: '/=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(290,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(607,67): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(611,67): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(615,67): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\player.h(619,70): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1333,30): warning C4244: '*=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1335,30): warning C4244: '/=': conversion from 'double' to 'unsigned int', possible loss of data
   Starting pass 1
   Processed /DEFAULTLIB:msvcprt
   Processed /DEFAULTLIB:uuid.lib
@@ -945,7 +949,7 @@ C:\Users\fetis\source\repos\roguelike\roguelike.cpp(1326,30): warning C4244: '/=
   Generating code
   Previous IPDB not found, fall back to full compilation.
 C:\Users\fetis\source\repos\roguelike\systems.h(51): warning C4715: 'systems::IsEven': not all control paths return a value
-C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::ShopMenuItemsSpecs': not all control paths return a value
+C:\Users\fetis\source\repos\roguelike\player.h(564): warning C4715: 'player::ShopMenuItemsSpecs': not all control paths return a value
   All 263 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Searching libraries
@@ -1077,26 +1081,26 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
    /v
    /x
    /fo
-   "C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp"
-   "C:\Users\fetis\AppData\Local\Temp\lnk{BB6D60D0-1DFB-4CAD-BD02-7395DC68E57A}.tmp"
+   "C:\Users\fetis\AppData\Local\Temp\lnk{60E4A8AC-490E-4335-A9B2-5CBB416EC47D}.tmp"
+   "C:\Users\fetis\AppData\Local\Temp\lnk{384C7332-134C-432D-9A60-9B467E464753}.tmp"
   Microsoft (R) Windows (R) Resource Compiler Version 10.0.10011.16384
   
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
   
   Using codepage 1251 as default
-  Creating C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp
+  Creating C:\Users\fetis\AppData\Local\Temp\lnk{60E4A8AC-490E-4335-A9B2-5CBB416EC47D}.tmp
   
   
-  C:\Users\fetis\AppData\Local\Temp\lnk{BB6D60D0-1DFB-4CAD-BD02-7395DC68E57A}.tmp.
+  C:\Users\fetis\AppData\Local\Temp\lnk{384C7332-134C-432D-9A60-9B467E464753}.tmp.
   Writing 24:1,	lang:0x409,	size 381
   Invoking cvtres.exe:
    /machine:amd64
    /verbose
-   /out:"C:\Users\fetis\AppData\Local\Temp\lnk{83D500A7-F668-4D58-996E-3829E39305AD}.tmp"
+   /out:"C:\Users\fetis\AppData\Local\Temp\lnk{169EA8DB-557F-497E-8740-B5FF4E5F7616}.tmp"
    /readonly
    "x64\Release\roguelike.res"
-   "C:\Users\fetis\AppData\Local\Temp\lnk{E4071E3F-AC93-4F4E-97D0-F5D0CCCEF57C}.tmp"
+   "C:\Users\fetis\AppData\Local\Temp\lnk{60E4A8AC-490E-4335-A9B2-5CBB416EC47D}.tmp"
   Microsoft (R) Windows Resource To Object Converter Version 14.35.32217.1
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
@@ -1168,8 +1172,10 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           __imp_TerminateProcess		; kernel32.lib(KERNEL32.dll)
           _get_startup_thread_locale_mode		; MSVCRT.lib(thread_locale.obj)
           ??_C@_0BA@LHACMMIE@Overall?5score?3?5@		; roguelike.obj
+          ??_C@_0CN@DIDFOAKD@title?5Roguelike?5v1?40?44?5by?5xtclo@		; roguelike.obj
           _get_startup_new_mode		; MSVCRT.lib(new_mode.obj)
           ??_C@_05HFMGPOJF@lv?3?5?5@		; roguelike.obj
+          __real@40400000		; roguelike.obj
           ??_C@_07DBBKMPDO@Score?3?5@		; roguelike.obj
           __real@3ff3333333333333		; roguelike.obj
           ??_C@_1DE@OHBNNANE@?$AAa?$AAu?$AAd?$AAi?$AAo?$AA?2?$AAs?$AAt?$AAa?$AAg?$AAe?$AA?5?$AAc?$AAo?$AAm@		; roguelike.obj
@@ -1217,6 +1223,7 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           __castguard_slow_path_check_nop		; MSVCRT.lib(guard_support.obj)
           ?set_app_type@__scrt_main_policy@@SAXXZ		; MSVCRT.lib(exe_main.obj)
           __imp_exit		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
+          ??_C@_0CE@IHGOCPKD@title?5Roguelike?5v1?40?44?5by?5xtclo@		; roguelike.obj
           ??_C@_0BC@EOODALEL@Unknown?5exception@		; roguelike.obj
           __GSHandlerCheckCommon		; MSVCRT.lib(gshandler.obj)
           __imp_?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@XZ		; msvcprt.lib(MSVCP140.dll)
@@ -1253,7 +1260,6 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           ??_C@_0BC@ELOOEFPB@Tome?5of?5Knowledge@		; roguelike.obj
           ??_R3bad_alloc@std@@8		; roguelike.obj
           ??_C@_04BBDFLMDN@?5?9?$DO?5@		; roguelike.obj
-          __real@3ff4cccccccccccd		; roguelike.obj
           ??_C@_0CB@JBKJGNBC@This?5game?5was?5made?5by?5xtclovver@		; roguelike.obj
           InitializeSListHead		; kernel32.lib(KERNEL32.dll)
           __imp__execute_onexit_table		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
@@ -1264,6 +1270,7 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           ??_C@_0CG@NKNJAKBN@Ctrl?5?$CL?5G?5?9?5Force?5start?5teleport@		; roguelike.obj
           _guard_icall_checks_enforced		; MSVCRT.lib(guard_support.obj)
           ??_C@_04FPLIODDM@Dao?4@		; roguelike.obj
+          ??_C@_0CH@BCFLOAMJ@https?3?1?1github?4com?1xtclovver?1ro@		; roguelike.obj
           _initialize_denormal_control		; MSVCRT.lib(denormal_control.obj)
           ??_C@_01GBGANLPD@0@		; roguelike.obj
           ??_C@_0BA@IOOJBMG@Heavens?5Halberd@		; roguelike.obj
@@ -1274,7 +1281,6 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           __imp_terminate		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __imp_malloc		; ucrt.lib(api-ms-win-crt-heap-l1-1-0.dll)
           ??_C@_0P@HGMPOFPE@Ring?5of?5Regen?4@		; roguelike.obj
-          ??_C@_0CN@JCNNHNE@title?5Roguelike?5v1?40?43?5by?5xtclo@		; roguelike.obj
           ??_C@_0BA@JFNIOLAK@string?5too?5long@		; roguelike.obj
           __real@3fc3333333333333		; roguelike.obj
           ??_R4exception@std@@6B@		; roguelike.obj
@@ -1433,7 +1439,6 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           _execute_onexit_table		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
           __dyn_tls_dtor_callback
           ??_C@_0NC@HANKACHC@Map?5generation?5seed?5?$CIseed?$CJ?5?9?5if@		; roguelike.obj
-          ??_C@_0CE@BMGPCALJ@title?5Roguelike?5v1?40?43?5by?5xtclo@		; roguelike.obj
           __imp_??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAVios_base@1@AEAV21@@Z@Z		; msvcprt.lib(MSVCP140.dll)
           __scrt_stub_for_acrt_thread_attach		; MSVCRT.lib(ucrt_stubs.obj)
           __real@3fedc28f5c28f5c3		; roguelike.obj
@@ -1477,6 +1482,7 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           __scrt_get_dyn_tls_init_callback		; MSVCRT.lib(dyn_tls_init.obj)
           ?__scrt_uninitialize_type_info@@YAXXZ		; MSVCRT.lib(tncleanup.obj)
           __imp__register_thread_local_exe_atexit_callback		; ucrt.lib(api-ms-win-crt-runtime-l1-1-0.dll)
+          __real@41700000		; roguelike.obj
           __CastGuardVftablesStart		; MSVCRT.lib(guard_support.obj)
           __report_rangecheckfailure		; MSVCRT.lib(gs_report.obj)
           ??_C@_0BC@FLPCDKIC@ShopItemsIDs?$FL2?$FN?3?5@		; roguelike.obj
@@ -1582,6 +1588,7 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           ??_C@_0FG@EGCDIMME@?5$$?5?5$$?$DM?5?5?5?5$$?5?$HM?5__?5$$?5?$HM?5?5?5?5?5?5$@		; roguelike.obj
           ??_C@_0BC@IDFBKEEL@Ctrl?5?$CL?5D?5?9?5?$CL5?5exp@		; roguelike.obj
           __xmm@0000000a00000000000000640000000f		; roguelike.obj
+          __real@3f000000		; roguelike.obj
           ??_C@_0BO@OCAALIAC@?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9?9@		; roguelike.obj
           ??_R3exception@std@@8		; roguelike.obj
           ??_C@_0BL@KBEPLNOH@mode?5con?5cols?$DN125?5lines?$DN35@		; roguelike.obj
@@ -1718,7 +1725,7 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
       Discarded "`string'" (??_C@_0CL@NJAPAPNL@Ctrl?5?$CL?5H?5?9?5Force?5re?9render?5map?5@) from roguelike.obj
       Discarded "`string'" (??_C@_0BG@JMMGPHCE@Ctrl?5?$CL?5i?5?9?5Next?5stage@) from roguelike.obj
       Discarded "`string'" (??_C@_0M@HHAKBBEB@Debug?5help?4@) from roguelike.obj
-      Discarded "`string'" (??_C@_0CN@JCNNHNE@title?5Roguelike?5v1?40?43?5by?5xtclo@) from roguelike.obj
+      Discarded "`string'" (??_C@_0CN@DIDFOAKD@title?5Roguelike?5v1?40?44?5by?5xtclo@) from roguelike.obj
       Discarded "`string'" (??_C@_0N@LPFKKEBD@?3AM?3am?3PM?3pm@) from roguelike.obj
       Discarded "`string'" (??_C@_1BK@MHIKGOKE@?$AA?3?$AAA?$AAM?$AA?3?$AAa?$AAm?$AA?3?$AAP?$AAM?$AA?3?$AAp?$AAm@) from roguelike.obj
       Discarded "struct std::_Fake_allocator const std::_Fake_alloc" (?_Fake_alloc@std@@3U_Fake_allocator@1@B) from roguelike.obj
@@ -2319,34 +2326,58 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           $unwind$?__scrt_throw_std_bad_array_new_length@@YAXXZ from MSVCRT.lib(throw_bad_alloc.obj)
           $unwind$?__scrt_throw_std_bad_alloc@@YAXXZ from MSVCRT.lib(throw_bad_alloc.obj)
       Selected symbol:
+          $unwind$?_Xlen_string@std@@YAXXZ from roguelike.obj
+      Replaced symbol(s):
+          $unwind$?pre_cpp_initialization@@YAXXZ from MSVCRT.lib(exe_main.obj)
+          $unwind$?post_pgo_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
+          $unwind$?ExitOption@@YAXXZ from roguelike.obj
+          $unwind$?PlayerDeath@@YAXXZ from roguelike.obj
+          $unwind$atexit from MSVCRT.lib(utility.obj)
+          $unwind$?ShopBuyConsume@player@@YAXXZ from roguelike.obj
+          $unwind$?ShopBuyWeapon@player@@YAXXZ from roguelike.obj
+          $unwind$__scrt_acquire_startup_lock from MSVCRT.lib(utility.obj)
+          $unwind$??__FCurrentState@variableKeeper@@YAXXZ from roguelike.obj
+          $unwind$__scrt_initialize_default_local_stdio_options from MSVCRT.lib(default_local_stdio_options.obj)
+          $unwind$__GSHandlerCheck from MSVCRT.lib(gshandler.obj)
+          $unwind$__scrt_is_managed_app from MSVCRT.lib(utility_desktop.obj)
+          $unwind$?MenuStart@@YAXXZ from roguelike.obj
+          $unwind$??__FCurrentState2@variableKeeper@@YAXXZ from roguelike.obj
+          $unwind$mainCRTStartup from MSVCRT.lib(exe_main.obj)
+          $unwind$?MenuSeedRun@@YAXXZ from roguelike.obj
+      Selected symbol:
           $unwind$??0exception@std@@QEAA@AEBV01@@Z from roguelike.obj
       Replaced symbol(s):
-          $unwind$??1ItemsSpecifications@variableKeeper@@QEAA@XZ from roguelike.obj
-          $unwind$__scrt_initialize_onexit_tables from MSVCRT.lib(utility.obj)
-          $unwind$__scrt_uninitialize_crt from MSVCRT.lib(utility.obj)
-          $unwind$__scrt_initialize_crt from MSVCRT.lib(utility.obj)
-          $unwind$??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ from roguelike.obj
-          $unwind$_onexit from MSVCRT.lib(utility.obj)
-          $unwind$__scrt_release_startup_lock from MSVCRT.lib(utility.obj)
-          $unwind$??2@YAPEAX_K@Z from MSVCRT.lib(new_scalar.obj)
-          $unwind$??0bad_alloc@std@@QEAA@AEBV01@@Z from roguelike.obj
           $unwind$?pre_c_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
-          $unwind$__raise_securityfailure from MSVCRT.lib(gs_report.obj)
-          $unwind$?MenuCredits@@YAXXZ from roguelike.obj
+          $unwind$__scrt_initialize_crt from MSVCRT.lib(utility.obj)
+          $unwind$__scrt_uninitialize_crt from MSVCRT.lib(utility.obj)
+          $unwind$__scrt_initialize_onexit_tables from MSVCRT.lib(utility.obj)
+          $unwind$??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ from roguelike.obj
           $unwind$??0bad_array_new_length@std@@QEAA@AEBV01@@Z from roguelike.obj
+          $unwind$??2@YAPEAX_K@Z from MSVCRT.lib(new_scalar.obj)
+          $unwind$__scrt_release_startup_lock from MSVCRT.lib(utility.obj)
           $unwind$??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z from roguelike.obj
           $unwind$??_Gtype_info@@UEAAPEAXI@Z from MSVCRT.lib(std_type_info_static.obj)
+          $unwind$?MenuCredits@@YAXXZ from roguelike.obj
+          $unwind$__raise_securityfailure from MSVCRT.lib(gs_report.obj)
+          $unwind$_onexit from MSVCRT.lib(utility.obj)
+          $unwind$??1ItemsSpecifications@variableKeeper@@QEAA@XZ from roguelike.obj
+          $unwind$??0bad_alloc@std@@QEAA@AEBV01@@Z from roguelike.obj
       Selected symbol:
           $stateUnwindMap$?OpenShop@player@@YAXXZ from roguelike.obj
       Replaced symbol(s):
+          $stateUnwindMap$?Gameplay@@YAXQEAY0FN@H@Z from roguelike.obj
           $stateUnwindMap$main from roguelike.obj
           $stateUnwindMap$?MenuSettings@@YAXXZ from roguelike.obj
-          $stateUnwindMap$?Gameplay@@YAXQEAY0FN@H@Z from roguelike.obj
+      Selected symbol:
+          $unwind$?fin$0@?0???_M@YAXPEAX_K1P6AX0@Z@Z@4HA from MSVCRT.lib(ehvecdtr.obj)
+      Replaced symbol(s):
+          $unwind$?filt$0@?0??__scrt_common_main_seh@@YAHXZ@4HA from MSVCRT.lib(exe_main.obj)
+          $unwind$?fin$0@?0???_L@YAXPEAX_K1P6AX0@Z2@Z@4HA from MSVCRT.lib(ehvecctr.obj)
       Selected symbol:
           $unwind$?catch$2@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
       Replaced symbol(s):
-          $unwind$?catch$0@?0??Gameplay@@YAXQEAY0FN@H@Z@4HA from roguelike.obj
           $unwind$?catch$1@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
+          $unwind$?catch$0@?0??Gameplay@@YAXQEAY0FN@H@Z@4HA from roguelike.obj
           $unwind$?catch$0@?0??OpenShop@player@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$0@?0??MenuSettings@@YAXXZ@4HA from roguelike.obj
           $unwind$?catch$1@?0??MenuSettings@@YAXXZ@4HA from roguelike.obj
@@ -2355,42 +2386,18 @@ C:\Users\fetis\source\repos\roguelike\player.h(554): warning C4715: 'player::Sho
           $unwind$main$catch$1 from roguelike.obj
           $unwind$main$catch$2 from roguelike.obj
       Selected symbol:
-          $unwind$?fin$0@?0???_M@YAXPEAX_K1P6AX0@Z@Z@4HA from MSVCRT.lib(ehvecdtr.obj)
+          $unwind$??_Gexception@std@@UEAAPEAXI@Z from roguelike.obj
       Replaced symbol(s):
-          $unwind$?fin$0@?0???_L@YAXPEAX_K1P6AX0@Z2@Z@4HA from MSVCRT.lib(ehvecctr.obj)
-          $unwind$?filt$0@?0??__scrt_common_main_seh@@YAHXZ@4HA from MSVCRT.lib(exe_main.obj)
-      Selected symbol:
-          $unwind$?_Xlen_string@std@@YAXXZ from roguelike.obj
-      Replaced symbol(s):
-          $unwind$?MenuSeedRun@@YAXXZ from roguelike.obj
-          $unwind$__scrt_initialize_default_local_stdio_options from MSVCRT.lib(default_local_stdio_options.obj)
-          $unwind$?ExitOption@@YAXXZ from roguelike.obj
-          $unwind$atexit from MSVCRT.lib(utility.obj)
-          $unwind$?PlayerDeath@@YAXXZ from roguelike.obj
-          $unwind$?MenuStart@@YAXXZ from roguelike.obj
-          $unwind$?ShopBuyWeapon@player@@YAXXZ from roguelike.obj
-          $unwind$?ShopBuyConsume@player@@YAXXZ from roguelike.obj
-          $unwind$__scrt_acquire_startup_lock from MSVCRT.lib(utility.obj)
-          $unwind$__GSHandlerCheck from MSVCRT.lib(gshandler.obj)
-          $unwind$__scrt_is_managed_app from MSVCRT.lib(utility_desktop.obj)
-          $unwind$??__FCurrentState@variableKeeper@@YAXXZ from roguelike.obj
-          $unwind$??__FCurrentState2@variableKeeper@@YAXXZ from roguelike.obj
-          $unwind$mainCRTStartup from MSVCRT.lib(exe_main.obj)
-          $unwind$?post_pgo_initialization@@YAHXZ from MSVCRT.lib(exe_main.obj)
-          $unwind$?pre_cpp_initialization@@YAXXZ from MSVCRT.lib(exe_main.obj)
+          $unwind$_RTC_Terminate from MSVCRT.lib(initsect.obj)
+          $unwind$__scrt_unhandled_exception_filter from MSVCRT.lib(utility_desktop.obj)
+          $unwind$_RTC_Initialize from MSVCRT.lib(initsect.obj)
+          $unwind$?ShopBuyItem@player@@YAXXZ from roguelike.obj
+          $unwind$??_Gbad_array_new_length@std@@UEAAPEAXI@Z from roguelike.obj
+          $unwind$??_Gbad_alloc@std@@UEAAPEAXI@Z from roguelike.obj
       Selected symbol:
           $unwind$?gotoxy@systems@@YAXHH@Z from roguelike.obj
       Replaced symbol(s):
           $unwind$?actionOnTheEnemy@player@@YAXHHH_N0@Z from roguelike.obj
-      Selected symbol:
-          $unwind$??_Gexception@std@@UEAAPEAXI@Z from roguelike.obj
-      Replaced symbol(s):
-          $unwind$_RTC_Terminate from MSVCRT.lib(initsect.obj)
-          $unwind$?ShopBuyItem@player@@YAXXZ from roguelike.obj
-          $unwind$_RTC_Initialize from MSVCRT.lib(initsect.obj)
-          $unwind$__scrt_unhandled_exception_filter from MSVCRT.lib(utility_desktop.obj)
-          $unwind$??_Gbad_array_new_length@std@@UEAAPEAXI@Z from roguelike.obj
-          $unwind$??_Gbad_alloc@std@@UEAAPEAXI@Z from roguelike.obj
       Selected symbol:
           $stateUnwindMap$??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z from roguelike.obj
       Replaced symbol(s):

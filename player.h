@@ -272,9 +272,16 @@ namespace player {
 		}
 
 
-		systems::gotoxy(15, 1);
+		systems::gotoxy(18, 1);
 		std::cout << Color::magenta << "xp: " << player::Player.exp << " / " << player::Player.forNextlvl << Color::def;
-		systems::gotoxy(15, 2);
+		if (Player.forNextlvl <= 100)
+		{
+			systems::gotoxy(28, 1);
+			std::cout << Color::def << ' ' << Color::def;
+			systems::gotoxy(29, 1);
+			std::cout << Color::def << ' ' << Color::def;
+		}
+		systems::gotoxy(18, 2);
 		std::cout << Color::brcyan << "lv: " << player::Player.lvl << Color::def;
 		systems::gotoxy(1, 2);
 		std::cout << Color::green << "coins: " << player::Player.coins << Color::def;
@@ -423,13 +430,16 @@ namespace player {
 				Player.exp += 2.5 + (2.5 * variableKeeper::difficulty);
 				if (variableKeeper::PlayerGotCrown == true) {
 #pragma warning(suppress: 4244)
-					player::Player.exp += (2.5 + (2.5 * variableKeeper::difficulty)) * (25 + variableKeeper::Stage / 100);
+					player::Player.exp += (2.5 + (2.5 * variableKeeper::difficulty)) + (25 + variableKeeper::Stage / 100);
 				}
 				variableKeeper::CurrentState = "You killed a en";
 				variableKeeper::CurrentState2 = "emy and got money & exp";
 				variableKeeper::Score += 50;
 			}
-			player::Player.hp -= variableKeeper::EnemyDefaultStats[0] - player::Player.armor;
+			if (Player.armor >= variableKeeper::EnemyDefaultStats[0] - player::Player.armor)
+				player::Player.hp -= 1;
+			else
+				player::Player.hp -= variableKeeper::EnemyDefaultStats[0] - player::Player.armor;
 			player::Player.hp += variableKeeper::HealAfterKill;
 			InitializationLeftMenu();
 		}
@@ -598,7 +608,7 @@ namespace player {
 			}
 			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[1]].ID == 13)
 			{
-				player::Player.armor += variableKeeper::ShopItems[13].special + Player.lvl;
+				player::Player.armor += variableKeeper::ShopItems[13].special + (Player.lvl / 2);
 			}
 			else if (variableKeeper::ShopItems[variableKeeper::ShopItemsIDs[1]].ID == 14)
 			{

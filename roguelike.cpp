@@ -1,4 +1,4 @@
-﻿#define DebugMode 0
+﻿#define DebugMode 0	
 //-----------------------------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -27,46 +27,45 @@ void UpgradeLvl()
 	Player.lvl += 1;
 	Player.exp = 0;
 	Player.forNextlvl += 5;
-#pragma warning(suppress: 4244)
-	ShopItems[0].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[1].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[2].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[3].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[4].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[5].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[6].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[7].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[8].damage += Player.lvl * 1.2;
-	//
-#pragma warning(suppress: 4244)
-	ShopItems[9].damage += Player.lvl * 1.2;
+//#pragma warning(suppress: 4244)
+//	ShopItems[0].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[1].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[2].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[3].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[4].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[5].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[6].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[7].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[8].damage += Player.lvl * 1.2;
+//	//
+//#pragma warning(suppress: 4244)
+//	ShopItems[9].damage += Player.lvl * 2;
 	//
 	if (HealAfterKill >= 25)
 	{
 		HealAfterKill += 2;
 	}
-	Player.MaxHP += Player.lvl * 2;
 	bool HaveStim = false;
 	for (int i = 0; i < 6; i++)
 	{
 		if (variableKeeper::ItemSlotID[i] == 13)
-			Player.armor += 1;
+			ShopItems[13].special += 0.5f;
 		else if (variableKeeper::ItemSlotID[i] == 14)
 			HaveStim = true;
 	}
@@ -81,7 +80,7 @@ void UpgradeLvl()
 #pragma warning(suppress: 4244)
 	Player.hp += Player.lvl * 4;
 #pragma warning(suppress: 4244)
-	Player.armor += Player.lvl * 1.3;
+	Player.armor += Player.lvl * 1.2;
 	InitializationLeftMenu();
 }
 //
@@ -360,6 +359,8 @@ void MenuCredits()
 	cout << brcyan << "I'm still learning c++." << def;
 	systems::gotoxy(41, 15);
 	cout << magenta << "I would be grateful if you play my game. <3" << def;
+	systems::gotoxy(39, 16);
+	cout << blue << "https://github.com/xtclovver/roguelike" << def;
 	cin.ignore();
 	system("cls");
 	system("mode con cols=125 lines=35"); //размер окна, вывод нужного количества строк в консоль
@@ -732,7 +733,11 @@ void EnemyAI(int i) // 1 is YOU attaked, 2 is just made a move
 		}
 		if (((WhereX(Enemy[i].x, Enemy[i].y, 4, false) <= Enemy[i].x + 1 && WhereX(Enemy[i].x, Enemy[i].y, 4, false) >= Enemy[i].x - 1) && (WhereY(Enemy[i].x, Enemy[i].y, 4, false) <= Enemy[i].y + 1 && WhereY(Enemy[i].x, Enemy[i].y, 4, false) >= Enemy[i].y - 1)) || (WhereX(Enemy[i].x, Enemy[i].y, 604, false) <= Enemy[i].x + 1 && WhereX(Enemy[i].x, Enemy[i].y, 604, false) >= Enemy[i].x - 1) && (WhereY(Enemy[i].x, Enemy[i].y, 604, false) <= Enemy[i].y + 1 && WhereY(Enemy[i].x, Enemy[i].y, 604, false) >= Enemy[i].y - 1))
 		{
-			Player.hp -= EnemyDefaultStats[0] - (Player.armor * 3); // offencive поощираю 
+			if (Player.armor >= EnemyDefaultStats[0] - Player.armor)
+				Player.hp -= 1;
+			else
+				Player.hp -= EnemyDefaultStats[0] - (Player.armor * 2); // offencive поощираю 
+
 			InitializationLeftMenu();
 			Enemy[i].toTurn = 0;
 			return;
@@ -940,6 +945,8 @@ void Gameplay(int map[35][93])
 			PlayerDeath();
 			return;
 		}
+		else if (Player.hp > Player.MaxHP)
+			Player.hp = Player.MaxHP;
 		if (Player.exp >= Player.forNextlvl)
 		{
 			UpgradeLvl();
@@ -1078,7 +1085,8 @@ void Gameplay(int map[35][93])
 		case 5: // Ctrl + E
 			if (DebugMode == 1)
 			{
-				Player.lvl += 1;
+				/*Player.lvl += 1;*/
+				UpgradeLvl();
 				InitializationLeftMenu();
 				continue;
 			}
@@ -1554,11 +1562,11 @@ int main()
 	if (DebugMode == 1)
 		IsMusicOn = false;
 	if (DebugMode == 1)
-		system("title Roguelike v1.0.3 by xtclovver // DEBUG");
+		system("title Roguelike v1.0.4 by xtclovver // DEBUG");
 	else if (DebugMode == 0)
-		system("title Roguelike v1.0.3 by xtclovver");
+		system("title Roguelike v1.0.4 by xtclovver");
 	ChangeCursorStatus(false);
-	////////////////////меняем размер консоли 
+	////////////////////меняем размер консоли с
 	system("mode con cols=125 lines=35"); //размер окна, вывод нужного количества строк в консоль
 	HANDLE  hout = GetStdHandle(STD_OUTPUT_HANDLE);
 	//COORD  size{ 100,100 };//символов строки, строк
